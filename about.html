@@ -1,0 +1,2758 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us — Sparkles Jewelleries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --ff-serif: "Cormorant Garamond", Georgia, serif;
+        --ff-sans: "Jost", sans-serif;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --nav-h: 64px;
+      }
+      [data-theme="dark"] {
+        --bg: #090806;
+        --surface: #131009;
+        --surface-2: #1c1812;
+        --surface-3: #241e15;
+        --text: #f0ebe0;
+        --text-sub: rgba(240, 235, 224, 0.48);
+        --text-dim: rgba(240, 235, 224, 0.22);
+        --gold: #c9a45f;
+        --gold-lt: #e2c88a;
+        --gold-dk: #8a6b38;
+        --gold-xdk: #5c4620;
+        --border: rgba(201, 164, 95, 0.14);
+        --border-hv: rgba(201, 164, 95, 0.38);
+        --nav-bg: rgba(9, 8, 6, 0.94);
+        --card-bg: #161209;
+        --shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+      }
+      [data-theme="light"] {
+        --bg: #f7f3ec;
+        --surface: #ede8de;
+        --surface-2: #e3ddd1;
+        --surface-3: #d8d1c3;
+        --text: #18130a;
+        --text-sub: rgba(24, 19, 10, 0.52);
+        --text-dim: rgba(24, 19, 10, 0.28);
+        --gold: #9a7235;
+        --gold-lt: #b8904a;
+        --gold-dk: #6b4d22;
+        --gold-xdk: #3e2c10;
+        --border: rgba(154, 114, 53, 0.18);
+        --border-hv: rgba(154, 114, 53, 0.42);
+        --nav-bg: rgba(247, 243, 236, 0.96);
+        --card-bg: #ede8de;
+        --shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--ff-sans);
+        font-weight: 300;
+        overflow-x: hidden;
+        transition:
+          background 0.4s,
+          color 0.4s;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      button {
+        font-family: var(--ff-sans);
+      }
+
+      /* ── CURSOR ── */
+      #cur-o,
+      #cur-i {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      #cur-o {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(201, 164, 95, 0.4);
+        transition:
+          width 0.3s,
+          height 0.3s,
+          border-color 0.3s;
+      }
+      #cur-i {
+        width: 5px;
+        height: 5px;
+        background: var(--gold-lt);
+        transform: translate(-50%, -50%);
+      }
+      body:has(a:hover) #cur-o,
+      body:has(button:hover) #cur-o {
+        width: 46px;
+        height: 46px;
+        border-color: var(--gold);
+      }
+      @media (max-width: 768px) {
+        body {
+          cursor: auto;
+        }
+        #cur-o,
+        #cur-i {
+          display: none;
+        }
+      }
+
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 88px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--surface);
+        border: 1px solid var(--gold);
+        color: var(--gold-lt);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        padding: 12px 28px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 700;
+        white-space: nowrap;
+        transition:
+          opacity 0.35s,
+          transform 0.35s;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ── ANNOUNCE ── */
+      .announce {
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 9px 0;
+        overflow: hidden;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold-lt);
+      }
+      .announce-inner {
+        display: flex;
+        gap: 72px;
+        width: max-content;
+        animation: ticker 34s linear infinite;
+      }
+      .announce-item {
+        white-space: nowrap;
+      }
+      .announce-item + .announce-item::before {
+        content: "◆";
+        margin-right: 72px;
+        color: var(--gold-dk);
+        font-size: 0.42rem;
+        vertical-align: middle;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        height: var(--nav-h);
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        transition: background 0.4s;
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 32px;
+        gap: 12px;
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .nav-inner {
+          padding: 0 16px;
+        }
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+      }
+      @media (max-width: 900px) {
+        .nav-left {
+          display: none;
+        }
+      }
+
+      .nav-left a,
+      .nav-drop > a {
+        font-size: 0.65rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-sub);
+        text-decoration: none;
+        white-space: nowrap;
+        position: relative;
+        padding-bottom: 2px;
+        transition: color 0.3s;
+      }
+      .nav-left a:hover,
+      .nav-drop > a:hover {
+        color: var(--gold-lt);
+      }
+      .nav-left a::after,
+      .nav-drop > a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.35s var(--ease);
+      }
+      .nav-left a:hover::after,
+      .nav-drop > a:hover::after {
+        width: 100%;
+      }
+      .nav-left a.active {
+        color: var(--gold-lt);
+      }
+
+      .nav-drop {
+        position: relative;
+      }
+      .drop-panel {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        min-width: 190px;
+        padding: 8px 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-6px);
+        box-shadow: var(--shadow);
+        transition:
+          opacity 0.25s,
+          transform 0.25s var(--ease);
+      }
+      .nav-drop:hover .drop-panel {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+      }
+      .drop-panel a {
+        display: block;
+        padding: 9px 18px;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-sub) !important;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s !important;
+      }
+      .drop-panel a::after {
+        display: none !important;
+      }
+      .drop-panel a:hover {
+        background: rgba(201, 164, 95, 0.08);
+        color: var(--gold-lt) !important;
+      }
+
+      .nav-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        gap: 2px;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+      .logo-word {
+        font-family: var(--ff-serif);
+        font-weight: 300;
+        font-size: 1.45rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--text);
+        line-height: 1;
+        white-space: nowrap;
+        transition: color 0.4s;
+      }
+      .logo-tag {
+        font-size: 0.5rem;
+        letter-spacing: 0.55em;
+        text-transform: uppercase;
+        color: var(--gold);
+        white-space: nowrap;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 14px;
+        flex: 1;
+      }
+      .nav-icons {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .n-icon {
+        color: var(--text-sub);
+        cursor: pointer;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        position: relative;
+      }
+      .n-icon:hover {
+        color: var(--gold-lt);
+      }
+      .n-icon svg {
+        width: 17px;
+        height: 17px;
+        stroke-width: 1.2;
+      }
+      .cart-dot {
+        position: absolute;
+        top: -5px;
+        right: -6px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--bg);
+        font-size: 0.5rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme-wrap {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .theme-icon {
+        font-size: 0.68rem;
+        color: var(--text-sub);
+        line-height: 1;
+      }
+      .theme-toggle {
+        width: 34px;
+        height: 18px;
+        border-radius: 9px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        position: relative;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .theme-toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--gold);
+        transition: transform 0.3s;
+      }
+      [data-theme="light"] .theme-toggle::after {
+        transform: translateX(16px);
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 6px;
+      }
+      .burger span {
+        display: block;
+        width: 20px;
+        height: 1px;
+        background: var(--gold-lt);
+        transition: 0.3s;
+      }
+      .burger.open span:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+      }
+      .burger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .burger.open span:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
+      }
+      @media (max-width: 900px) {
+        .burger {
+          display: flex;
+        }
+      }
+
+      /* ── MOBILE DRAWER ── */
+      .mob-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.4s var(--ease);
+        overflow-y: auto;
+      }
+      .mob-drawer.open {
+        transform: translateX(0);
+      }
+      .mob-drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+      .mob-drawer-logo {
+        font-family: var(--ff-serif);
+        font-weight: 300;
+        font-size: 1.35rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .mob-x {
+        background: none;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        color: var(--text-sub);
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .mob-x:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .mob-nav-links {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+      .mob-nav-links a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        font-size: 0.76rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--text-sub);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        transition:
+          color 0.3s,
+          background 0.3s;
+      }
+      .mob-nav-links a:hover {
+        color: var(--gold-lt);
+        background: rgba(201, 164, 95, 0.04);
+      }
+      .mob-nav-links a.active {
+        color: var(--gold-lt);
+      }
+      .mob-nav-links a svg {
+        width: 13px;
+        height: 13px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+        opacity: 0.4;
+      }
+      .mob-drawer-foot {
+        padding: 20px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .mob-contact-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        color: var(--text-sub);
+      }
+      .mob-contact-row svg {
+        width: 13px;
+        height: 13px;
+        stroke: var(--gold);
+        fill: none;
+        stroke-width: 1.5;
+        flex-shrink: 0;
+      }
+
+      /* ── REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .d1 {
+        transition-delay: 0.1s;
+      }
+      .d2 {
+        transition-delay: 0.2s;
+      }
+      .d3 {
+        transition-delay: 0.3s;
+      }
+      .d4 {
+        transition-delay: 0.4s;
+      }
+
+      /* ── BTN ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--ff-sans);
+        font-size: 0.66rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        padding: 13px 30px;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s var(--ease);
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-101%);
+        transition: transform 0.35s var(--ease);
+      }
+      .btn:hover::before {
+        transform: translateX(0);
+      }
+      .btn span {
+        position: relative;
+        z-index: 1;
+      }
+      .btn svg {
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s;
+      }
+      .btn:hover svg {
+        transform: translateX(3px);
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: var(--bg);
+      }
+      .btn-gold::before {
+        background: var(--gold-dk);
+      }
+      .btn-gold:hover {
+        color: var(--text);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--text-sub);
+        border: 1px solid var(--border);
+      }
+      .btn-outline::before {
+        background: rgba(201, 164, 95, 0.07);
+      }
+      .btn-outline:hover {
+        color: var(--gold-lt);
+        border-color: var(--border-hv);
+      }
+
+      /* ── CONTACT FAB (matching collections.html) ── */
+      .contact-fab {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 400;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 1px solid var(--border-hv);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+        transition:
+          border-color 0.3s,
+          transform 0.3s,
+          background 0.3s;
+        animation: fab-bob 4s ease-in-out infinite;
+      }
+      .contact-fab:hover {
+        border-color: var(--gold);
+        background: rgba(201, 164, 95, 0.1);
+        transform: scale(1.1);
+        animation: none;
+      }
+      .contact-fab svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--gold-lt);
+        fill: none;
+        stroke-width: 1.3;
+      }
+      @keyframes fab-bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+      @media (max-width: 640px) {
+        .contact-fab {
+          bottom: 72px;
+          right: 16px;
+        }
+      }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: var(--bg);
+      }
+      .hero-photos {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+      .hero-photo {
+        overflow: hidden;
+      }
+      .hero-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.32) saturate(0.5);
+        transform: scale(1.05);
+        animation: photo-drift 18s ease-in-out infinite alternate;
+      }
+      .hero-photo:nth-child(2) img {
+        animation-delay: -3s;
+        animation-duration: 20s;
+      }
+      .hero-photo:nth-child(3) img {
+        animation-delay: -7s;
+        animation-duration: 16s;
+      }
+      .hero-photo:nth-child(4) img {
+        animation-delay: -11s;
+        animation-duration: 22s;
+      }
+      @keyframes photo-drift {
+        from {
+          transform: scale(1.05) translateY(0);
+        }
+        to {
+          transform: scale(1.12) translateY(-2%);
+        }
+      }
+      @media (max-width: 640px) {
+        .hero-photos {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-photo:nth-child(3),
+        .hero-photo:nth-child(4) {
+          display: none;
+        }
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background:
+          linear-gradient(
+            to right,
+            rgba(9, 8, 6, 0.93) 0%,
+            rgba(9, 8, 6, 0.7) 55%,
+            rgba(9, 8, 6, 0.3) 100%
+          ),
+          linear-gradient(to top, rgba(9, 8, 6, 0.95) 0%, transparent 40%);
+      }
+      .hero-dividers {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        display: flex;
+      }
+      .hero-dividers span {
+        flex: 1;
+        border-right: 1px solid rgba(201, 164, 95, 0.06);
+      }
+      .hero-dividers span:last-child {
+        border-right: none;
+      }
+
+      .hero-ring-deco {
+        position: absolute;
+        right: 8%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 4;
+        pointer-events: none;
+      }
+      .hero-ring-deco svg {
+        width: clamp(280px, 32vw, 520px);
+        height: clamp(280px, 32vw, 520px);
+        opacity: 0.12;
+        animation: ring-rotate 60s linear infinite;
+      }
+      @keyframes ring-rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (max-width: 640px) {
+        .hero-ring-deco {
+          right: -20%;
+          opacity: 0.07;
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 5;
+        padding: 0 48px;
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+        padding-top: calc(var(--nav-h) + 40px);
+        padding-bottom: 160px;
+      }
+      @media (max-width: 768px) {
+        .hero-content {
+          padding: calc(var(--nav-h) + 32px) 20px 140px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-content {
+          padding: calc(var(--nav-h) + 24px) 16px 120px;
+        }
+      }
+
+      .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 0.58rem;
+        letter-spacing: 0.5em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 24px;
+        animation: fade-slide 0.9s 0.1s both;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: var(--gold-dk);
+      }
+      @keyframes fade-slide {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-h1 {
+        font-family: var(--ff-serif);
+        font-weight: 300;
+        line-height: 0.95;
+        color: var(--text);
+        margin-bottom: 6px;
+        animation: fade-slide 0.9s 0.2s both;
+      }
+      .hero-h1-small {
+        font-size: clamp(1.4rem, 4vw, 3rem);
+        display: block;
+        color: var(--text-sub);
+        letter-spacing: 0.08em;
+      }
+      .hero-h1-big {
+        font-size: clamp(4.5rem, 12vw, 10rem);
+        display: block;
+        color: var(--text);
+        line-height: 0.9;
+      }
+      .hero-h1-big em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .hero-rule {
+        width: 120px;
+        height: 1px;
+        background: linear-gradient(to right, var(--gold), transparent);
+        margin: 28px 0;
+        animation: fade-slide 0.9s 0.3s both;
+      }
+      .hero-p {
+        font-size: 0.88rem;
+        line-height: 2;
+        color: var(--text-sub);
+        max-width: 440px;
+        margin-bottom: 40px;
+        animation: fade-slide 0.9s 0.4s both;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        animation: fade-slide 0.9s 0.5s both;
+      }
+
+      /* Hero bottom stats bar */
+      .hero-scroll {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+        background: rgba(9, 8, 6, 0.7);
+        backdrop-filter: blur(12px);
+      }
+      [data-theme="light"] .hero-scroll {
+        background: rgba(247, 243, 236, 0.7);
+      }
+      .hero-scroll-inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 48px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+      }
+      @media (max-width: 768px) {
+        .hero-scroll-inner {
+          grid-template-columns: 1fr 1fr;
+          padding: 0 20px;
+        }
+      }
+      .stat-cell {
+        background: rgba(9, 8, 6, 0.4);
+        padding: 18px 24px;
+        text-align: center;
+        transition: background 0.3s;
+      }
+      [data-theme="light"] .stat-cell {
+        background: rgba(247, 243, 236, 0.4);
+      }
+      .stat-cell:hover {
+        background: rgba(201, 164, 95, 0.08);
+      }
+      .stat-n {
+        font-family: var(--ff-serif);
+        font-size: 1.9rem;
+        font-weight: 300;
+        color: var(--gold-lt);
+        line-height: 1;
+      }
+      .stat-l {
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-top: 3px;
+      }
+
+      /* ── OUR STORY ── */
+      .story-sec {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 600px;
+        border-bottom: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .story-sec {
+          grid-template-columns: 1fr;
+        }
+      }
+      .story-vis {
+        position: relative;
+        overflow: hidden;
+        min-height: 480px;
+        background: var(--surface-2);
+      }
+      .story-vis img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        transition: transform 1s var(--ease);
+      }
+      .story-vis:hover img {
+        transform: scale(1.04);
+      }
+      .story-vis-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 164, 95, 0.06),
+          transparent
+        );
+      }
+      .story-yr {
+        position: absolute;
+        bottom: 28px;
+        left: 28px;
+        z-index: 3;
+        font-family: var(--ff-serif);
+        font-size: 5rem;
+        font-weight: 300;
+        color: rgba(201, 164, 95, 0.12);
+        line-height: 1;
+        letter-spacing: 0.04em;
+      }
+      .story-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 64px;
+        background: var(--surface);
+        transition: background 0.4s;
+      }
+      @media (max-width: 768px) {
+        .story-body {
+          padding: 48px 28px;
+        }
+      }
+      .sec-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.44em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+      .story-quote {
+        font-family: var(--ff-serif);
+        font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.48;
+        color: var(--text);
+        margin-bottom: 28px;
+      }
+      .story-quote strong {
+        color: var(--gold-lt);
+        font-weight: 300;
+      }
+      .story-by {
+        font-size: 0.62rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .story-by::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: var(--gold-dk);
+      }
+      .story-p {
+        font-size: 0.82rem;
+        line-height: 2;
+        color: var(--text-sub);
+        margin-bottom: 36px;
+      }
+
+      /* ── TIMELINE ── */
+      .timeline-sec {
+        padding: 96px 56px;
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .timeline-sec {
+          padding: 64px 20px;
+        }
+      }
+      .timeline-hd {
+        margin-bottom: 64px;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+      }
+      @media (max-width: 900px) {
+        .timeline {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+      }
+      .tl-item {
+        background: var(--surface);
+        padding: 40px 32px;
+        border-top: 2px solid transparent;
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+      .tl-item:hover {
+        background: rgba(201, 164, 95, 0.04);
+        border-color: var(--gold);
+      }
+      .tl-yr {
+        font-family: var(--ff-serif);
+        font-size: 2.8rem;
+        font-weight: 300;
+        color: var(--gold-xdk);
+        line-height: 1;
+        margin-bottom: 14px;
+      }
+      .tl-title {
+        font-family: var(--ff-serif);
+        font-size: 1.15rem;
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+      .tl-desc {
+        font-size: 0.76rem;
+        line-height: 1.9;
+        color: var(--text-sub);
+      }
+
+      /* ── VALUES GRID ── */
+      .values-sec {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 80px 56px;
+      }
+      @media (max-width: 640px) {
+        .values-sec {
+          padding: 60px 20px;
+        }
+      }
+      .values-inner {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .values-hd {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 52px;
+      }
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+      }
+      @media (max-width: 768px) {
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .val-card {
+        background: var(--surface);
+        padding: 40px 32px;
+        transition: background 0.3s;
+      }
+      .val-card:hover {
+        background: rgba(201, 164, 95, 0.04);
+      }
+      .val-icon {
+        width: 52px;
+        height: 52px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: var(--gold);
+        transition: border-color 0.3s;
+      }
+      .val-card:hover .val-icon {
+        border-color: var(--gold-dk);
+      }
+      .val-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.3;
+      }
+      .val-title {
+        font-family: var(--ff-serif);
+        font-size: 1.25rem;
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+      .val-desc {
+        font-size: 0.78rem;
+        line-height: 1.9;
+        color: var(--text-dim);
+      }
+
+      /* ── TEAM ── */
+      .team-sec {
+        padding: 96px 56px;
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .team-sec {
+          padding: 64px 20px;
+        }
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 52px;
+      }
+      @media (max-width: 900px) {
+        .team-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .team-card {
+        position: relative;
+      }
+      .team-img-wrap {
+        position: relative;
+        aspect-ratio: 0.88;
+        overflow: hidden;
+        background: var(--card-bg);
+        margin-bottom: 16px;
+      }
+      .team-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease);
+      }
+      .team-card:hover .team-img-wrap img {
+        transform: scale(1.05);
+      }
+      .team-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(9, 8, 6, 0.7) 0%,
+          transparent 55%
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .team-card:hover .team-img-overlay {
+        opacity: 1;
+      }
+      .team-name {
+        font-family: var(--ff-serif);
+        font-size: 1.15rem;
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 4px;
+        transition: color 0.3s;
+      }
+      .team-card:hover .team-name {
+        color: var(--gold-lt);
+      }
+      .team-role {
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .team-bio {
+        font-size: 0.76rem;
+        line-height: 1.85;
+        color: var(--text-dim);
+      }
+      .team-num {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 2;
+        font-family: var(--ff-serif);
+        font-size: 4rem;
+        font-weight: 300;
+        color: rgba(201, 164, 95, 0.15);
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      /* ── PROCESS ── */
+      .process-sec {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 80px 56px;
+      }
+      @media (max-width: 640px) {
+        .process-sec {
+          padding: 60px 20px;
+        }
+      }
+      .process-inner {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        margin-top: 52px;
+        position: relative;
+      }
+      @media (max-width: 900px) {
+        .process-steps {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .process-steps {
+          grid-template-columns: 1fr;
+        }
+      }
+      .process-steps::before {
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--border);
+        z-index: 0;
+      }
+      @media (max-width: 900px) {
+        .process-steps::before {
+          display: none;
+        }
+      }
+      .proc-step {
+        padding: 0 24px 32px;
+        position: relative;
+        z-index: 1;
+      }
+      @media (max-width: 900px) {
+        .proc-step {
+          padding: 24px;
+          border-bottom: 1px solid var(--border);
+        }
+      }
+      .proc-num {
+        width: 60px;
+        height: 60px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--ff-serif);
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: var(--gold);
+        background: var(--surface);
+        margin-bottom: 20px;
+        transition:
+          border-color 0.3s,
+          background 0.3s;
+      }
+      .proc-step:hover .proc-num {
+        border-color: var(--gold);
+        background: rgba(201, 164, 95, 0.08);
+      }
+      .proc-title {
+        font-family: var(--ff-serif);
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .proc-desc {
+        font-size: 0.74rem;
+        line-height: 1.9;
+        color: var(--text-dim);
+      }
+
+      /* ── TESTIMONIALS ── */
+      .testi-sec {
+        padding: 96px 56px;
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .testi-sec {
+          padding: 64px 20px;
+        }
+      }
+      .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 48px;
+      }
+      @media (max-width: 768px) {
+        .testi-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .tc {
+        border: 1px solid var(--border);
+        padding: 32px 28px;
+        position: relative;
+        transition:
+          border-color 0.3s,
+          background 0.3s;
+      }
+      .tc:hover {
+        border-color: var(--border-hv);
+        background: rgba(201, 164, 95, 0.03);
+      }
+      .tc::before {
+        content: "\201C";
+        font-family: var(--ff-serif);
+        font-size: 4rem;
+        font-style: italic;
+        color: var(--gold-dk);
+        opacity: 0.2;
+        position: absolute;
+        top: 6px;
+        left: 20px;
+        line-height: 1;
+      }
+      .tc-stars {
+        color: var(--gold-dk);
+        font-size: 0.65rem;
+        margin-bottom: 10px;
+      }
+      .tc-txt {
+        font-family: var(--ff-serif);
+        font-size: 1rem;
+        font-style: italic;
+        line-height: 1.75;
+        color: var(--text-sub);
+        margin-bottom: 16px;
+      }
+      .tc-name {
+        font-size: 0.6rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+      }
+
+      /* ── CTA BESPOKE ── */
+      .cta-sec {
+        margin: 0 32px 0;
+        border: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 280px;
+        border-bottom: none;
+      }
+      @media (max-width: 768px) {
+        .cta-sec {
+          grid-template-columns: 1fr;
+          margin: 0 16px;
+        }
+      }
+      .cta-vis {
+        position: relative;
+        overflow: hidden;
+        min-height: 220px;
+      }
+      .cta-vis img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cta-body {
+        padding: 48px 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--surface);
+        transition: background 0.4s;
+      }
+      @media (max-width: 640px) {
+        .cta-body {
+          padding: 32px 24px;
+        }
+      }
+      .cta-label {
+        font-size: 0.58rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+      .cta-h {
+        font-family: var(--ff-serif);
+        font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 14px;
+        line-height: 1.2;
+      }
+      .cta-h em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .cta-p {
+        font-size: 0.78rem;
+        line-height: 1.95;
+        color: var(--text-sub);
+        margin-bottom: 28px;
+      }
+
+      /* ── NEWSLETTER ── */
+      .nl-strip {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 64px 32px;
+        text-align: center;
+      }
+      @media (max-width: 640px) {
+        .nl-strip {
+          padding: 48px 16px 80px;
+        }
+      }
+      .nl-title {
+        font-family: var(--ff-serif);
+        font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 9px;
+      }
+      .nl-title em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .nl-p {
+        font-size: 0.78rem;
+        color: var(--text-sub);
+        margin-bottom: 26px;
+      }
+      .nl-form {
+        display: flex;
+        max-width: 400px;
+        margin: 0 auto 10px;
+      }
+      .nl-form input {
+        flex: 1;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-right: none;
+        padding: 12px 16px;
+        color: var(--text);
+        font-family: var(--ff-sans);
+        font-size: 0.76rem;
+        outline: none;
+        transition: border-color 0.3s;
+        min-width: 0;
+      }
+      .nl-form input::placeholder {
+        color: var(--text-dim);
+      }
+      .nl-form input:focus {
+        border-color: var(--border-hv);
+      }
+      .nl-form button {
+        background: var(--gold);
+        border: 1px solid var(--gold);
+        color: var(--bg);
+        font-family: var(--ff-sans);
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: background 0.3s;
+        white-space: nowrap;
+      }
+      .nl-form button:hover {
+        background: var(--gold-dk);
+      }
+      .nl-alt {
+        font-size: 0.7rem;
+        color: var(--text-sub);
+      }
+      .nl-alt a {
+        color: var(--gold-lt);
+        text-decoration: none;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 64px 32px 32px;
+        background: var(--bg);
+      }
+      @media (max-width: 640px) {
+        footer {
+          padding: 48px 16px 28px;
+        }
+      }
+      .foot-grid {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+      @media (max-width: 900px) {
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+      }
+      @media (max-width: 480px) {
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+      }
+      .foot-brand .fb-name {
+        font-family: var(--ff-serif);
+        font-size: 1.55rem;
+        font-weight: 300;
+        letter-spacing: 0.22em;
+        color: var(--text);
+        margin-bottom: 12px;
+      }
+      .foot-brand p {
+        font-size: 0.76rem;
+        line-height: 1.95;
+        color: var(--text-sub);
+        max-width: 260px;
+        margin-bottom: 24px;
+      }
+      .soc-row {
+        display: flex;
+        gap: 10px;
+      }
+      .soc-btn {
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-sub);
+        transition:
+          border-color 0.3s,
+          color 0.3s,
+          background 0.3s;
+      }
+      .soc-btn:hover {
+        border-color: var(--border-hv);
+        color: var(--gold-lt);
+        background: rgba(201, 164, 95, 0.07);
+      }
+      .soc-btn svg {
+        width: 12px;
+        height: 12px;
+      }
+      .foot-col h4 {
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 18px;
+      }
+      .foot-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .foot-col ul li a {
+        font-size: 0.76rem;
+        color: var(--text-sub);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .foot-col ul li a:hover {
+        color: var(--text);
+      }
+      .foot-btm {
+        max-width: 1440px;
+        margin: 0 auto;
+        border-top: 1px solid var(--border);
+        padding-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .foot-btm p {
+        font-size: 0.62rem;
+        color: var(--text-dim);
+        letter-spacing: 0.08em;
+      }
+      .pay-row {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      .pay-chip {
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 4px 9px;
+        font-size: 0.56rem;
+        letter-spacing: 0.08em;
+        color: var(--text-dim);
+      }
+
+      /* ── MOBILE BOTTOM NAV ── */
+      .mob-bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 640px) {
+        .mob-bottom-nav {
+          display: flex;
+        }
+        footer {
+          padding-bottom: 72px;
+        }
+        .nl-strip {
+          padding-bottom: 88px;
+        }
+      }
+      .mob-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 9px 4px;
+        text-decoration: none;
+        color: var(--text-dim);
+        font-size: 0.5rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      .mob-nav-item:hover,
+      .mob-nav-item.primary {
+        color: var(--gold-lt);
+      }
+      .mob-nav-item svg {
+        width: 17px;
+        height: 17px;
+      }
+      .mob-nav-item.primary svg {
+        stroke: var(--gold);
+      }
+      .mob-nav-item + .mob-nav-item {
+        border-left: 1px solid var(--border);
+      }
+
+      /* ── SEC TITLE ── */
+      .sec-title {
+        font-family: var(--ff-serif);
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 300;
+        line-height: 1.12;
+        color: var(--text);
+      }
+      .sec-title em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .sec-desc {
+        font-size: 0.83rem;
+        line-height: 2;
+        color: var(--text-sub);
+        max-width: 480px;
+        margin-top: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cur-o"></div>
+    <div id="cur-i"></div>
+    <div class="toast" id="toast"></div>
+
+    <!-- Contact FAB — same as collections.html -->
+    <a
+      class="contact-fab"
+      href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20enquire%20about%20your%20jewellery."
+      target="_blank"
+      title="Chat with us"
+    >
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+        />
+      </svg>
+    </a>
+
+    <!-- Mobile Drawer -->
+    <div class="mob-drawer" id="mobDrawer">
+      <div class="mob-drawer-head">
+        <a class="mob-drawer-logo" href="index.html">Sparkles</a>
+        <button class="mob-x" id="mobX">✕</button>
+      </div>
+      <nav class="mob-nav-links">
+        <a href="index.html"
+          >Home<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+        <a href="collections.html"
+          >Collections<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+        <a href="jewllries.html"
+          >Jewellery Guide<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+        <a href="bespoke.html"
+          >Bespoke<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+        <a href="about.html" class="active"
+          >About Us<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+        <a href="contact.html"
+          >Contact<svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" /></svg
+        ></a>
+      </nav>
+      <div class="mob-drawer-foot">
+        <div class="mob-contact-row">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"
+            />
+          </svg>
+          <span>09019733420</span>
+        </div>
+        <div class="mob-contact-row">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <span>divineokpara01@gmail.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Announce Bar -->
+    <div class="announce">
+      <div class="announce-inner">
+        <span class="announce-item">Free delivery on orders over ₦50,000</span>
+        <span class="announce-item">New Arrivals — The Lumière Collection</span>
+        <span class="announce-item">Handcrafted with 18k Gold</span>
+        <span class="announce-item">Order via WhatsApp: 09019733420</span>
+        <span class="announce-item">Certified Diamonds &amp; Gemstones</span>
+        <span class="announce-item">Lifetime Quality Guarantee</span>
+        <span class="announce-item">Free delivery on orders over ₦50,000</span>
+        <span class="announce-item">New Arrivals — The Lumière Collection</span>
+        <span class="announce-item">Handcrafted with 18k Gold</span>
+        <span class="announce-item">Order via WhatsApp: 09019733420</span>
+        <span class="announce-item">Certified Diamonds &amp; Gemstones</span>
+        <span class="announce-item">Lifetime Quality Guarantee</span>
+      </div>
+    </div>
+
+    <!-- Navbar — identical structure to collections.html -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <a href="index.html">Home</a>
+          <div class="nav-drop">
+            <a href="collections.html">Collections</a>
+            <div class="drop-panel">
+              <a href="collections.html">New Arrivals</a>
+              <a href="collections.html">Best Sellers</a>
+              <a href="collections.html">Limited Edition</a>
+              <a href="collections.html">Gift Sets</a>
+            </div>
+          </div>
+          <div class="nav-drop">
+            <a href="collections.html">Jewellery</a>
+            <div class="drop-panel">
+              <a href="collections.html">Rings</a>
+              <a href="collections.html">Necklaces &amp; Chains</a>
+              <a href="collections.html">Earrings</a>
+              <a href="collections.html">Bracelets &amp; Bangles</a>
+              <a href="collections.html">Anklets</a>
+              <a href="collections.html">Jewellery Sets</a>
+            </div>
+          </div>
+          <a href="jewllries.html">Guide</a>
+          <a href="bespoke.html">Bespoke</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <a href="index.html" class="nav-logo">
+          <span class="logo-word">Sparkles</span>
+          <span class="logo-tag">Jewellery</span>
+        </a>
+
+        <div class="nav-right">
+          <div class="nav-icons">
+            <button
+              class="n-icon"
+              onclick="location.href = 'collections.html'"
+              title="Shop"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="7" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+            <button
+              class="n-icon"
+              onclick="location.href = 'collections.html'"
+              title="Wishlist"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+            </button>
+            <div
+              class="n-icon"
+              onclick="location.href = 'collections.html'"
+              style="cursor: pointer"
+              title="Bag"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              <div class="cart-dot" id="cartCount">0</div>
+            </div>
+            <div class="theme-wrap">
+              <span class="theme-icon">☽</span>
+              <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle theme"
+              ></button>
+              <span class="theme-icon">☀</span>
+            </div>
+          </div>
+          <button class="burger" id="burgerBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="hero-photos">
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=75"
+            alt=""
+            loading="eager"
+          />
+        </div>
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=75"
+            alt=""
+            loading="eager"
+          />
+        </div>
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=75"
+            alt=""
+            loading="eager"
+          />
+        </div>
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=75"
+            alt=""
+            loading="eager"
+          />
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-dividers">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hero-ring-deco">
+        <svg
+          viewBox="0 0 400 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="200"
+            cy="200"
+            r="192"
+            stroke="#c9a45f"
+            stroke-width=".6"
+          />
+          <circle
+            cx="200"
+            cy="200"
+            r="155"
+            stroke="#c9a45f"
+            stroke-width=".3"
+          />
+          <circle
+            cx="200"
+            cy="200"
+            r="118"
+            stroke="#c9a45f"
+            stroke-width=".3"
+          />
+          <polygon
+            points="200,22 222,90 295,90 237,133 258,200 200,158 142,200 163,133 105,90 178,90"
+            fill="none"
+            stroke="#c9a45f"
+            stroke-width=".8"
+          />
+          <circle cx="200" cy="200" r="6" stroke="#c9a45f" stroke-width=".6" />
+          <line
+            x1="200"
+            y1="8"
+            x2="200"
+            y2="392"
+            stroke="#c9a45f"
+            stroke-width=".2"
+          />
+          <line
+            x1="8"
+            y1="200"
+            x2="392"
+            y2="200"
+            stroke="#c9a45f"
+            stroke-width=".2"
+          />
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-eyebrow">Lagos, Nigeria — Est. 2015</div>
+        <h1 class="hero-h1">
+          <span class="hero-h1-small">Our</span>
+          <span class="hero-h1-big">Sto<em>ry</em></span>
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="hero-p">
+          Born from a deep love for African elegance and master craftsmanship,
+          Sparkles has been adorning extraordinary women with handcrafted luxury
+          jewellery since 2015.
+        </p>
+        <div class="hero-btns">
+          <a href="collections.html" class="btn btn-gold">
+            <span>Explore Collections</span>
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20know%20more%20about%20you."
+            target="_blank"
+            class="btn btn-outline"
+          >
+            <span>Get in Touch</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div class="hero-scroll-inner">
+          <div class="stat-cell">
+            <div class="stat-n">10+</div>
+            <div class="stat-l">Years Crafting</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">300+</div>
+            <div class="stat-l">Unique Pieces</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">5,000+</div>
+            <div class="stat-l">Happy Clients</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">18k</div>
+            <div class="stat-l">Gold Standard</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── OUR STORY ── -->
+    <div class="story-sec">
+      <div class="story-vis">
+        <img
+          src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&q=80"
+          alt="Our Story"
+        />
+        <div class="story-vis-overlay"></div>
+        <div class="story-yr">Since<br />2015</div>
+      </div>
+      <div class="story-body">
+        <p class="sec-label reveal">Our Story</p>
+        <blockquote class="story-quote reveal d1">
+          "Jewellery is not mere decoration — it is memory, identity, and
+          <strong>love made tangible.</strong>"
+        </blockquote>
+        <div class="story-by reveal d2">Founder, Sparkles Jewelleries</div>
+        <p class="story-p reveal d3">
+          Sparkles was founded with a singular vision: to bring world-class
+          handcrafted jewellery to Nigerian women who deserve nothing less than
+          the extraordinary. What began as a small atelier in Lagos has grown
+          into Nigeria's most trusted name in luxury adornment.
+        </p>
+        <p class="story-p reveal d3" style="margin-top: -20px">
+          Every piece we create is a conversation between heritage and modernity
+          — drawing from Africa's rich aesthetic traditions while embracing
+          contemporary design. We don't just make jewellery. We craft heirlooms.
+        </p>
+        <a
+          href="collections.html"
+          class="btn btn-gold reveal d4"
+          style="align-self: flex-start; display: inline-flex"
+        >
+          <span>Shop the Collection</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── TIMELINE ── -->
+    <div class="timeline-sec">
+      <div class="timeline-hd">
+        <p class="sec-label reveal">Our Journey</p>
+        <h2 class="sec-title reveal d1">A Decade of <em>Excellence</em></h2>
+        <p class="sec-desc reveal d2">
+          From a single workshop to Nigeria's premier jewellery destination —
+          every year has deepened our craft.
+        </p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-yr">2015</div>
+          <div class="tl-title">The Beginning</div>
+          <div class="tl-desc">
+            Founded in Lagos with a vision to make luxury accessible to the
+            African woman. Our first atelier opens with just five signature
+            pieces.
+          </div>
+        </div>
+        <div class="tl-item reveal d1">
+          <div class="tl-yr">2017</div>
+          <div class="tl-title">Diamond Certification</div>
+          <div class="tl-desc">
+            We become one of the first Nigerian jewellers to exclusively use
+            GIA-certified diamonds — setting a new standard in the industry.
+          </div>
+        </div>
+        <div class="tl-item reveal d2">
+          <div class="tl-yr">2020</div>
+          <div class="tl-title">Bespoke Studio</div>
+          <div class="tl-desc">
+            Launch of our dedicated bespoke design studio, offering fully custom
+            pieces from concept to creation — a first in Lagos.
+          </div>
+        </div>
+        <div class="tl-item reveal d3">
+          <div class="tl-yr">2025</div>
+          <div class="tl-title">The Lumière Era</div>
+          <div class="tl-desc">
+            Our most ambitious collection yet — 300+ pieces blending African
+            artistry with contemporary luxury for the modern Nigerian woman.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VALUES ── -->
+    <div class="values-sec">
+      <div class="values-inner">
+        <div class="values-hd">
+          <div>
+            <p class="sec-label reveal">What We Stand For</p>
+            <h2 class="sec-title reveal d1">Our Core <em>Values</em></h2>
+          </div>
+        </div>
+        <div class="values-grid">
+          <div class="val-card reveal">
+            <div class="val-icon">
+              <svg viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+            </div>
+            <div class="val-title">Uncompromising Quality</div>
+            <div class="val-desc">
+              Every piece passes through at least twelve skilled hands — from
+              wax carver to stone setter to polisher. We accept no shortcuts.
+            </div>
+          </div>
+          <div class="val-card reveal d1">
+            <div class="val-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div class="val-title">Ethical Sourcing</div>
+            <div class="val-desc">
+              All our diamonds and gemstones are responsibly sourced and
+              GIA-certified. You wear brilliance with a clear conscience.
+            </div>
+          </div>
+          <div class="val-card reveal d2">
+            <div class="val-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+            </div>
+            <div class="val-title">Made for Women</div>
+            <div class="val-desc">
+              Every design decision is made with the African woman in mind — her
+              strength, her grace, her stories. You are our inspiration.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TEAM ── -->
+    <div class="team-sec">
+      <p class="sec-label reveal">The People Behind the Craft</p>
+      <h2 class="sec-title reveal d1">Meet Our <em>Artisans</em></h2>
+      <p class="sec-desc reveal d2">
+        A team of passionate craftspeople united by one belief: that every woman
+        deserves a piece that tells her story.
+      </p>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-num">01</div>
+          <div class="team-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80"
+              alt="Founder"
+              loading="lazy"
+            />
+            <div class="team-img-overlay"></div>
+          </div>
+          <div class="team-role">Founder &amp; Creative Director</div>
+          <div class="team-name">Adaeze Okonkwo</div>
+          <div class="team-bio">
+            With over 15 years in luxury design, Adaeze founded Sparkles to
+            redefine what Nigerian luxury jewellery could be. Her vision drives
+            every collection.
+          </div>
+        </div>
+        <div class="team-card reveal d1">
+          <div class="team-num">02</div>
+          <div class="team-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=500&q=80"
+              alt="Master Jeweller"
+              loading="lazy"
+            />
+            <div class="team-img-overlay"></div>
+          </div>
+          <div class="team-role">Master Jeweller</div>
+          <div class="team-name">Emmanuel Eze</div>
+          <div class="team-bio">
+            Emmanuel has spent two decades perfecting the art of goldsmithing.
+            His hands transform raw materials into wearable masterpieces of
+            precision.
+          </div>
+        </div>
+        <div class="team-card reveal d2">
+          <div class="team-num">03</div>
+          <div class="team-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80"
+              alt="Gemologist"
+              loading="lazy"
+            />
+            <div class="team-img-overlay"></div>
+          </div>
+          <div class="team-role">Head Gemologist</div>
+          <div class="team-name">Chioma Nwosu</div>
+          <div class="team-bio">
+            GIA-certified and with an eye for extraordinary stones, Chioma
+            sources and certifies every gemstone that enters a Sparkles piece.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROCESS ── -->
+    <div class="process-sec">
+      <div class="process-inner">
+        <p class="sec-label reveal">From Concept to Wrist</p>
+        <h2 class="sec-title reveal d1">How We <em>Craft</em></h2>
+        <p class="sec-desc reveal d2">
+          Every Sparkles piece follows a meticulous five-stage process that
+          ensures perfection in every detail.
+        </p>
+        <div class="process-steps">
+          <div class="proc-step reveal">
+            <div class="proc-num">1</div>
+            <div class="proc-title">Design</div>
+            <div class="proc-desc">
+              Our designers sketch and refine concepts — balancing artistic
+              vision with wearability and the desires of the woman it's made
+              for.
+            </div>
+          </div>
+          <div class="proc-step reveal d1">
+            <div class="proc-num">2</div>
+            <div class="proc-title">Wax Carving</div>
+            <div class="proc-desc">
+              Master carvers sculpt the design in wax — a tactile process that
+              brings the sketch into three dimensions with extraordinary detail.
+            </div>
+          </div>
+          <div class="proc-step reveal d2">
+            <div class="proc-num">3</div>
+            <div class="proc-title">Casting</div>
+            <div class="proc-desc">
+              The wax model is cast in 18k gold using the lost-wax method — an
+              ancient technique perfected over thousands of years.
+            </div>
+          </div>
+          <div class="proc-step reveal d3">
+            <div class="proc-num">4</div>
+            <div class="proc-title">Stone Setting</div>
+            <div class="proc-desc">
+              Our stone setters place each certified diamond or gemstone by
+              hand, securing it for a lifetime of wear without compromise.
+            </div>
+          </div>
+          <div class="proc-step reveal d4">
+            <div class="proc-num">5</div>
+            <div class="proc-title">Polish &amp; Quality</div>
+            <div class="proc-desc">
+              The finished piece is polished to a mirror sheen, inspected under
+              magnification, and certified before it reaches your hands.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TESTIMONIALS ── -->
+    <div class="testi-sec">
+      <p class="sec-label reveal">Client Voices</p>
+      <h2 class="sec-title reveal d1">Words that <em>Shine</em></h2>
+      <div class="testi-grid">
+        <div class="tc reveal">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-txt">
+            "My engagement ring from Sparkles is absolutely breathtaking.
+            Everyone asks where I got it. The quality is unmatched and the
+            service was so personal and warm."
+          </p>
+          <div class="tc-name">Amara O. — Lagos</div>
+        </div>
+        <div class="tc reveal d1">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-txt">
+            "I ordered a custom set for my wedding and they exceeded every
+            expectation. The attention to detail is remarkable. Worth every
+            kobo."
+          </p>
+          <div class="tc-name">Chidinma E. — Abuja</div>
+        </div>
+        <div class="tc reveal d2">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-txt">
+            "Their pieces carry a certain energy — you feel luxurious the moment
+            you put one on. My bracelet has received so many compliments.
+            Absolutely stunning."
+          </p>
+          <div class="tc-name">Funmilayo A. — Port Harcourt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BESPOKE CTA ── -->
+    <div class="cta-sec reveal">
+      <div class="cta-vis">
+        <img
+          src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80"
+          alt="Bespoke"
+        />
+      </div>
+      <div class="cta-body">
+        <div class="cta-label">Made for You, Only You</div>
+        <h2 class="cta-h">Commission a<br /><em>Bespoke Piece</em></h2>
+        <p class="cta-p">
+          Work one-on-one with our master craftspeople to design a piece that
+          tells your unique story. Starting ₦350,000.
+        </p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <a
+            href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20commission%20a%20bespoke%20piece."
+            target="_blank"
+            class="btn btn-gold"
+            ><span>Start Your Design</span></a
+          >
+          <a href="collections.html" class="btn btn-outline"
+            ><span>Browse Collections</span></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- ── NEWSLETTER ── -->
+    <div class="nl-strip">
+      <h2 class="nl-title">First Access to <em>New Collections</em></h2>
+      <p class="nl-p">
+        Join our inner circle for exclusive previews, offers, and care tips.
+      </p>
+      <div class="nl-form">
+        <input type="email" id="nlEmail" placeholder="Your email address" />
+        <button id="nlBtn">Subscribe</button>
+      </div>
+      <p class="nl-alt">
+        Or email:
+        <a href="mailto:divineokpara01@gmail.com">divineokpara01@gmail.com</a>
+      </p>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="fb-name">Sparkles</div>
+          <p>
+            Nigeria's premier destination for handcrafted luxury jewellery.
+            Crafted for the woman who knows her worth.
+          </p>
+          <div class="soc-row">
+            <a
+              href="https://instagram.com/sparklesjewelleries"
+              target="_blank"
+              class="soc-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="5" />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/sparklesjeweleries"
+              target="_blank"
+              class="soc-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/2349019733420"
+              target="_blank"
+              class="soc-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="foot-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="collections.html">Rings</a></li>
+            <li><a href="collections.html">Necklaces</a></li>
+            <li><a href="collections.html">Earrings</a></li>
+            <li><a href="collections.html">Bracelets</a></li>
+            <li><a href="collections.html">Anklets</a></li>
+            <li><a href="collections.html">Jewellery Sets</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="jewllries.html">Jewellery Guide</a></li>
+            <li><a href="bespoke.html">Bespoke</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>
+              <a href="https://wa.me/2349019733420" target="_blank"
+                >WhatsApp Order</a
+              >
+            </li>
+            <li><a href="mailto:divineokpara01@gmail.com">Email Us</a></li>
+            <li>
+              <a
+                href="https://instagram.com/sparklesjewelleries"
+                target="_blank"
+                >Instagram</a
+              >
+            </li>
+            <li><a href="bespoke.html">Book Consultation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-btm">
+        <p>© 2025 Sparkles Jewelleries. All rights reserved.</p>
+        <p style="color: var(--text-dim)">Crafted for Brilliance</p>
+        <div class="pay-row">
+          <div class="pay-chip">Paystack</div>
+          <div class="pay-chip">Flutterwave</div>
+          <div class="pay-chip">Bank Transfer</div>
+          <div class="pay-chip">WhatsApp</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="mob-bottom-nav">
+      <a class="mob-nav-item" href="collections.html">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <circle cx="9" cy="21" r="1" />
+          <circle cx="20" cy="21" r="1" />
+          <path
+            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+          />
+        </svg>
+        Shop
+      </a>
+      <a class="mob-nav-item" href="jewllries.html">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+        Guide
+      </a>
+      <a
+        class="mob-nav-item primary"
+        href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20order."
+        target="_blank"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path
+            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+          />
+        </svg>
+        Order
+      </a>
+      <a class="mob-nav-item" href="about.html" style="color: var(--gold-lt)">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        About
+      </a>
+      <button class="mob-nav-item" id="mobMenuBtn">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+        Menu
+      </button>
+    </div>
+
+    <script>
+      /* ── CURSOR ── */
+      const co = document.getElementById("cur-o"),
+        ci = document.getElementById("cur-i");
+      let mx = 0,
+        my = 0,
+        ox = 0,
+        oy = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        ci.style.cssText = `left:${mx}px;top:${my}px`;
+      });
+      (function tick() {
+        ox += (mx - ox) * 0.1;
+        oy += (my - oy) * 0.1;
+        co.style.cssText = `left:${ox - 15}px;top:${oy - 15}px`;
+        requestAnimationFrame(tick);
+      })();
+
+      /* ── THEME ── */
+      const html = document.documentElement;
+      html.setAttribute(
+        "data-theme",
+        localStorage.getItem("sparkles-theme") || "dark",
+      );
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const n = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", n);
+        localStorage.setItem("sparkles-theme", n);
+      });
+
+      /* ── CART BADGE ── */
+      try {
+        const cart = JSON.parse(localStorage.getItem("sparkles-cart") || "[]");
+        document.getElementById("cartCount").textContent = cart.reduce(
+          (a, i) => a + i.qty,
+          0,
+        );
+      } catch (e) {}
+
+      /* ── NAVBAR SCROLL ── */
+      window.addEventListener("scroll", () =>
+        document
+          .getElementById("navbar")
+          .classList.toggle("scrolled", scrollY > 60),
+      );
+
+      /* ── MOBILE DRAWER ── */
+      const openDrawer = () =>
+        document.getElementById("mobDrawer").classList.add("open");
+      const closeDrawer = () =>
+        document.getElementById("mobDrawer").classList.remove("open");
+      document
+        .getElementById("burgerBtn")
+        .addEventListener("click", function () {
+          this.classList.toggle("open");
+          openDrawer();
+        });
+      document
+        .getElementById("mobMenuBtn")
+        ?.addEventListener("click", openDrawer);
+      document.getElementById("mobX").addEventListener("click", () => {
+        closeDrawer();
+        document.getElementById("burgerBtn").classList.remove("open");
+      });
+
+      /* ── REVEAL ── */
+      const ro = new IntersectionObserver(
+        (en) => {
+          en.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              ro.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".reveal").forEach((r) => ro.observe(r));
+
+      /* ── NEWSLETTER ── */
+      document.getElementById("nlBtn").addEventListener("click", () => {
+        const email = document.getElementById("nlEmail").value.trim();
+        if (!email || !email.includes("@")) {
+          return;
+        }
+        window.location.href = `mailto:divineokpara01@gmail.com?subject=Newsletter%20Subscription&body=Please%20add%20me%20to%20the%20Sparkles%20newsletter.%0AEmail%3A%20${encodeURIComponent(email)}`;
+      });
+    </script>
+  </body>
+</html>
