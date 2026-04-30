@@ -3,39 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collections — Sparkles Jewelleries</title>
+    <title>Bespoke Commissions — Sparkles Jewelleries</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
 
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
       :root {
         --ff-serif: "Cormorant Garamond", Georgia, serif;
-        --ff-sans: "Jost", sans-serif;
-        --ease: cubic-bezier(0.4, 0, 0.2, 1);
-        --nav-h: 64px;
+        --ff-sans:  "Jost", sans-serif;
+        --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+        --nav-h:    64px;
       }
 
       [data-theme="dark"] {
-        --bg: #090806; --surface: #131009; --surface-2: #1c1812;
-        --surface-3: #241e15; --text: #f0ebe0;
-        --text-sub: rgba(240,235,224,0.48); --text-dim: rgba(240,235,224,0.22);
-        --gold: #c9a45f; --gold-lt: #e2c88a; --gold-dk: #8a6b38;
-        --gold-xdk: #5c4620; --border: rgba(201,164,95,0.14);
-        --border-hv: rgba(201,164,95,0.38); --nav-bg: rgba(9,8,6,0.96);
-        --card-bg: #161209; --shadow: 0 8px 40px rgba(0,0,0,0.6);
+        --bg:        #06050a;
+        --surface:   #100e16;
+        --surface-2: #17151e;
+        --surface-3: #201d28;
+        --text:      #f0ebe0;
+        --text-sub:  rgba(240,235,224,0.48);
+        --text-dim:  rgba(240,235,224,0.2);
+        --gold:      #c9a45f;
+        --gold-lt:   #e2c88a;
+        --gold-dk:   #8a6b38;
+        --gold-xdk:  #5c4620;
+        --border:    rgba(201,164,95,0.14);
+        --border-hv: rgba(201,164,95,0.4);
+        --card-bg:   #0e0c14;
+        --shadow:    0 8px 48px rgba(0,0,0,0.75);
+        --nav-bg:    rgba(6,5,10,0.95);
+        --hero-glow: rgba(201,164,95,0.1);
       }
 
       [data-theme="light"] {
-        --bg: #f7f3ec; --surface: #ede8de; --surface-2: #e3ddd1;
-        --surface-3: #d8d1c3; --text: #18130a;
-        --text-sub: rgba(24,19,10,0.52); --text-dim: rgba(24,19,10,0.28);
-        --gold: #9a7235; --gold-lt: #b8904a; --gold-dk: #6b4d22;
-        --gold-xdk: #3e2c10; --border: rgba(154,114,53,0.18);
-        --border-hv: rgba(154,114,53,0.42); --nav-bg: rgba(247,243,236,0.98);
-        --card-bg: #ede8de; --shadow: 0 8px 40px rgba(0,0,0,0.12);
+        --bg:        #f7f3ec;
+        --surface:   #ede8de;
+        --surface-2: #e3ddd1;
+        --surface-3: #d8d1c3;
+        --text:      #18130a;
+        --text-sub:  rgba(24,19,10,0.55);
+        --text-dim:  rgba(24,19,10,0.3);
+        --gold:      #9a7235;
+        --gold-lt:   #b8904a;
+        --gold-dk:   #6b4d22;
+        --gold-xdk:  #3e2c10;
+        --border:    rgba(154,114,53,0.2);
+        --border-hv: rgba(154,114,53,0.45);
+        --card-bg:   #ede8de;
+        --shadow:    0 8px 40px rgba(0,0,0,0.12);
+        --nav-bg:    rgba(247,243,236,0.97);
+        --hero-glow: rgba(154,114,53,0.08);
       }
 
       html { scroll-behavior: smooth; }
@@ -43,705 +63,512 @@
         background: var(--bg); color: var(--text);
         font-family: var(--ff-sans); font-weight: 300;
         overflow-x: hidden; transition: background 0.4s, color 0.4s;
-        cursor: default;
       }
-      img { display: block; max-width: 100%; }
-      button { font-family: var(--ff-sans); }
 
       /* ── CURSOR (desktop only) ── */
       #cur-o, #cur-i { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
-      #cur-o { width: 30px; height: 30px; border: 1px solid rgba(201,164,95,0.4); transition: width 0.3s, height 0.3s; }
+      #cur-o { width: 32px; height: 32px; border: 1px solid rgba(201,164,95,0.45); transition: width .3s, height .3s; }
       #cur-i { width: 5px; height: 5px; background: var(--gold-lt); transform: translate(-50%,-50%); }
-      body:has(a:hover) #cur-o, body:has(button:hover) #cur-o { width: 46px; height: 46px; border-color: var(--gold); }
+      body:has(a:hover) #cur-o, body:has(button:hover) #cur-o { width: 52px; height: 52px; border-color: var(--gold); }
       @media (max-width: 768px) { body { cursor: auto; } #cur-o, #cur-i { display: none; } }
 
       /* ── TOAST ── */
-      .toast {
-        position: fixed; bottom: 88px; left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        background: var(--surface); border: 1px solid var(--gold);
-        color: var(--gold-lt); font-size: 0.72rem; letter-spacing: 0.12em;
-        padding: 12px 28px; opacity: 0; pointer-events: none; z-index: 700;
-        white-space: nowrap; transition: opacity 0.35s, transform 0.35s;
-        max-width: calc(100vw - 32px); border-radius: 2px;
-      }
+      .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface); border: 1px solid var(--gold); color: var(--gold-lt); font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; padding: 12px 24px; opacity: 0; pointer-events: none; transition: opacity .35s, transform .35s; z-index: 700; white-space: nowrap; border-radius: 2px; max-width: calc(100vw - 32px); }
       .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-      @media (max-width: 640px) { .toast { bottom: 90px; font-size: 0.65rem; padding: 10px 16px; } }
 
-      /* ── ANNOUNCE ── */
-      .announce {
-        background: var(--bg); border-bottom: 1px solid var(--border);
-        padding: 9px 0; overflow: hidden; font-size: 0.62rem;
-        letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-lt);
-      }
-      .announce-inner { display: flex; gap: 72px; width: max-content; animation: ticker 34s linear infinite; }
-      .announce-item { white-space: nowrap; }
-      .announce-item + .announce-item::before { content:"◆"; margin-right: 72px; color: var(--gold-dk); font-size: 0.42rem; vertical-align: middle; }
-      @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+      /* ── WHATSAPP FAB ── */
+      .wa-float { position: fixed; bottom: 24px; right: 20px; z-index: 500; text-decoration: none; display: flex; align-items: center; }
+      .wa-pill { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border-hv); padding: 12px 18px 12px 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all .35s var(--ease); position: relative; overflow: hidden; border-radius: 2px; }
+      .wa-pill::before { content: ""; position: absolute; inset: 0; background: var(--gold); transform: translateX(-101%); transition: transform .35s var(--ease); }
+      .wa-float:hover .wa-pill::before { transform: translateX(0); }
+      .wa-pill svg { width: 18px; height: 18px; fill: var(--gold); position: relative; z-index: 1; transition: fill .3s; flex-shrink: 0; }
+      .wa-float:hover .wa-pill svg { fill: #000; }
+      .wa-label { font-family: var(--ff-sans); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-lt); position: relative; z-index: 1; transition: color .3s; white-space: nowrap; }
+      .wa-float:hover .wa-label { color: #000; }
+      @media (max-width: 640px) { .wa-float { bottom: 16px; right: 14px; } .wa-label { display: none; } .wa-pill { padding: 12px; } }
+
+      /* ── ANNOUNCEMENT TICKER ── */
+      .announce { background: #0a0812; border-bottom: 1px solid var(--border); padding: 8px 0; overflow: hidden; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-lt); }
+      .ann-inner { display: flex; gap: 60px; width: max-content; animation: ticker 38s linear infinite; }
+      .ann-item { white-space: nowrap; }
+      .ann-item + .ann-item::before { content: "◆"; margin-right: 60px; color: var(--gold-dk); font-size: 0.4rem; vertical-align: middle; }
+      @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
       /* ── NAVBAR ── */
       nav {
         position: sticky; top: 0; z-index: 200; height: var(--nav-h);
-        background: var(--nav-bg); backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
-        transition: background 0.4s;
+        background: var(--nav-bg); backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
+        transition: background .4s, box-shadow .4s;
       }
+      nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
+
       .nav-inner {
         display: flex; align-items: center; height: 100%;
-        padding: 0 32px; max-width: 1440px; margin: 0 auto;
+        padding: 0 40px; max-width: 1440px; margin: 0 auto;
+        position: relative;
       }
-      @media (max-width: 640px) { .nav-inner { padding: 0 14px; } }
+      @media (max-width: 640px) { .nav-inner { padding: 0 16px; } }
 
-      .nav-left { display: flex; align-items: center; gap: 20px; flex: 1; }
+      /* Left: nav links (desktop only) */
+      .nav-left { display: flex; align-items: center; gap: 28px; flex: 1; }
       @media (max-width: 900px) { .nav-left { display: none; } }
-      .nav-left a, .nav-drop > a {
-        font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-        color: var(--text-sub); text-decoration: none; white-space: nowrap;
-        position: relative; padding-bottom: 2px; transition: color 0.3s;
-      }
-      .nav-left a:hover, .nav-drop > a:hover { color: var(--gold-lt); }
-      .nav-left a::after, .nav-drop > a::after {
-        content:""; position: absolute; bottom: 0; left: 0; width: 0;
-        height: 1px; background: var(--gold); transition: width 0.35s var(--ease);
-      }
-      .nav-left a:hover::after, .nav-drop > a:hover::after { width: 100%; }
+
       .nav-drop { position: relative; }
-      .drop-panel {
-        position: absolute; top: calc(100% + 12px); left: 0;
-        background: var(--surface); border: 1px solid var(--border);
-        min-width: 190px; padding: 8px 0; opacity: 0; pointer-events: none;
-        transform: translateY(-6px); box-shadow: var(--shadow);
-        transition: opacity 0.25s, transform 0.25s var(--ease);
-      }
+      .nav-left > a, .nav-drop > a { font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-sub); text-decoration: none; white-space: nowrap; position: relative; padding-bottom: 2px; transition: color .3s; }
+      .nav-left > a:hover, .nav-drop > a:hover { color: var(--gold-lt); }
+      .nav-left > a::after, .nav-drop > a::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .35s var(--ease); }
+      .nav-left > a:hover::after, .nav-drop > a:hover::after { width: 100%; }
+      .drop-panel { position: absolute; top: calc(100% + 18px); left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 200px; padding: 10px 0; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .25s, transform .25s var(--ease); box-shadow: var(--shadow); }
       .nav-drop:hover .drop-panel { opacity: 1; pointer-events: all; transform: translateY(0); }
-      .drop-panel a { display: block; padding: 9px 18px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-sub) !important; text-decoration: none; transition: background 0.2s, color 0.2s !important; }
+      .drop-panel a { display: block; padding: 10px 20px; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-sub) !important; text-decoration: none; transition: background .2s, color .2s !important; }
       .drop-panel a::after { display: none !important; }
       .drop-panel a:hover { background: rgba(201,164,95,0.08); color: var(--gold-lt) !important; }
 
-      .nav-logo { display: flex; flex-direction: column; align-items: center; text-decoration: none; gap: 2px; padding: 0 20px; flex-shrink: 0; }
-      .logo-word { font-family: var(--ff-serif); font-weight: 300; font-size: 1.45rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text); line-height: 1; white-space: nowrap; transition: color 0.4s; }
-      .logo-tag { font-size: 0.5rem; letter-spacing: 0.55em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
-      @media (max-width: 400px) { .logo-word { font-size: 1.2rem; letter-spacing: 0.25em; } .nav-logo { padding: 0 8px; } }
+      /* Center logo — absolutely centered */
+      .nav-logo {
+        position: absolute; left: 50%; transform: translateX(-50%);
+        display: flex; flex-direction: column; align-items: center;
+        text-decoration: none; gap: 2px; pointer-events: auto;
+      }
+      .logo-word { font-family: var(--ff-serif); font-weight: 300; font-size: 1.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text); line-height: 1; white-space: nowrap; transition: color .4s; }
+      .logo-sub { font-size: 0.48rem; letter-spacing: 0.55em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+      @media (max-width: 400px) { .logo-word { font-size: 1.2rem; letter-spacing: 0.2em; } }
 
-      .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 1; }
-      .nav-icons { display: flex; gap: 10px; align-items: center; }
-      .n-icon { color: var(--text-sub); cursor: pointer; transition: color 0.3s; display: flex; align-items: center; background: none; border: none; position: relative; padding: 4px; }
-      .n-icon:hover { color: var(--gold-lt); }
-      .n-icon svg { width: 17px; height: 17px; stroke-width: 1.2; }
-      @media (max-width: 380px) { .n-icon.hide-xs { display: none; } }
-      .cart-dot { position: absolute; top: -2px; right: -4px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); color: var(--bg); font-size: 0.5rem; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+      /* ── NAV RIGHT ──
+         Desktop: search icon + theme toggle
+         Mobile:  burger ONLY — everything else moves to drawer */
+      .nav-right {
+        display: flex; align-items: center; justify-content: flex-end;
+        gap: 10px; flex: 1;
+      }
+
+      /* Desktop nav icons */
+      .nav-icons { display: flex; gap: 8px; align-items: center; }
+      .ni { color: var(--text-sub); cursor: pointer; transition: color .3s; display: flex; align-items: center; background: none; border: none; padding: 6px; }
+      .ni:hover { color: var(--gold-lt); }
+      .ni svg { width: 17px; height: 17px; stroke-width: 1.3; }
+
+      /* Theme toggle */
       .theme-wrap { display: flex; align-items: center; gap: 6px; }
-      .theme-icon { font-size: 0.68rem; color: var(--text-sub); line-height: 1; }
-      @media (max-width: 480px) { .theme-icon { display: none; } }
-      .theme-toggle { width: 34px; height: 18px; border-radius: 9px; background: var(--surface-2); border: 1px solid var(--border); position: relative; cursor: pointer; transition: background 0.3s; }
-      .theme-toggle::after { content:""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); transition: transform 0.3s; }
-      [data-theme="light"] .theme-toggle::after { transform: translateX(16px); }
-      .burger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 6px; }
-      .burger span { display: block; width: 20px; height: 1px; background: var(--gold-lt); transition: 0.3s; }
-      .burger.open span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+      .theme-icon { font-size: 0.68rem; color: var(--text-sub); }
+      .theme-btn { width: 36px; height: 20px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); position: relative; cursor: pointer; transition: background .3s; flex-shrink: 0; }
+      .theme-btn::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); transition: transform .3s; }
+      [data-theme="light"] .theme-btn::after { transform: translateX(16px); }
+
+      /* On mobile: hide desktop controls — they live in the drawer */
+      @media (max-width: 900px) {
+        .nav-icons { display: none; }
+        .theme-wrap { display: none; }
+      }
+
+      /* Burger — right side, mobile/tablet only */
+      .burger {
+        display: none;
+        flex-direction: column; gap: 5px;
+        cursor: pointer; background: none; border: none;
+        width: 44px; height: 44px;
+        justify-content: center; align-items: center;
+        -webkit-tap-highlight-color: transparent;
+        flex-shrink: 0;
+      }
+      .burger span { display: block; width: 22px; height: 1.5px; background: var(--gold-lt); transition: 0.3s; border-radius: 2px; }
+      .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .burger.open span:nth-child(2) { opacity: 0; }
-      .burger.open span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+      .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
       @media (max-width: 900px) { .burger { display: flex; } }
 
-      /* ── MOBILE DRAWER ── */
+      /* ── MOBILE DRAWER — slides from RIGHT ── */
       .mob-drawer {
-        position: fixed; inset: 0; z-index: 500; background: var(--bg);
-        display: flex; flex-direction: column;
-        transform: translateX(100%); transition: transform 0.4s var(--ease); overflow-y: auto;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: min(300px, 85vw); background: var(--surface);
+        z-index: 400; transform: translateX(110%);
+        transition: transform .4s var(--ease);
+        display: flex; flex-direction: column; overflow-y: auto;
+        box-shadow: -4px 0 40px rgba(0,0,0,0.6);
       }
       .mob-drawer.open { transform: translateX(0); }
-      .mob-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-      .mob-drawer-logo { font-family: var(--ff-serif); font-weight: 300; font-size: 1.35rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text); text-decoration: none; }
-      .mob-x { background: none; border: 1px solid var(--border); cursor: pointer; color: var(--text-sub); width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: border-color 0.2s, color 0.2s; }
+      .mob-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 399; opacity: 0; pointer-events: none; transition: opacity .4s; }
+      .mob-drawer-overlay.active { opacity: 1; pointer-events: all; }
+      .mob-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+      .mob-drawer-logo { font-family: var(--ff-serif); font-weight: 300; font-size: 1.4rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+      .mob-x { background: none; border: 1px solid var(--border); cursor: pointer; color: var(--text-sub); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: border-color .2s, color .2s; border-radius: 2px; }
       .mob-x:hover { border-color: var(--gold); color: var(--gold); }
-      .mob-nav-links { flex: 1; display: flex; flex-direction: column; padding: 12px 0; }
-      .mob-nav-links a { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; font-size: 0.76rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-sub); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.3s, background 0.3s; }
+      .mob-nav-links { flex: 1; display: flex; flex-direction: column; padding: 8px 0; }
+      .mob-nav-links a { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-sub); text-decoration: none; border-bottom: 1px solid var(--border); transition: color .3s, background .3s; min-height: 56px; }
       .mob-nav-links a:hover { color: var(--gold-lt); background: rgba(201,164,95,0.04); }
       .mob-nav-links a.active { color: var(--gold-lt); }
-      .mob-nav-links a svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; opacity: 0.4; }
-      .mob-drawer-foot { padding: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
-      .mob-contact-row { display: flex; align-items: center; gap: 10px; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-sub); }
-      .mob-contact-row svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 1.5; flex-shrink: 0; }
-
-      /* ── REVEAL ── */
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-      .reveal.in { opacity: 1; transform: translateY(0); }
-      .d1{transition-delay:0.1s} .d2{transition-delay:0.2s} .d3{transition-delay:0.3s}
+      /* Search row inside drawer */
+      .mob-search-row { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; }
+      .mob-search-row svg { width: 15px; height: 15px; stroke: var(--text-sub); stroke-width: 1.4; fill: none; flex-shrink: 0; }
+      .mob-search-row span { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-sub); }
+      .mob-search-row:hover span, .mob-search-row:hover svg { color: var(--gold-lt); stroke: var(--gold-lt); }
+      /* Theme row inside drawer */
+      .mob-theme-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-top: 1px solid var(--border); margin-top: auto; }
+      .mob-theme-row span { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-sub); }
 
       /* ── BUTTONS ── */
-      .btn {
-        display: inline-flex; align-items: center; gap: 10px;
-        font-family: var(--ff-sans); font-size: 0.66rem; letter-spacing: 0.22em;
-        text-transform: uppercase; text-decoration: none; cursor: pointer;
-        border: none; padding: 13px 30px; position: relative; overflow: hidden;
-        transition: color 0.3s var(--ease);
-      }
-      .btn::before { content:""; position: absolute; inset: 0; transform: translateX(-101%); transition: transform 0.35s var(--ease); }
+      .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; padding: 14px 32px; position: relative; overflow: hidden; transition: color .3s var(--ease); border-radius: 1px; }
+      .btn::before { content: ""; position: absolute; inset: 0; transform: translateX(-101%); transition: transform .35s var(--ease); }
       .btn:hover::before { transform: translateX(0); }
-      .btn span, .btn svg { position: relative; z-index: 1; }
-      .btn svg { transition: transform 0.3s; }
-      .btn:hover svg { transform: translateX(3px); }
-      .btn-gold { background: var(--gold); color: var(--bg); }
+      .btn span { position: relative; z-index: 1; }
+      .btn svg { position: relative; z-index: 1; transition: transform .3s; }
+      .btn:hover svg { transform: translateX(4px); }
+      .btn-gold { background: var(--gold); color: #000; }
       .btn-gold::before { background: var(--gold-dk); }
       .btn-gold:hover { color: var(--text); }
       .btn-outline { background: transparent; color: var(--text-sub); border: 1px solid var(--border); }
-      .btn-outline::before { background: rgba(201,164,95,0.07); }
+      .btn-outline::before { background: rgba(201,164,95,0.08); }
       .btn-outline:hover { color: var(--gold-lt); border-color: var(--border-hv); }
+      @media (max-width: 480px) { .btn { padding: 14px 22px; font-size: 0.62rem; } }
 
-      /* ── WHATSAPP FAB ── */
-      .contact-fab {
-        position: fixed; bottom: 28px; right: 28px; z-index: 400;
-        width: 50px; height: 50px; border-radius: 50%;
-        background: var(--surface); border: 1px solid var(--border-hv);
-        display: flex; align-items: center; justify-content: center;
-        text-decoration: none; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-        transition: border-color 0.3s, background 0.3s;
-        animation: fab-bob 4s ease-in-out infinite;
-      }
-      .contact-fab:hover { border-color: var(--gold); background: rgba(201,164,95,0.1); animation: none; }
-      .contact-fab svg { width: 20px; height: 20px; stroke: var(--gold-lt); fill: none; stroke-width: 1.3; }
-      @keyframes fab-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-      @media (max-width: 640px) { .contact-fab { bottom: 76px; right: 14px; width: 44px; height: 44px; } }
+      /* ── REVEAL ── */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; } .d5 { transition-delay: .5s; }
 
       /* ── HERO ── */
-      .hero {
-        position: relative; min-height: 75svh; overflow: hidden;
-        display: flex; align-items: center; background: var(--bg);
-      }
-      @media (max-width: 640px) { .hero { min-height: 100svh; } }
+      .bespoke-hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: var(--bg); }
+      .hero-mesh { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 65% 50%, rgba(201,164,95,0.12) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(120,80,200,0.05) 0%, transparent 50%); z-index: 1; }
+      .hero-grain { position: absolute; inset: 0; opacity: 0.45; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"); }
+      .hero-video-side { position: absolute; right: 0; top: 0; bottom: 0; width: 50%; z-index: 3; overflow: hidden; }
+      .hero-video-side video { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+      .hero-video-mask { position: absolute; inset: 0; background: linear-gradient(to right, var(--bg) 0%, transparent 40%), linear-gradient(to top, var(--bg) 0%, transparent 20%); z-index: 4; }
 
-      .hero-photos { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; }
-      .hero-photo { overflow: hidden; }
-      .hero-photo img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35) saturate(0.6); transform: scale(1.05); animation: photo-drift 18s ease-in-out infinite alternate; }
-      .hero-photo:nth-child(2) img { animation-delay: -3s; animation-duration: 20s; }
-      .hero-photo:nth-child(3) img { animation-delay: -7s; animation-duration: 16s; }
-      .hero-photo:nth-child(4) img { animation-delay: -11s; animation-duration: 22s; }
-      @keyframes photo-drift { from{transform:scale(1.05) translateY(0)} to{transform:scale(1.12) translateY(-2%)} }
-      @media (max-width: 640px) { .hero-photos{grid-template-columns:1fr 1fr} .hero-photo:nth-child(3),.hero-photo:nth-child(4){display:none} }
-
-      .hero-overlay {
-        position: absolute; inset: 0; z-index: 2;
-        background: linear-gradient(to right, rgba(9,8,6,0.92) 0%, rgba(9,8,6,0.7) 55%, rgba(9,8,6,0.3) 100%),
-                    linear-gradient(to top, rgba(9,8,6,0.95) 0%, transparent 40%);
-      }
-      .hero-dividers { position: absolute; inset: 0; z-index: 3; pointer-events: none; display: flex; }
-      .hero-dividers span { flex: 1; border-right: 1px solid rgba(201,164,95,0.06); }
-      .hero-dividers span:last-child { border-right: none; }
-      .hero-ring-deco { position: absolute; right: 8%; top: 50%; transform: translateY(-50%); z-index: 4; pointer-events: none; }
-      .hero-ring-deco svg { width: clamp(200px,28vw,480px); height: clamp(200px,28vw,480px); opacity: 0.1; animation: ring-rotate 60s linear infinite; }
-      @keyframes ring-rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-      @media (max-width: 640px) { .hero-ring-deco { right: -20%; opacity: 0.06; } }
-
-      /* Hero content — KEY: enough bottom padding on mobile so stat bar never overlaps buttons */
-      .hero-content {
-        position: relative; z-index: 5;
-        max-width: 1440px; width: 100%; margin: 0 auto;
-        padding: calc(var(--nav-h) + 40px) 48px 140px;
-      }
-      @media (max-width: 768px) {
-        .hero-content { padding: calc(var(--nav-h) + 28px) 24px 180px; }
-      }
-      @media (max-width: 480px) {
-        .hero-content { padding: calc(var(--nav-h) + 20px) 18px 200px; }
-      }
-      @media (max-width: 360px) {
-        .hero-content { padding: calc(var(--nav-h) + 16px) 14px 210px; }
+      .hero-inner {
+        position: relative; z-index: 5; max-width: 1400px; margin: 0 auto;
+        padding: 80px 56px 60px; width: 100%;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
       }
 
-      .hero-eyebrow { display: flex; align-items: center; gap: 14px; font-size: 0.58rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; animation: fade-slide 0.9s 0.1s both; }
-      .hero-eyebrow::before { content:""; width: 30px; height: 1px; background: var(--gold-dk); }
-      @keyframes fade-slide { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+      .hero-eyebrow { display: flex; align-items: center; gap: 14px; font-size: 0.6rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; animation: fade-up .9s .1s var(--ease) both; }
+      .hero-eyebrow::before { content: ""; display: block; width: 28px; height: 1px; background: var(--gold-dk); }
+      .hero-h1 { font-family: var(--ff-serif); font-size: clamp(2.4rem, 7vw, 7rem); font-weight: 300; line-height: 0.95; color: var(--text); margin-bottom: 28px; animation: fade-up .9s .25s var(--ease) both; }
+      .hero-h1 em { font-style: italic; color: var(--gold-lt); display: block; }
+      .hero-p { font-size: 0.88rem; line-height: 2.1; color: var(--text-sub); max-width: 440px; margin-bottom: 40px; animation: fade-up .9s .4s var(--ease) both; }
+      .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fade-up .9s .55s var(--ease) both; }
 
-      .hero-h1 { font-family: var(--ff-serif); font-weight: 300; line-height: 0.95; color: var(--text); margin-bottom: 6px; animation: fade-slide 0.9s 0.2s both; }
-      .hero-h1-small { font-size: clamp(1.2rem,3.5vw,2.5rem); display: block; color: var(--text-sub); letter-spacing: 0.08em; }
-      .hero-h1-big { font-size: clamp(3.2rem,11vw,9rem); display: block; color: var(--text); line-height: 0.9; }
-      .hero-h1-big em { font-style: italic; color: var(--gold-lt); }
+      /* Hero 3D visual */
+      .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; height: 520px; }
+      .diamond-3d-wrap { position: relative; width: 360px; height: 360px; animation: diamond-float 7s ease-in-out infinite; }
+      @keyframes diamond-float { 0%,100%{transform:translateY(0) rotateY(0deg)} 33%{transform:translateY(-20px) rotateY(8deg)} 66%{transform:translateY(-10px) rotateY(-5deg)} }
+      .diamond-glow { position: absolute; inset: -30px; border-radius: 50%; background: radial-gradient(circle, rgba(201,164,95,0.2) 0%, transparent 65%); animation: glow-pulse 4s ease-in-out infinite; }
+      @keyframes glow-pulse { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.15);opacity:1} }
+      .halo-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(201,164,95,0.2); }
+      .halo-ring:nth-child(2){width:320px;height:320px;margin:-160px 0 0 -160px;animation:halo-spin 14s linear infinite;border-color:rgba(201,164,95,.15)}
+      .halo-ring:nth-child(3){width:260px;height:260px;margin:-130px 0 0 -130px;animation:halo-spin 10s linear infinite reverse;border-color:rgba(201,164,95,.25)}
+      .halo-ring:nth-child(4){width:200px;height:200px;margin:-100px 0 0 -100px;animation:halo-spin 7s linear infinite;border-color:rgba(201,164,95,.12)}
+      .halo-dot { position: absolute; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; top: -3px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 12px var(--gold),0 0 24px rgba(201,164,95,.5); }
+      @keyframes halo-spin { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
+      .float-tag { position: absolute; background: rgba(16,14,22,0.9); border: 1px solid rgba(201,164,95,0.25); backdrop-filter: blur(12px); padding: 10px 16px; font-family: var(--ff-sans); border-radius: 1px; }
+      .ft-1{top:8%;right:-10%;animation:fc-f 7s 0s ease-in-out infinite}
+      .ft-2{bottom:20%;left:-5%;animation:fc-f 7s 2s ease-in-out infinite}
+      .ft-3{top:45%;right:-12%;animation:fc-f 7s 4s ease-in-out infinite}
+      @keyframes fc-f{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+      .ft-k{font-size:0.5rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px}
+      .ft-v{font-family:var(--ff-serif);font-size:0.88rem;color:var(--text)}
 
-      .hero-rule { width: 100px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin: 22px 0; animation: fade-slide 0.9s 0.3s both; }
-      .hero-p { font-size: 0.85rem; line-height: 2; color: var(--text-sub); max-width: 420px; margin-bottom: 32px; animation: fade-slide 0.9s 0.4s both; }
-      @media (max-width: 480px) { .hero-p { font-size: 0.78rem; margin-bottom: 28px; } }
-
-      /* ── HERO BUTTONS — MOBILE FIXED ── */
-      .hero-btns {
-        display: flex; gap: 12px; flex-wrap: wrap;
-        animation: fade-slide 0.9s 0.5s both;
+      /* Mobile hero */
+      @media (max-width: 900px) {
+        .hero-inner { grid-template-columns: 1fr; padding: 80px 28px 60px; gap: 0; }
+        .hero-video-side { display: none; }
+        .hero-visual { display: none; }
+        .hero-p { max-width: 100%; font-size: 0.84rem; }
       }
       @media (max-width: 560px) {
-        .hero-btns {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 10px;
-          width: 100%;
-          max-width: 320px;
-        }
-        .hero-btns .btn {
-          width: 100%;
-          justify-content: center;
-          padding: 15px 20px;
-          font-size: 0.64rem;
-          letter-spacing: 0.18em;
-        }
-      }
-      @media (max-width: 360px) {
-        .hero-btns .btn { padding: 13px 16px; font-size: 0.6rem; letter-spacing: 0.14em; }
+        .hero-inner { padding: 70px 18px 50px; }
+        .hero-btns { flex-direction: column; align-items: stretch; gap: 10px; max-width: 320px; }
+        .hero-btns .btn { justify-content: center; width: 100%; }
+        .hero-h1 { font-size: clamp(2.2rem, 12vw, 3.8rem); }
       }
 
-      /* ── HERO STATS ── */
-      .hero-scroll {
-        position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
-        border-top: 1px solid var(--border);
-        background: rgba(9,8,6,0.7); backdrop-filter: blur(12px);
-      }
-      [data-theme="light"] .hero-scroll { background: rgba(247,243,236,0.7); }
-      .hero-scroll-inner {
-        max-width: 1440px; margin: 0 auto; padding: 0 48px;
-        display: grid; grid-template-columns: repeat(4,1fr);
-        gap: 1px; background: var(--border);
-      }
-      @media (max-width: 768px) { .hero-scroll-inner { grid-template-columns: 1fr 1fr; padding: 0 16px; } }
-      @media (max-width: 480px) { .hero-scroll-inner { padding: 0 8px; } }
+      /* ── PROCESS SECTION ── */
+      .process-sec { position: relative; overflow: hidden; }
+      .process-video-bg { position: absolute; inset: 0; z-index: 0; }
+      .process-video-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
+      .process-video-overlay { position: absolute; inset: 0; z-index: 1; background: rgba(6,5,10,0.85); }
+      .process-inner { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 80px 48px; }
+      .process-hd { text-align: center; margin-bottom: 60px; }
+      .sec-label { font-size: 0.6rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .sec-title { font-family: var(--ff-serif); font-size: clamp(1.6rem, 4vw, 3.4rem); font-weight: 300; color: var(--text); }
+      .sec-title em { font-style: italic; color: var(--gold-lt); }
 
-      .stat-cell {
-        background: rgba(9,8,6,0.4); padding: 16px 20px;
-        text-align: center; transition: background 0.3s;
+      .steps-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; position: relative; }
+      .steps-grid::before { content: ""; position: absolute; top: 52px; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dk), var(--gold), var(--gold-dk), transparent); z-index: 0; }
+      .step-item { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+      .step-icon-wrap { width: 104px; height: 104px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; position: relative; transition: border-color .4s, background .4s; }
+      .step-item:hover .step-icon-wrap { border-color: var(--gold); background: rgba(201,164,95,0.08); }
+      .step-icon-wrap::before { content: attr(data-num); position: absolute; top: -12px; right: -4px; font-family: var(--ff-serif); font-size: 0.75rem; color: var(--gold-dk); font-style: italic; }
+      .step-icon-wrap svg { width: 36px; height: 36px; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+      .step-name { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+      .step-desc { font-size: 0.74rem; line-height: 1.85; color: var(--text-dim); }
+
+      @media (max-width: 900px) {
+        .process-inner { padding: 60px 24px; }
+        .steps-grid { grid-template-columns: 1fr; gap: 0; }
+        .steps-grid::before { display: none; }
+        .step-item { display: grid; grid-template-columns: 72px 1fr; gap: 18px; align-items: start; text-align: left; padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .step-icon-wrap { width: 64px; height: 64px; flex-shrink: 0; margin: 0; }
+        .step-icon-wrap svg { width: 22px; height: 22px; }
       }
-      [data-theme="light"] .stat-cell { background: rgba(247,243,236,0.4); }
-      .stat-cell:hover { background: rgba(201,164,95,0.08); }
-      .stat-n { font-family: var(--ff-serif); font-size: 1.8rem; font-weight: 300; color: var(--gold-lt); line-height: 1; }
-      .stat-l { font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-dim); margin-top: 3px; }
-      @media (max-width: 480px) {
-        .stat-cell { padding: 12px 8px; }
-        .stat-n { font-size: 1.4rem; }
-        .stat-l { font-size: 0.48rem; letter-spacing: 0.16em; }
+      @media (max-width: 480px) { .process-inner { padding: 48px 16px; } }
+
+      /* ── VIDEO STORIES ── */
+      .stories-sec { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+      .stories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); margin-top: 48px; }
+      .story-card:first-child { grid-row: 1/3; }
+      .story-card { position: relative; overflow: hidden; background: var(--card-bg); }
+      .sc-video-wrap { position: relative; padding-bottom: 75%; overflow: hidden; background: #000; }
+      .story-card:first-child .sc-video-wrap { padding-bottom: 130%; }
+      .sc-video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .sc-info { padding: 20px 22px; border-top: 1px solid var(--border); }
+      .sc-tag { font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+      .sc-title { font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 300; color: var(--text); transition: color .3s; }
+      .story-card:hover .sc-title { color: var(--gold-lt); }
+      .sc-desc { font-size: 0.72rem; line-height: 1.8; color: var(--text-sub); margin-top: 5px; }
+
+      @media (max-width: 768px) {
+        .stories-sec { padding: 60px 18px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .story-card:first-child { grid-row: auto; }
+        .story-card:first-child .sc-video-wrap { padding-bottom: 75%; }
       }
 
-      /* ── TRUST BAR ── */
-      .trust-bar { background: var(--surface-2); border-bottom: 1px solid var(--border); padding: 14px 32px; }
-      .trust-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-      @media (max-width: 768px) { .trust-inner { grid-template-columns: 1fr 1fr; padding: 0; gap: 12px; } }
-      @media (max-width: 400px) { .trust-inner { grid-template-columns: 1fr 1fr; gap: 8px; } }
-      .trust-item { display: flex; align-items: center; gap: 10px; }
-      .trust-icon { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
-      .trust-icon svg { width: 14px; height: 14px; }
-      .trust-text strong { display: block; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); font-weight: 400; }
-      .trust-text span { font-size: 0.58rem; color: var(--text-dim); }
+      /* ── GALLERY ── */
+      .gallery-sec { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 48px; }
+      .gallery-inner { max-width: 1400px; margin: 0 auto; }
+      .gallery-grid { display: grid; grid-template-columns: repeat(6,1fr); grid-auto-rows: 200px; gap: 4px; margin-top: 48px; }
+      .gal-item:nth-child(1){grid-column:1/3;grid-row:1/3}
+      .gal-item:nth-child(4){grid-column:4/6}
+      .gal-item:nth-child(6){grid-column:5/7}
+      .gal-item:nth-child(7){grid-column:1/4;grid-row:3/5}
+      .gal-item { overflow: hidden; position: relative; background: var(--card-bg); cursor: pointer; }
+      .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--ease), filter .5s; }
+      .gal-item:hover img { transform: scale(1.08); filter: brightness(1.05); }
+      .gal-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(6,5,10,0.85), transparent); font-size: 0.54rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0; transition: opacity .3s; }
+      .gal-item:hover .gal-label { opacity: 1; }
+      .gal-item::after { content: "⊕"; position: absolute; top: 10px; right: 10px; color: rgba(201,164,95,0.7); font-size: 1.1rem; opacity: 0; transition: opacity .3s; pointer-events: none; }
+      .gal-item:hover::after { opacity: 1; }
 
-      /* ── FILTER BAR ── */
-      .filter-sec {
-        border-bottom: 1px solid var(--border); background: var(--surface);
-        position: sticky; top: var(--nav-h); z-index: 90; transition: background 0.4s;
+      @media (max-width: 900px) {
+        .gallery-sec { padding: 60px 18px; }
+        .gallery-grid { grid-template-columns: repeat(3,1fr); grid-auto-rows: 160px; }
+        .gal-item:nth-child(n) { grid-column: unset !important; grid-row: unset !important; }
+        .gal-label { opacity: 1; }
+        .gal-item::after { opacity: 0.6; }
       }
-      .filter-inner {
-        max-width: 1440px; margin: 0 auto;
-        padding: 0 32px;
-        display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      }
-      @media (max-width: 640px) { .filter-inner { padding: 0 12px; gap: 6px; } }
+      @media (max-width: 560px) { .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 130px; gap: 3px; } }
 
-      .filter-tabs {
-        display: flex; overflow-x: auto; scrollbar-width: none;
-        -webkit-overflow-scrolling: touch; flex: 1; min-width: 0;
-      }
-      .filter-tabs::-webkit-scrollbar { display: none; }
-      .filter-tab {
-        background: none; border: none; cursor: pointer;
-        font-family: var(--ff-sans); font-size: 0.62rem;
-        letter-spacing: 0.16em; text-transform: uppercase;
-        color: var(--text-sub); padding: 13px 14px;
-        position: relative; transition: color 0.3s; white-space: nowrap;
-        flex-shrink: 0; -webkit-tap-highlight-color: transparent;
-      }
-      @media (max-width: 480px) { .filter-tab { padding: 11px 11px; font-size: 0.58rem; letter-spacing: 0.12em; } }
-      @media (max-width: 360px) { .filter-tab { padding: 10px 9px; font-size: 0.54rem; } }
-      .filter-tab::after { content:""; position: absolute; bottom: 0; left: 14px; right: 14px; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.35s var(--ease); }
-      @media (max-width: 480px) { .filter-tab::after { left: 11px; right: 11px; } }
-      .filter-tab.active { color: var(--gold-lt); }
-      .filter-tab.active::after, .filter-tab:hover::after { transform: scaleX(1); }
-      .filter-tab:hover { color: var(--gold-lt); }
+      /* ── LIGHTBOX ── */
+      .lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 800; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .35s; padding: 16px; }
+      .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+      .lb-img-wrap { position: relative; max-width: 90vw; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
+      .lb-img-wrap img { max-width: 90vw; max-height: 82vh; object-fit: contain; border: 1px solid rgba(201,164,95,0.2); display: block; }
+      .lb-close { position: absolute; top: -44px; right: 0; background: none; border: 1px solid rgba(201,164,95,0.3); color: var(--gold-lt); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; border-radius: 2px; transition: background .2s; }
+      .lb-close:hover { background: rgba(201,164,95,0.1); border-color: var(--gold); }
+      .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(201,164,95,0.3); color: var(--gold-lt); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: background .2s; border-radius: 2px; }
+      .lb-nav:hover { background: rgba(201,164,95,0.15); border-color: var(--gold); }
+      .lb-prev { left: -60px; }
+      .lb-next { right: -60px; }
+      .lb-caption { position: absolute; bottom: -38px; left: 0; right: 0; text-align: center; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+      .lb-counter { position: absolute; top: -44px; left: 0; font-size: 0.6rem; letter-spacing: 0.22em; color: var(--text-dim); }
+      @media (max-width: 600px) { .lb-prev { left: -14px; } .lb-next { right: -14px; } .lb-nav { width: 36px; height: 36px; } .lb-img-wrap { max-width: 95vw; } .lb-img-wrap img { max-width: 95vw; max-height: 78vh; } }
 
-      .filter-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-      .results-count { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
-      @media (max-width: 560px) { .results-count { display: none; } }
-      .sort-select {
-        background: var(--surface-2); border: 1px solid var(--border);
-        color: var(--text-sub); font-family: var(--ff-sans); font-size: 0.6rem;
-        letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 26px 8px 10px;
-        cursor: pointer; outline: none; transition: border-color 0.3s;
-        -webkit-appearance: none; appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%238a6b38' stroke-width='1.5'%3E%3Cpolyline points='1 1 5 5 9 1'/%3E%3C/svg%3E");
-        background-repeat: no-repeat; background-position: right 8px center;
-        max-width: 110px;
-      }
-      @media (max-width: 480px) { .sort-select { font-size: 0.55rem; padding: 7px 22px 7px 8px; max-width: 90px; } }
+      /* ── PRICING ── */
+      .pricing-sec { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+      .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); margin-top: 48px; }
+      .price-card { background: var(--surface); padding: 40px 32px; position: relative; overflow: hidden; transition: background .3s; }
+      .price-card.featured { background: rgba(201,164,95,0.06); border-top: 2px solid var(--gold); }
+      .price-card:hover { background: rgba(201,164,95,0.04); }
+      .price-card.featured:hover { background: rgba(201,164,95,0.09); }
+      .pc-tag { font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 14px; }
+      .pc-tag.featured-tag { color: var(--gold); }
+      .pc-name { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 300; color: var(--text); margin-bottom: 10px; }
+      .pc-price { font-family: var(--ff-serif); font-size: 2.3rem; font-weight: 300; color: var(--gold-lt); line-height: 1; margin-bottom: 6px; }
+      .pc-note { font-size: 0.62rem; color: var(--text-dim); margin-bottom: 24px; letter-spacing: 0.08em; }
+      .pc-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 32px; }
+      .pc-features li { font-size: 0.76rem; color: var(--text-sub); display: flex; align-items: center; gap: 12px; line-height: 1.6; }
+      .pc-features li::before { content: "◆"; color: var(--gold-dk); font-size: 0.38rem; flex-shrink: 0; }
+      .pc-star { position: absolute; top: 14px; right: 14px; background: var(--gold); color: #000; font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 10px; border-radius: 1px; }
 
-      /* ── PRODUCTS GRID ── */
-      .products-sec { padding: 40px 32px 80px; max-width: 1440px; margin: 0 auto; }
-      @media (max-width: 640px) { .products-sec { padding: 24px 12px 64px; } }
-      .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-      @media (max-width: 1200px) { .products-grid { grid-template-columns: repeat(3,1fr); gap: 18px; } }
-      @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2,1fr); gap: 14px; } }
-      @media (max-width: 480px) { .products-grid { gap: 10px; } }
-      @media (max-width: 360px) { .products-grid { gap: 8px; } }
-
-      /* ── PRODUCT CARD ── */
-      .prd { cursor: pointer; text-decoration: none; display: block; }
-      .prd.hidden { display: none; }
-      .prd-img-wrap {
-        position: relative; aspect-ratio: 3/4; overflow: hidden;
-        background: var(--card-bg); margin-bottom: 12px; transition: box-shadow 0.4s;
+      @media (max-width: 900px) {
+        .pricing-sec { padding: 60px 18px; }
+        .pricing-grid { grid-template-columns: 1fr; }
+        .price-card { padding: 32px 24px; }
       }
-      @media (max-width: 480px) { .prd-img-wrap { margin-bottom: 8px; } }
-      .prd:hover .prd-img-wrap { box-shadow: 0 2px 0 0 var(--gold), 0 20px 44px rgba(0,0,0,0.35); }
-      .prd-img {
-        position: absolute; inset: 0; width: 100%; height: 100%;
-        object-fit: cover; object-position: center; display: block;
-        transition: transform 0.7s var(--ease), filter 0.5s;
-      }
-      .prd:hover .prd-img { transform: scale(1.06); filter: brightness(1.04); }
-      .prd-badge { position: absolute; top: 8px; left: 8px; z-index: 3; font-size: 0.48rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px; }
-      .badge-new { background: var(--gold); color: var(--bg); }
-      .badge-best { background: var(--surface-3); color: var(--gold-lt); border: 1px solid var(--border); }
-      .badge-ltd { background: transparent; border: 1px solid var(--gold-dk); color: var(--gold); }
-      .prd-wish {
-        position: absolute; top: 6px; right: 6px; z-index: 6;
-        width: 28px; height: 28px; border-radius: 50%;
-        background: rgba(9,8,6,0.6); border: 1px solid var(--border);
-        display: flex; align-items: center; justify-content: center;
-        opacity: 1; transform: scale(1);
-        cursor: pointer; transition: background 0.3s, border-color 0.3s;
-        -webkit-tap-highlight-color: transparent;
-      }
-      @media (min-width: 901px) {
-        .prd-wish { opacity: 0; transform: scale(0.7); transition: opacity 0.3s, transform 0.3s, background 0.3s; }
-        .prd:hover .prd-wish { opacity: 1; transform: scale(1); }
-      }
-      .prd-wish:hover { background: rgba(158,78,71,0.3) !important; border-color: #9e4e47; }
-      .prd-wish.wishlisted { background: rgba(158,78,71,0.3) !important; border-color: #9e4e47; opacity: 1; transform: scale(1); }
-      .prd-wish svg { width: 11px; height: 11px; stroke: var(--text); }
-      .prd-action { position: absolute; bottom: 0; left: 0; right: 0; z-index: 6; display: grid; grid-template-columns: 1fr 1fr; }
-      .prd-enquire, .prd-cart {
-        padding: 9px 4px; font-size: 0.56rem; letter-spacing: 0.12em;
-        text-transform: uppercase; font-family: var(--ff-sans); border: none; cursor: pointer;
-        transform: translateY(0); transition: background 0.25s;
-        -webkit-tap-highlight-color: transparent;
-      }
-      @media (min-width: 901px) {
-        .prd-enquire, .prd-cart { transform: translateY(100%); transition: transform 0.32s var(--ease), background 0.25s; }
-        .prd:hover .prd-enquire, .prd:hover .prd-cart { transform: translateY(0); }
-      }
-      .prd-enquire { background: rgba(201,164,95,0.92); color: var(--bg); }
-      .prd-cart { background: rgba(9,8,6,0.92); color: var(--gold-lt); border-left: 1px solid rgba(201,164,95,0.2); }
-      .prd-enquire:hover { background: var(--gold); }
-      .prd-cart:hover { background: rgba(201,164,95,0.18); }
-      @media (max-width: 480px) { .prd-enquire, .prd-cart { padding: 8px 3px; font-size: 0.52rem; } }
-      @media (max-width: 360px) { .prd-enquire, .prd-cart { padding: 7px 2px; font-size: 0.48rem; letter-spacing: 0.08em; } }
-      .prd-name { font-family: var(--ff-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); margin-bottom: 4px; transition: color 0.4s; line-height: 1.2; }
-      @media (max-width: 480px) { .prd-name { font-size: 0.82rem; } }
-      @media (max-width: 360px) { .prd-name { font-size: 0.76rem; } }
-      .prd:hover .prd-name { color: var(--gold-lt); }
-      .prd-meta { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
-      .prd-price { font-size: 0.76rem; color: var(--gold); }
-      @media (max-width: 480px) { .prd-price { font-size: 0.68rem; } }
-      .prd-stars { font-size: 0.56rem; color: var(--gold-dk); }
-      @media (max-width: 600px) { .prd-stars { display: none; } }
-      .prd-cat { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3px; }
 
-      /* ── LOAD MORE ── */
-      .load-more-wrap { text-align: center; margin-top: 40px; }
-      .load-bar { width: 80px; height: 1px; background: var(--border); margin: 0 auto 18px; position: relative; overflow: hidden; }
-      .load-bar::after { content:""; position: absolute; left: 0; top: 0; height: 100%; background: var(--gold); animation: load-pulse 2s ease-in-out infinite; }
-      @keyframes load-pulse { 0%{width:0;opacity:1} 70%{width:100%;opacity:1} 100%{width:100%;opacity:0} }
+      /* ── TESTIMONIALS ── */
+      .testi-cinema { position: relative; overflow: hidden; }
+      .tc-video { position: absolute; inset: 0; z-index: 0; }
+      .tc-video video { width: 100%; height: 100%; object-fit: cover; opacity: 0.2; }
+      .tc-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(6,5,10,0.7), rgba(6,5,10,0.95)); }
+      .tc-inner { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 80px 48px; }
+      .tc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 48px; }
+      .tcard { border: 1px solid var(--border); padding: 32px 26px; position: relative; transition: border-color .3s, background .3s; background: rgba(16,14,22,0.7); backdrop-filter: blur(8px); border-radius: 2px; }
+      .tcard:hover { border-color: var(--border-hv); background: rgba(201,164,95,0.04); }
+      .tcard::before { content: "\201C"; font-family: var(--ff-serif); font-size: 5rem; font-style: italic; color: var(--gold-dk); opacity: 0.2; position: absolute; top: 4px; left: 16px; line-height: 1; }
+      .tcard-stars { color: var(--gold-dk); font-size: 0.65rem; margin-bottom: 12px; }
+      .tcard-txt { font-family: var(--ff-serif); font-size: 1rem; font-style: italic; line-height: 1.75; color: var(--text-sub); margin-bottom: 16px; }
+      .tcard-name { font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-dk); }
 
-      /* ── ENQUIRY MODAL ── */
-      .enq-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.78); z-index: 800; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(6px); }
-      .enq-overlay.open { opacity: 1; pointer-events: all; }
-      .enq-box { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-54%); width: min(94vw, 860px); max-height: 90svh; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); z-index: 801; opacity: 0; box-shadow: 0 40px 100px rgba(0,0,0,0.7); transition: opacity 0.3s, transform 0.35s var(--ease); }
-      .enq-overlay.open .enq-box { opacity: 1; transform: translate(-50%,-50%); }
-      .enq-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 460px; }
-      @media (max-width: 600px) { .enq-inner { grid-template-columns: 1fr; } }
-      .enq-img-side { position: relative; overflow: hidden; min-height: 240px; }
-      .enq-img-side img { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .enq-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,8,6,0.6) 0%, transparent 55%); }
-      .enq-img-label { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; }
-      .enq-img-label .tag { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-      .enq-img-label .name { font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 300; color: #f0ebe0; line-height: 1.15; }
-      .enq-img-label .price { font-size: 0.82rem; color: var(--gold-lt); margin-top: 4px; }
-      .enq-close { position: absolute; top: 12px; right: 12px; background: rgba(9,8,6,0.65); border: 1px solid var(--border); color: var(--text-sub); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: color 0.2s, background 0.2s; z-index: 10; }
-      .enq-close:hover { color: var(--gold); background: rgba(9,8,6,0.95); }
-      .enq-info { padding: 36px 32px; display: flex; flex-direction: column; gap: 14px; }
-      @media (max-width: 600px) { .enq-info { padding: 22px 18px; } }
-      .enq-cat { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
-      .enq-name-lg { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 300; color: var(--text); line-height: 1.2; }
-      .enq-price-lg { font-size: 1.05rem; color: var(--gold); font-family: var(--ff-serif); }
-      .enq-stars-row { font-size: 0.68rem; color: var(--gold-dk); }
-      .enq-desc { font-size: 0.76rem; line-height: 1.85; color: var(--text-sub); border-top: 1px solid var(--border); padding-top: 12px; }
-      .enq-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid var(--border); padding-top: 12px; }
-      .enq-spec { font-size: 0.64rem; color: var(--text-dim); }
-      .enq-spec b { color: var(--text-sub); display: block; font-weight: 400; margin-bottom: 1px; }
-      .enq-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
-      .enq-btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--gold); color: var(--bg); border: none; font-family: var(--ff-sans); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 14px 20px; cursor: pointer; text-decoration: none; transition: background 0.3s; width: 100%; }
-      .enq-btn-wa:hover { background: var(--gold-dk); }
-      .enq-btn-wa svg { width: 15px; height: 15px; fill: currentColor; }
-      .enq-btn-addtobag { background: rgba(201,164,95,0.1); color: var(--gold-lt); border: 1px solid var(--border-hv); font-family: var(--ff-sans); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; transition: all 0.3s; width: 100%; }
-      .enq-btn-addtobag:hover { background: rgba(201,164,95,0.18); }
-      .enq-btn-wish { background: transparent; color: var(--text-sub); border: 1px solid var(--border); font-family: var(--ff-sans); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; transition: all 0.3s; width: 100%; }
-      .enq-btn-wish:hover { color: var(--gold-lt); border-color: var(--border-hv); }
+      @media (max-width: 900px) { .tc-inner { padding: 60px 18px; } .tc-grid { grid-template-columns: 1fr; gap: 14px; } }
 
-      /* ── WISHLIST PANEL ── */
-      .wish-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 900; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-      .wish-overlay.open { opacity: 1; pointer-events: all; }
-      .wish-panel { position: fixed; right: 0; top: 0; bottom: 0; width: min(100vw, 420px); background: var(--surface); border-left: 1px solid var(--border); z-index: 901; transform: translateX(100%); transition: transform 0.4s var(--ease); display: flex; flex-direction: column; }
-      .wish-overlay.open .wish-panel { transform: translateX(0); }
-      .wish-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--border); }
-      .wish-head h3 { font-family: var(--ff-serif); font-size: 1.25rem; font-weight: 300; color: var(--text); }
-      .wish-x { background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 1.1rem; transition: color 0.2s; }
-      .wish-x:hover { color: var(--gold); }
-      .wish-items { flex: 1; overflow-y: auto; padding: 18px 22px; }
-      .wish-empty { text-align: center; padding: 60px 20px; }
-      .wish-empty p { font-family: var(--ff-serif); font-size: 1.1rem; color: var(--text-sub); }
-      .wish-item { display: grid; grid-template-columns: 60px 1fr auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); }
-      .wish-item-img { width: 60px; height: 60px; object-fit: cover; }
-      .wish-item-name { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--text); margin-bottom: 3px; }
-      .wish-item-price { font-size: 0.75rem; color: var(--gold); }
-      .wish-item-actions { display: flex; flex-direction: column; gap: 5px; }
-      .wish-enquire { background: var(--gold); border: none; color: var(--bg); font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 9px; cursor: pointer; transition: background 0.3s; font-family: var(--ff-sans); }
-      .wish-enquire:hover { background: var(--gold-dk); }
-      .wish-remove { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 0.7rem; transition: color 0.2s; font-family: var(--ff-sans); }
-      .wish-remove:hover { color: #9e4e47; }
+      /* ── FORM SECTION ── */
+      .form-sec { background: var(--surface); border-top: 1px solid var(--border); padding: 80px 48px; }
+      .form-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+      .form-label { font-size: 0.6rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+      .form-title { font-family: var(--ff-serif); font-size: clamp(1.6rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--text); margin-bottom: 18px; line-height: 1.12; }
+      .form-title em { font-style: italic; color: var(--gold-lt); }
+      .form-body p { font-size: 0.84rem; line-height: 2; color: var(--text-sub); margin-bottom: 12px; }
+      .form-promise { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+      .promise-item { display: flex; align-items: flex-start; gap: 14px; }
+      .promise-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+      .promise-text { font-size: 0.76rem; color: var(--text-sub); line-height: 1.7; }
+      .promise-text strong { color: var(--text); font-weight: 400; }
+      .bform { display: flex; flex-direction: column; gap: 0; }
+      .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--border); }
+      .field-group { background: var(--surface); padding: 0; }
+      .field-group label { display: block; font-size: 0.54rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); padding: 16px 18px 4px; cursor: pointer; }
+      .field-group input, .field-group select, .field-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text); font-family: var(--ff-sans); font-size: 0.84rem; padding: 8px 18px 14px; outline: none; transition: border-color .3s; -webkit-appearance: none; appearance: none; }
+      .field-group textarea { resize: vertical; min-height: 120px; }
+      .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--gold); }
+      .field-group input::placeholder, .field-group textarea::placeholder { color: var(--text-dim); }
+      .field-group select option { background: var(--surface); color: var(--text); }
+      .form-full { background: var(--surface); }
+      .form-submit { background: var(--gold); color: #000; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 18px 40px; cursor: pointer; border: none; transition: background .3s, color .3s; width: 100%; }
+      .form-submit:hover { background: var(--gold-dk); color: var(--text); }
+      .form-note { font-size: 0.64rem; color: var(--text-dim); padding: 12px 18px; text-align: center; line-height: 1.7; }
 
-      /* ── CART PANEL ── */
-      .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 900; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-      .cart-overlay.open { opacity: 1; pointer-events: all; }
-      .cart-panel { position: fixed; right: 0; top: 0; bottom: 0; width: min(100vw, 420px); background: var(--surface); border-left: 1px solid var(--border); z-index: 901; transform: translateX(100%); transition: transform 0.4s var(--ease); display: flex; flex-direction: column; }
-      .cart-overlay.open .cart-panel { transform: translateX(0); }
-      .cart-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--border); }
-      .cart-head h3 { font-family: var(--ff-serif); font-size: 1.25rem; font-weight: 300; color: var(--text); }
-      .cart-x { background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 1.1rem; transition: color 0.2s; }
-      .cart-x:hover { color: var(--gold); }
-      .cart-items { flex: 1; overflow-y: auto; padding: 18px 22px; }
-      .cart-empty { text-align: center; padding: 60px 20px; color: var(--text-dim); }
-      .cart-empty p { font-family: var(--ff-serif); font-size: 1.1rem; color: var(--text-sub); }
-      .cart-item { display: grid; grid-template-columns: 60px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--border); }
-      .cart-item-img { width: 60px; height: 60px; object-fit: cover; }
-      .cart-item-name { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--text); margin-bottom: 3px; }
-      .cart-item-price { font-size: 0.75rem; color: var(--gold); }
-      .cart-item-qty { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
-      .qty-btn { background: var(--surface-2); border: 1px solid var(--border); color: var(--text-sub); width: 22px; height: 22px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-      .qty-btn:hover { background: rgba(201,164,95,0.1); color: var(--gold-lt); }
-      .qty-val { font-size: 0.75rem; color: var(--text); min-width: 18px; text-align: center; }
-      .cart-del { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--ff-sans); transition: color 0.2s; margin-top: 3px; display: block; }
-      .cart-del:hover { color: #c0504a; }
-      .cart-foot { padding: 18px 22px; border-top: 1px solid var(--border); }
-      .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-      .cart-total-lbl { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-sub); }
-      .cart-total-val { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--gold-lt); }
-      .cart-checkout { width: 100%; background: var(--gold); border: none; color: var(--bg); font-family: var(--ff-sans); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 14px; cursor: pointer; transition: background 0.3s; }
-      .cart-checkout:hover { background: var(--gold-dk); }
-      .cart-continue { width: 100%; background: transparent; border: 1px solid var(--border); color: var(--text-sub); font-family: var(--ff-sans); font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
-      .cart-continue:hover { border-color: var(--border-hv); color: var(--gold-lt); }
-
-      /* ── EDITORIAL STRIP ── */
-      .editorial-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 32px; }
-      @media (max-width: 640px) { .editorial-strip { padding: 36px 16px; } }
-      .editorial-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); }
-      @media (max-width: 768px) { .editorial-inner { grid-template-columns: 1fr; } }
-      .editorial-card { background: var(--surface); padding: 36px 28px; transition: background 0.3s; }
-      .editorial-card:hover { background: rgba(201,164,95,0.04); }
-      .editorial-num { font-family: var(--ff-serif); font-size: 2.8rem; color: var(--gold-xdk); font-weight: 300; line-height: 1; margin-bottom: 14px; }
-      .editorial-title { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--text); font-weight: 300; margin-bottom: 9px; }
-      .editorial-text { font-size: 0.76rem; line-height: 1.9; color: var(--text-sub); }
-      .editorial-link { display: inline-block; margin-top: 12px; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
-      .editorial-link:hover { border-color: var(--gold); }
-
-      /* ── BESPOKE CTA ── */
-      .bespoke-cta { margin: 0 32px 72px; border: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; min-height: 260px; }
-      @media (max-width: 768px) { .bespoke-cta { grid-template-columns: 1fr; margin: 0 16px 56px; } }
-      .bespoke-vis { position: relative; overflow: hidden; min-height: 200px; }
-      .bespoke-vis img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-      .bespoke-text { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; background: var(--surface); transition: background 0.4s; }
-      @media (max-width: 640px) { .bespoke-text { padding: 28px 20px; } }
-      .bespoke-label { font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-      .bespoke-h { font-family: var(--ff-serif); font-size: clamp(1.4rem,2.5vw,2.2rem); font-weight: 300; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
-      .bespoke-h em { font-style: italic; color: var(--gold-lt); }
-      .bespoke-p { font-size: 0.76rem; line-height: 1.95; color: var(--text-sub); margin-bottom: 24px; }
-      .bespoke-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-      @media (max-width: 480px) {
-        .bespoke-btns { flex-direction: column; }
-        .bespoke-btns .btn { width: 100%; justify-content: center; }
-      }
+      @media (max-width: 900px) { .form-sec { padding: 60px 18px; } .form-inner { grid-template-columns: 1fr; gap: 40px; } }
+      @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
 
       /* ── NEWSLETTER ── */
-      .nl-strip { background: var(--surface); border-top: 1px solid var(--border); padding: 64px 32px; text-align: center; }
-      @media (max-width: 640px) { .nl-strip { padding: 44px 16px 88px; } }
-      .nl-title { font-family: var(--ff-serif); font-size: clamp(1.5rem,2.8vw,2.2rem); font-weight: 300; color: var(--text); margin-bottom: 9px; }
+      .nl-sec { text-align: center; padding: 80px 32px; background: var(--bg); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+      .nl-sec::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 50%, var(--hero-glow), transparent 70%); }
+      .nl-inner { position: relative; z-index: 1; max-width: 500px; margin: 0 auto; }
+      .nl-title { font-family: var(--ff-serif); font-size: clamp(1.6rem, 3.5vw, 2.7rem); font-weight: 300; color: var(--text); margin-bottom: 10px; }
       .nl-title em { font-style: italic; color: var(--gold-lt); }
-      .nl-p { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 24px; }
-      .nl-form { display: flex; max-width: 400px; margin: 0 auto 10px; }
-      .nl-form input { flex: 1; background: transparent; border: 1px solid var(--border); border-right: none; padding: 12px 14px; color: var(--text); font-family: var(--ff-sans); font-size: 0.76rem; outline: none; transition: border-color 0.3s; min-width: 0; }
+      .nl-p { font-size: 0.8rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 28px; }
+      .nl-form { display: flex; max-width: 420px; margin: 0 auto 14px; }
+      .nl-form input { flex: 1; background: transparent; border: 1px solid var(--border); border-right: none; padding: 14px 16px; color: var(--text); font-family: var(--ff-sans); font-size: 0.78rem; outline: none; transition: border-color .3s; min-width: 0; }
       .nl-form input::placeholder { color: var(--text-dim); }
       .nl-form input:focus { border-color: var(--border-hv); }
-      .nl-form button { background: var(--gold); border: 1px solid var(--gold); color: var(--bg); font-family: var(--ff-sans); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 12px 18px; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+      .nl-form button { background: var(--gold); border: 1px solid var(--gold); color: #000; font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 14px 20px; cursor: pointer; transition: background .3s; white-space: nowrap; }
       .nl-form button:hover { background: var(--gold-dk); }
       .nl-alt { font-size: 0.7rem; color: var(--text-sub); }
       .nl-alt a { color: var(--gold-lt); text-decoration: none; }
+      @media (max-width: 480px) { .nl-sec { padding: 60px 18px; } .nl-form { flex-direction: column; } .nl-form input { border-right: 1px solid var(--border); border-bottom: none; } .nl-form button { padding: 14px; } }
 
       /* ── FOOTER ── */
-      footer { border-top: 1px solid var(--border); padding: 56px 32px 32px; background: var(--bg); }
-      @media (max-width: 640px) { footer { padding: 44px 16px 96px; } }
-      .foot-grid { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-      @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
-      @media (max-width: 480px) { .foot-grid { gap: 20px; } }
+      footer { border-top: 1px solid var(--border); padding: 64px 48px 28px; background: var(--bg); }
+      .foot-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 44px; }
       .foot-brand .fb-name { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.22em; color: var(--text); margin-bottom: 12px; }
       .foot-brand p { font-size: 0.75rem; line-height: 1.95; color: var(--text-sub); max-width: 260px; margin-bottom: 22px; }
-      .soc-row { display: flex; gap: 10px; }
-      .soc-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-sub); transition: border-color 0.3s, color 0.3s, background 0.3s; }
+      .soc-row { display: flex; gap: 10px; flex-wrap: wrap; }
+      .soc-btn { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-sub); transition: border-color .3s, color .3s, background .3s; }
       .soc-btn:hover { border-color: var(--border-hv); color: var(--gold-lt); background: rgba(201,164,95,0.07); }
-      .soc-btn svg { width: 12px; height: 12px; }
-      .foot-col h4 { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-      .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-      .foot-col ul li a { font-size: 0.75rem; color: var(--text-sub); text-decoration: none; transition: color 0.3s; }
+      .soc-btn svg { width: 13px; height: 13px; }
+      .foot-col h4 { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+      .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+      .foot-col ul li a { font-size: 0.75rem; color: var(--text-sub); text-decoration: none; transition: color .3s; padding: 2px 0; display: block; }
       .foot-col ul li a:hover { color: var(--text); }
-      .foot-btm { max-width: 1440px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+      .foot-btm { max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
       .foot-btm p { font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.08em; }
-      .pay-row { display: flex; gap: 6px; flex-wrap: wrap; }
-      .pay-chip { border: 1px solid var(--border); border-radius: 3px; padding: 4px 8px; font-size: 0.54rem; letter-spacing: 0.08em; color: var(--text-dim); }
+      .pay-row { display: flex; gap: 7px; flex-wrap: wrap; }
+      .pay-chip { border: 1px solid var(--border); border-radius: 3px; padding: 4px 10px; font-size: 0.54rem; letter-spacing: 0.08em; color: var(--text-dim); }
 
-      /* ── MOBILE BOTTOM NAV ── */
-      .mob-bottom-nav {
-        display: none; position: fixed; bottom: 0; left: 0; right: 0;
-        z-index: 300; background: var(--bg); border-top: 1px solid var(--border);
-        padding-bottom: env(safe-area-inset-bottom, 0px);
-      }
-      @media (max-width: 640px) { .mob-bottom-nav { display: flex; } }
-      .mob-nav-item {
-        flex: 1; display: flex; flex-direction: column; align-items: center;
-        justify-content: center; gap: 3px; padding: 8px 4px;
-        text-decoration: none; color: var(--text-dim);
-        font-size: 0.45rem; letter-spacing: 0.1em; text-transform: uppercase;
-        transition: color 0.2s; cursor: pointer; background: none; border: none;
-        font-family: var(--ff-sans); -webkit-tap-highlight-color: transparent;
-      }
-      .mob-nav-item.primary, .mob-nav-item:hover { color: var(--gold-lt); }
-      .mob-nav-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; }
-      .mob-nav-item.primary svg { stroke: var(--gold); }
-      .mob-nav-item + .mob-nav-item { border-left: 1px solid var(--border); }
+      @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+      @media (max-width: 500px) { footer { padding: 48px 18px 24px; } .foot-grid { grid-template-columns: 1fr; gap: 28px; } .foot-brand p { max-width: 100%; } }
 
-      /* ── EMPTY STATE ── */
-      .empty-state { grid-column: 1/-1; text-align: center; padding: 80px 20px; display: none; }
-      .empty-state h3 { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 300; color: var(--text); margin-bottom: 6px; }
-      .empty-state p { font-size: 0.78rem; color: var(--text-sub); }
+      /* ── ANIMATIONS ── */
+      @keyframes fade-up { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
     </style>
   </head>
+
   <body>
     <div id="cur-o"></div>
     <div id="cur-i"></div>
     <div class="toast" id="toast"></div>
 
-    <!-- WhatsApp FAB -->
-    <a class="contact-fab" href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20enquire%20about%20your%20collections." target="_blank" title="Chat with us on WhatsApp">
-      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <!-- LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+      <div class="lb-img-wrap">
+        <button class="lb-close" id="lbClose">✕</button>
+        <span class="lb-counter" id="lbCounter"></span>
+        <img id="lbImg" src="" alt="Gallery image"/>
+        <button class="lb-nav lb-prev" id="lbPrev">&#8249;</button>
+        <button class="lb-nav lb-next" id="lbNext">&#8250;</button>
+        <div class="lb-caption" id="lbCaption"></div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP -->
+    <a class="wa-float" href="https://wa.me/2349019733420" target="_blank" aria-label="Chat on WhatsApp">
+      <div class="wa-pill">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="wa-label">WhatsApp Us</span>
+      </div>
     </a>
 
-    <!-- Enquiry Modal -->
-    <div class="enq-overlay" id="enqOverlay">
-      <div class="enq-box">
-        <div class="enq-inner">
-          <div class="enq-img-side">
-            <img id="enqImg" src="" alt=""/>
-            <div class="enq-img-overlay"></div>
-            <div class="enq-img-label">
-              <div class="tag" id="enqCatLabel"></div>
-              <div class="name" id="enqNameLabel"></div>
-              <div class="price" id="enqPriceLabel"></div>
-            </div>
-            <button class="enq-close" id="enqClose">✕</button>
-          </div>
-          <div class="enq-info">
-            <div class="enq-cat" id="enqCat"></div>
-            <div class="enq-name-lg" id="enqName"></div>
-            <div class="enq-price-lg" id="enqPrice"></div>
-            <div class="enq-stars-row" id="enqStars"></div>
-            <div class="enq-desc" id="enqDesc"></div>
-            <div class="enq-specs" id="enqSpecs"></div>
-            <div class="enq-actions">
-              <a class="enq-btn-wa" id="enqWaBtn" href="#" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Enquire on WhatsApp
-              </a>
-              <button class="enq-btn-addtobag" id="enqBagBtn">+ Add to Bag</button>
-              <button class="enq-btn-wish" id="enqWishBtn">♡ Save to Wishlist</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- DRAWER OVERLAY -->
+    <div class="mob-drawer-overlay" id="drawerOverlay"></div>
 
-    <!-- Wishlist Panel -->
-    <div class="wish-overlay" id="wishOverlay">
-      <div class="wish-panel">
-        <div class="wish-head"><h3>Wishlist</h3><button class="wish-x" id="wishClose">✕</button></div>
-        <div class="wish-items" id="wishItems"></div>
-      </div>
-    </div>
-
-    <!-- Cart Panel -->
-    <div class="cart-overlay" id="cartOverlay">
-      <div class="cart-panel">
-        <div class="cart-head"><h3>Your Bag</h3><button class="cart-x" id="cartClose">✕</button></div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-foot">
-          <div class="cart-total"><span class="cart-total-lbl">Total</span><span class="cart-total-val" id="cartTotalVal">₦0</span></div>
-          <button class="cart-checkout" id="cartCheckout">Checkout via WhatsApp</button>
-          <button class="cart-continue" onclick="document.getElementById('cartOverlay').classList.remove('open')">Continue Shopping</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Drawer -->
-    <div class="mob-drawer" id="mobDrawer">
+    <!-- MOBILE DRAWER -->
+    <div class="mob-drawer" id="mobDrawer" role="dialog" aria-modal="true">
       <div class="mob-drawer-head">
         <a class="mob-drawer-logo" href="index.html">Sparkles</a>
-        <button class="mob-x" id="mobX">✕</button>
+        <button class="mob-x" id="mobX">&#10005;</button>
       </div>
       <nav class="mob-nav-links">
-        <a href="index.html">Home<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="collections.html" class="active">Collections<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="jewllries.html">Jewellery Guide<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="bespoke.html">Bespoke<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="about.html">About Us<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="contact.html">Contact<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="jewllries.html">Jewellery Guide</a>
+        <a href="bespoke.html" class="active">Bespoke</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
       </nav>
-      <div class="mob-drawer-foot">
-        <div class="mob-contact-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg><span>09019733420</span></div>
-        <div class="mob-contact-row"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>divineokpara01@gmail.com</span></div>
+      <!-- Search shortcut inside drawer -->
+      <div class="mob-search-row" onclick="location.href='collections.html'">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+      </div>
+      <!-- Theme toggle inside drawer -->
+      <div class="mob-theme-row">
+        <span>Theme</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:0.7rem;color:var(--text-dim)">&#9789;</span>
+          <button class="theme-btn" id="themeBtnMob"></button>
+          <span style="font-size:0.7rem;color:var(--text-dim)">&#9728;</span>
+        </div>
       </div>
     </div>
 
-    <!-- Announcement Bar -->
-    <div class="announce">
-      <div class="announce-inner">
-        <span class="announce-item">Free delivery on orders over ₦50,000</span>
-        <span class="announce-item">New Arrivals — The Lumière Collection</span>
-        <span class="announce-item">Handcrafted with 18k Gold</span>
-        <span class="announce-item">Order via WhatsApp: 09019733420</span>
-        <span class="announce-item">Certified Diamonds &amp; Gemstones</span>
-        <span class="announce-item">Lifetime Quality Guarantee</span>
-        <span class="announce-item">Free delivery on orders over ₦50,000</span>
-        <span class="announce-item">New Arrivals — The Lumière Collection</span>
-        <span class="announce-item">Handcrafted with 18k Gold</span>
-        <span class="announce-item">Order via WhatsApp: 09019733420</span>
-        <span class="announce-item">Certified Diamonds &amp; Gemstones</span>
-        <span class="announce-item">Lifetime Quality Guarantee</span>
+    <!-- TICKER -->
+    <div class="announce" aria-hidden="true">
+      <div class="ann-inner">
+        <span class="ann-item">Custom commissions — Yours alone, forever</span>
+        <span class="ann-item">Bespoke consultations by appointment</span>
+        <span class="ann-item">18k Gold · Certified Diamonds · Ethically Sourced Gems</span>
+        <span class="ann-item">Starting from &#8358;350,000</span>
+        <span class="ann-item">6–8 week creation timeline</span>
+        <span class="ann-item">WhatsApp: 09019733420</span>
+        <span class="ann-item">Custom commissions — Yours alone, forever</span>
+        <span class="ann-item">Bespoke consultations by appointment</span>
+        <span class="ann-item">18k Gold · Certified Diamonds · Ethically Sourced Gems</span>
+        <span class="ann-item">Starting from &#8358;350,000</span>
+        <span class="ann-item">6–8 week creation timeline</span>
+        <span class="ann-item">WhatsApp: 09019733420</span>
       </div>
     </div>
 
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav id="navbar">
       <div class="nav-inner">
+        <!-- LEFT: desktop nav only -->
         <div class="nav-left">
           <a href="index.html">Home</a>
           <div class="nav-drop">
-            <a href="collections.html" style="color:var(--gold-lt)">Collections</a>
+            <a href="collections.html">Collections</a>
             <div class="drop-panel">
               <a href="collections.html">New Arrivals</a>
               <a href="collections.html">Best Sellers</a>
@@ -753,171 +580,311 @@
             <a href="collections.html">Jewellery</a>
             <div class="drop-panel">
               <a href="collections.html">Rings</a>
-              <a href="collections.html">Necklaces &amp; Chains</a>
+              <a href="collections.html">Necklaces</a>
               <a href="collections.html">Earrings</a>
-              <a href="collections.html">Bracelets &amp; Bangles</a>
+              <a href="collections.html">Bracelets</a>
               <a href="collections.html">Anklets</a>
-              <a href="collections.html">Jewellery Sets</a>
+              <a href="collections.html">Sets</a>
             </div>
           </div>
-          <a href="jewllries.html">Guide</a>
-          <a href="bespoke.html">Bespoke</a>
           <a href="about.html">About</a>
+          <a href="bespoke.html" style="color:var(--gold-lt)">Bespoke</a>
+          <a href="contact.html">Contact</a>
         </div>
+
+        <!-- CENTER: logo (always centred via absolute) -->
         <a href="index.html" class="nav-logo">
           <span class="logo-word">Sparkles</span>
-          <span class="logo-tag">Jewellery</span>
+          <span class="logo-sub">Jewellery</span>
         </a>
+
+        <!-- RIGHT: desktop = icons + theme; mobile = burger ONLY -->
         <div class="nav-right">
           <div class="nav-icons">
-            <button class="n-icon hide-xs" onclick="filterTo('all')" title="All items">
+            <button class="ni" onclick="location.href='collections.html'" aria-label="Search">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
-            <button class="n-icon" id="wishBtn" title="Wishlist">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <div class="n-icon" id="cartBtn" style="cursor:pointer" title="Bag">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              <div class="cart-dot" id="cartCount">0</div>
-            </div>
             <div class="theme-wrap">
-              <span class="theme-icon">☽</span>
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
-              <span class="theme-icon">☀</span>
+              <span class="theme-icon">&#9789;</span>
+              <button class="theme-btn" id="themeBtn"></button>
+              <span class="theme-icon">&#9728;</span>
             </div>
           </div>
-          <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+          <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-photos">
-        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=75" alt="" loading="eager"/></div>
-        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=600&q=75" alt="" loading="eager"/></div>
-        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=75" alt="" loading="eager"/></div>
-        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1615655114865-4cc8b93c2e91?w=600&q=75" alt="" loading="eager"/></div>
+    <!-- HERO -->
+    <section class="bespoke-hero">
+      <div class="hero-mesh" aria-hidden="true"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="hero-video-side" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+          <source src="https://cdn.coverr.co/videos/coverr-jeweler-working-with-gold-8068/1080p.mp4" type="video/mp4"/>
+        </video>
+        <div class="hero-video-mask"></div>
       </div>
-      <div class="hero-overlay"></div>
-      <div class="hero-dividers"><span></span><span></span><span></span><span></span></div>
-      <div class="hero-ring-deco">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="200" cy="200" r="192" stroke="#c9a45f" stroke-width=".6"/>
-          <circle cx="200" cy="200" r="155" stroke="#c9a45f" stroke-width=".3"/>
-          <circle cx="200" cy="200" r="118" stroke="#c9a45f" stroke-width=".3"/>
-          <polygon points="200,22 222,90 295,90 237,133 258,200 200,158 142,200 163,133 105,90 178,90" fill="none" stroke="#c9a45f" stroke-width=".8"/>
-          <circle cx="200" cy="200" r="6" stroke="#c9a45f" stroke-width=".6"/>
-          <line x1="200" y1="8" x2="200" y2="392" stroke="#c9a45f" stroke-width=".2"/>
-          <line x1="8" y1="200" x2="392" y2="200" stroke="#c9a45f" stroke-width=".2"/>
-        </svg>
-      </div>
-      <div class="hero-content">
-        <div class="hero-eyebrow">Curated for You — 2025</div>
-        <h1 class="hero-h1">
-          <span class="hero-h1-small">All</span>
-          <span class="hero-h1-big">Collec<em>tions</em></span>
-        </h1>
-        <div class="hero-rule"></div>
-        <p class="hero-p">Every piece at Sparkles begins as an idea — a feeling, a promise, a memory waiting to be worn. Discover 300+ handcrafted jewels.</p>
-        <div class="hero-btns">
-          <button class="btn btn-gold" onclick="document.getElementById('filterBar').scrollIntoView({behavior:'smooth'})">
-            <span>Shop Now</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-          <a href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20enquire%20about%20a%20bespoke%20piece." target="_blank" class="btn btn-outline"><span>Bespoke Order</span></a>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Bespoke Commissions</div>
+          <h1 class="hero-h1">Something<br/>That Exists<br/><em>Only for You.</em></h1>
+          <p class="hero-p">A bespoke Sparkles piece is not made — it is born. Born from a conversation, a memory, a dream you carry. Our master goldsmiths translate the invisible into gold, one deliberate gesture at a time.</p>
+          <div class="hero-btns">
+            <a href="#commission-form" class="btn btn-gold">
+              <span>Begin Your Journey</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="https://wa.me/2349019733420" target="_blank" class="btn btn-outline">
+              <span>WhatsApp Consultation</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="hero-scroll">
-        <div class="hero-scroll-inner">
-          <div class="stat-cell"><div class="stat-n">300+</div><div class="stat-l">Unique Pieces</div></div>
-          <div class="stat-cell"><div class="stat-n">6</div><div class="stat-l">Categories</div></div>
-          <div class="stat-cell"><div class="stat-n">18k</div><div class="stat-l">Gold Standard</div></div>
-          <div class="stat-cell"><div class="stat-n">10+</div><div class="stat-l">Years Crafting</div></div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="diamond-3d-wrap">
+            <div class="diamond-glow"></div>
+            <div class="halo-ring"><div class="halo-dot"></div></div>
+            <div class="halo-ring"><div class="halo-dot"></div></div>
+            <div class="halo-ring"><div class="halo-dot"></div></div>
+            <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 0 40px rgba(201,164,95,0.4));" width="220" height="260" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="dG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/><stop offset="30%" stop-color="#c8ecff" stop-opacity=".85"/><stop offset="70%" stop-color="#80d4ff" stop-opacity=".7"/><stop offset="100%" stop-color="#4ab8f0" stop-opacity=".6"/></linearGradient>
+                <linearGradient id="dG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a8ddf0" stop-opacity=".8"/><stop offset="100%" stop-color="#4a8caa" stop-opacity=".5"/></linearGradient>
+                <linearGradient id="dG3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e8f8ff" stop-opacity=".6"/><stop offset="100%" stop-color="#c0e8f8" stop-opacity=".4"/></linearGradient>
+                <filter id="df1"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="df2"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <ellipse cx="110" cy="240" rx="60" ry="14" fill="rgba(0,0,0,0.4)" filter="url(#df2)"/>
+              <ellipse cx="110" cy="110" rx="90" ry="22" fill="rgba(180,230,255,.15)" stroke="rgba(200,240,255,.5)" stroke-width="1"/>
+              <ellipse cx="110" cy="68" rx="55" ry="14" fill="url(#dG1)" filter="url(#df1)" opacity=".95"/>
+              <path d="M20 110 L55 68 L110 54 L110 110Z" fill="url(#dG2)" opacity=".85"/>
+              <path d="M20 110 L2 98 L55 68Z" fill="rgba(100,180,220,.5)"/>
+              <path d="M55 68 L40 60 L2 98Z" fill="rgba(160,220,240,.4)"/>
+              <path d="M200 110 L165 68 L110 54 L110 110Z" fill="url(#dG3)" opacity=".75"/>
+              <path d="M200 110 L218 98 L165 68Z" fill="rgba(220,245,255,.4)"/>
+              <path d="M165 68 L180 60 L218 98Z" fill="rgba(240,250,255,.3)"/>
+              <path d="M80 60 L110 54 L140 60 L110 68Z" fill="rgba(255,255,255,.7)"/>
+              <path d="M20 110 L110 110 L110 228Z" fill="rgba(80,160,200,.45)" opacity=".9"/>
+              <path d="M20 110 L110 228 L2 98Z" fill="rgba(60,130,170,.3)"/>
+              <path d="M200 110 L110 110 L110 228Z" fill="rgba(180,225,248,.3)" opacity=".9"/>
+              <path d="M200 110 L110 228 L218 98Z" fill="rgba(220,245,255,.2)"/>
+              <circle cx="110" cy="228" r="4" fill="rgba(255,255,255,.9)" filter="url(#df1)"/>
+              <ellipse cx="110" cy="110" rx="90" ry="22" fill="none" stroke="rgba(201,164,95,.4)" stroke-width="1.5"/>
+            </svg>
+            <div class="float-tag ft-1"><span class="ft-k">Cut</span><span class="ft-v">Brilliant Round</span></div>
+            <div class="float-tag ft-2"><span class="ft-k">Clarity</span><span class="ft-v">VS1</span></div>
+            <div class="float-tag ft-3"><span class="ft-k">Setting</span><span class="ft-v">Your Choice</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-      <div class="trust-inner">
-        <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="trust-text"><strong>Certified Authentic</strong><span>Every piece verified</span></div></div>
-        <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="trust-text"><strong>Free Delivery</strong><span>Orders over ₦50,000</span></div></div>
-        <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="trust-text"><strong>Lagos-Based</strong><span>Visit us in person</span></div></div>
-        <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="trust-text"><strong>Lifetime Guarantee</strong><span>Quality you can trust</span></div></div>
+    <!-- PROCESS -->
+    <section class="process-sec">
+      <div class="process-video-bg" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+          <source src="https://cdn.coverr.co/videos/coverr-goldsmith-melting-gold-6528/1080p.mp4" type="video/mp4"/>
+        </video>
+        <div class="process-video-overlay"></div>
       </div>
-    </div>
-
-    <!-- Filter Bar -->
-    <div class="filter-sec" id="filterBar">
-      <div class="filter-inner">
-        <div class="filter-tabs" id="filterTabs">
-          <button class="filter-tab active" data-cat="all">All</button>
-          <button class="filter-tab" data-cat="rings">Rings</button>
-          <button class="filter-tab" data-cat="necklaces">Necklaces</button>
-          <button class="filter-tab" data-cat="earrings">Earrings</button>
-          <button class="filter-tab" data-cat="bracelets">Bracelets</button>
-          <button class="filter-tab" data-cat="anklets">Anklets</button>
-          <button class="filter-tab" data-cat="sets">Sets</button>
+      <div class="process-inner">
+        <div class="process-hd reveal">
+          <p class="sec-label">How It Works</p>
+          <h2 class="sec-title">Five Steps to <em>Something Eternal</em></h2>
         </div>
-        <div class="filter-right">
-          <span class="results-count" id="resultsCount">Loading…</span>
-          <select class="sort-select" id="sortSelect">
-            <option value="default">Newest</option>
-            <option value="price-asc">Price ↑</option>
-            <option value="price-desc">Price ↓</option>
-            <option value="rating">Top Rated</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- Products Grid -->
-    <div class="products-sec">
-      <div class="products-grid" id="productGrid">
-        <div class="empty-state" id="emptyState" style="display:none"><h3>No pieces found</h3><p>Try a different category.</p></div>
-      </div>
-      <div class="load-more-wrap" id="loadMoreWrap">
-        <div class="load-bar"></div>
-        <button class="btn btn-outline" id="loadMoreBtn">
-          <span>Load More Pieces</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Editorial Strip -->
-    <div class="editorial-strip reveal">
-      <div class="editorial-inner">
-        <div class="editorial-card"><div class="editorial-num">01</div><div class="editorial-title">How to Choose Your Gold</div><div class="editorial-text">Not all gold is equal. Learn the difference between 9k, 14k, and 18k — and why Sparkles exclusively works with 18k for superior brilliance and durability.</div><a href="jewllries.html" class="editorial-link">Read the guide →</a></div>
-        <div class="editorial-card"><div class="editorial-num">02</div><div class="editorial-title">Spotting a Real Diamond</div><div class="editorial-text">The four Cs — Cut, Clarity, Colour, and Carat — are your compass. Our certified gemologists break down what they look for.</div><a href="jewllries.html" class="editorial-link">Read the guide →</a></div>
-        <div class="editorial-card"><div class="editorial-num">03</div><div class="editorial-title">Jewellery Care in the Tropics</div><div class="editorial-text">Nigeria's heat and humidity demands special care. Learn how to store, clean, and protect your pieces so they last a lifetime.</div><a href="jewllries.html" class="editorial-link">Read the guide →</a></div>
-      </div>
-    </div>
-
-    <!-- Bespoke CTA -->
-    <div class="bespoke-cta reveal">
-      <div class="bespoke-vis"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80" alt="Bespoke jewellery"/></div>
-      <div class="bespoke-text">
-        <div class="bespoke-label">Made for You, Only You</div>
-        <h2 class="bespoke-h">Commission a<br/><em>Bespoke Piece</em></h2>
-        <p class="bespoke-p">Work one-on-one with our master craftspeople to design a piece that tells your unique story. Starting ₦350,000.</p>
-        <div class="bespoke-btns">
-          <a href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20commission%20a%20bespoke%20piece." target="_blank" class="btn btn-gold"><span>Start Your Design</span></a>
-          <a href="jewllries.html" class="btn btn-outline"><span>View Guide</span></a>
+        <div class="steps-grid">
+          <div class="step-item reveal">
+            <div class="step-icon-wrap" data-num="01"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <div><div class="step-name">Consultation</div><div class="step-desc">A private conversation — in person, by phone, or via WhatsApp — where we listen to your vision, your story, your desires.</div></div>
+          </div>
+          <div class="step-item reveal d1">
+            <div class="step-icon-wrap" data-num="02"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div><div class="step-name">Design Sketch</div><div class="step-desc">Our designers produce hand-drawn sketches and digital renderings until the design feels unmistakably yours.</div></div>
+          </div>
+          <div class="step-item reveal d2">
+            <div class="step-icon-wrap" data-num="03"><svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></div>
+            <div><div class="step-name">Wax Prototype</div><div class="step-desc">A physical wax model is carved and presented for your approval before a single gram of gold is touched.</div></div>
+          </div>
+          <div class="step-item reveal d3">
+            <div class="step-icon-wrap" data-num="04"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div><div class="step-name">Goldsmithing</div><div class="step-desc">Lost-wax casting in 18k gold, followed by stone setting, engraving, and meticulous hand-finishing over 8–12 hours.</div></div>
+          </div>
+          <div class="step-item reveal d4">
+            <div class="step-icon-wrap" data-num="05"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><div class="step-name">Delivery &amp; Legacy</div><div class="step-desc">Presented in our signature box with a certificate of authenticity. This piece is yours — and the story behind it, ours to keep.</div></div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- VIDEO STORIES -->
+    <section class="stories-sec">
+      <div class="reveal"><p class="sec-label">Client Creations</p><h2 class="sec-title reveal d1">Pieces <em>Born from Stories</em></h2></div>
+      <div class="stories-grid">
+        <div class="story-card reveal">
+          <div class="sc-video-wrap"><video src="videos/amaka.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="sc-info"><div class="sc-tag">Featured · Bespoke Ring</div><div class="sc-title">The Proposal Ring — Designed for Amara</div><div class="sc-desc">Emeka came to us with a single photo from his grandmother's attic. We turned it into a solitaire that brought tears to three people at once.</div></div>
+        </div>
+        <div class="story-card reveal d1">
+          <div class="sc-video-wrap"><video src="videos/constructing.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="sc-info"><div class="sc-tag">Process · Stone Setting</div><div class="sc-title">Setting a 2ct Colombian Emerald</div><div class="sc-desc">Watch our master setter work under magnification for over four hours to position a single stone perfectly.</div></div>
+        </div>
+        <div class="story-card reveal d2">
+          <div class="sc-video-wrap"><video src="videos/masterpiece.mp4" controls playsinline preload="metadata"></video></div>
+          <div class="sc-info"><div class="sc-tag">Client Journey · Full Process</div><div class="sc-title">From First Sketch to Final Polish</div><div class="sc-desc">A complete documentary of one client's bespoke journey — from the first WhatsApp message to the moment she opened the box.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-sec">
+      <div class="gallery-inner">
+        <div class="reveal"><p class="sec-label">Our Creations</p><h2 class="sec-title reveal d1">Every Piece <em>Unique</em></h2></div>
+        <div class="gallery-grid reveal d2" id="galleryGrid">
+          <div class="gal-item" data-caption="Solitaire Commission"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700&q=80" alt="Bespoke solitaire ring" loading="lazy"/><div class="gal-label">Solitaire Commission</div></div>
+          <div class="gal-item" data-caption="Custom Pendant"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80" alt="Custom pendant necklace" loading="lazy"/><div class="gal-label">Custom Pendant</div></div>
+          <div class="gal-item" data-caption="Bespoke Drops"><img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=500&q=80" alt="Bespoke drop earrings" loading="lazy"/><div class="gal-label">Bespoke Drops</div></div>
+          <div class="gal-item" data-caption="Tennis Bracelet"><img src="https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=500&q=80" alt="Diamond tennis bracelet" loading="lazy"/><div class="gal-label">Tennis Bracelet</div></div>
+          <div class="gal-item" data-caption="Sapphire Commission"><img src="https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?w=500&q=80" alt="Blue sapphire commission" loading="lazy"/><div class="gal-label">Sapphire Commission</div></div>
+          <div class="gal-item" data-caption="Emerald Creation"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&q=80" alt="Emerald creation" loading="lazy"/><div class="gal-label">Emerald Creation</div></div>
+          <div class="gal-item" data-caption="Bridal Suite"><img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=700&q=80" alt="Bridal jewellery set" loading="lazy"/><div class="gal-label">Bridal Suite</div></div>
+          <div class="gal-item" data-caption="Ruby Cocktail Ring"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=500&q=80" alt="Ruby cocktail ring" loading="lazy"/><div class="gal-label">Ruby Cocktail Ring</div></div>
+          <div class="gal-item" data-caption="Halo Commission"><img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=500&q=80" alt="Halo diamond ring" loading="lazy"/><div class="gal-label">Halo Commission</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing-sec">
+      <div style="text-align:center" class="reveal">
+        <p class="sec-label">Investment</p>
+        <h2 class="sec-title reveal d1">Choose Your <em>Path</em></h2>
+        <p style="font-size:0.84rem;color:var(--text-sub);margin-top:12px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.9;" class="reveal d2">Every bespoke journey is unique. These are starting points — your piece may be more or less, depending on materials and complexity.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="pc-tag">Entry</div>
+          <div class="pc-name">Signature</div>
+          <div class="pc-price">&#8358;350k</div>
+          <div class="pc-note">Starting from</div>
+          <ul class="pc-features">
+            <li>One-hour consultation</li><li>2 design sketches</li><li>18k Yellow Gold band</li>
+            <li>Accent stones up to 0.3ct</li><li>Standard polish finish</li>
+            <li>Certificate of authenticity</li><li>Lifetime cleaning service</li>
+          </ul>
+          <a href="#commission-form" class="btn btn-outline" style="width:100%;justify-content:center"><span>Get Started</span></a>
+        </div>
+        <div class="price-card featured reveal d1">
+          <div class="pc-star">Most Popular</div>
+          <div class="pc-tag featured-tag">Signature+</div>
+          <div class="pc-name">Heritage</div>
+          <div class="pc-price">&#8358;650k</div>
+          <div class="pc-note">Starting from</div>
+          <ul class="pc-features">
+            <li>Private atelier consultation</li><li>Unlimited design revisions</li>
+            <li>18k White or Rose Gold</li><li>Certified diamond up to 1ct</li>
+            <li>Wax prototype approval</li><li>Mirror-polish &amp; engraving</li>
+            <li>Certificate + GIA documentation</li><li>Lifetime resizing &amp; guarantee</li>
+          </ul>
+          <a href="#commission-form" class="btn btn-gold" style="width:100%;justify-content:center"><span>Begin Commission</span></a>
+        </div>
+        <div class="price-card reveal d2">
+          <div class="pc-tag">Pinnacle</div>
+          <div class="pc-name">Lumi&#232;re Elite</div>
+          <div class="pc-price">&#8358;1.5M+</div>
+          <div class="pc-note">Investment pieces</div>
+          <ul class="pc-features">
+            <li>Dedicated goldsmith assigned</li><li>Rare coloured gems (GIA)</li>
+            <li>Multi-piece suite available</li><li>3D digital rendering</li>
+            <li>Diamonds over 1ct available</li><li>Private unveiling experience</li>
+            <li>Documentary video of process</li><li>Heirloom-grade archiving</li>
+          </ul>
+          <a href="https://wa.me/2349019733420" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center"><span>Request Private Consult</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testi-cinema">
+      <div class="tc-video" aria-hidden="true">
+        <video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-close-up-of-a-diamond-ring-on-a-table-7234/1080p.mp4" type="video/mp4"/></video>
+        <div class="tc-overlay"></div>
+      </div>
+      <div class="tc-inner">
+        <div style="text-align:center" class="reveal">
+          <p class="sec-label">What Clients Say</p>
+          <h2 class="sec-title reveal d1">The <em>Words We Treasure</em></h2>
+        </div>
+        <div class="tc-grid">
+          <div class="tcard reveal"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-txt">"I brought them a rough sketch on a napkin and they turned it into the most beautiful thing I have ever worn in my life. My daughter will inherit this ring."</p><div class="tcard-name">Ngozi F. — Lagos · Bespoke Ring</div></div>
+          <div class="tcard reveal d1"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-txt">"They listened to every detail about what my mother's style was and created a pendant that looked like it had come from her own jewellery box. I cried."</p><div class="tcard-name">Tolu A. — Abuja · Heirloom Pendant</div></div>
+          <div class="tcard reveal d2"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-txt">"The process was more special than the piece itself — if that is even possible. Three consultations, two revisions, one masterpiece. Sparkles is extraordinary."</p><div class="tcard-name">Blessing O. — Port Harcourt · Bridal Set</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMISSION FORM -->
+    <section class="form-sec" id="commission-form">
+      <div class="form-inner">
+        <div class="reveal">
+          <p class="form-label">Start Your Journey</p>
+          <h2 class="form-title">Tell Us About<br/><em>Your Vision</em></h2>
+          <div class="form-body">
+            <p>Fill in the form and we will contact you within 24 hours to begin the most exciting creative conversation of your jewellery life.</p>
+            <p>Alternatively, send us a message on WhatsApp at <strong style="color:var(--gold-lt)">09019733420</strong> — we respond to every single message.</p>
+          </div>
+          <div class="form-promise">
+            <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>No commitment required</strong> — the first consultation is always complimentary.</div></div>
+            <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>6–8 week timeline</strong> — from approved design to finished piece in your hands.</div></div>
+            <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Full transparency on pricing</strong> — no hidden costs, no surprises at the end.</div></div>
+            <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Lifetime guarantee</strong> — every bespoke piece is protected forever by Sparkles.</div></div>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="bform">
+            <div class="field-row">
+              <div class="field-group"><label for="f-name">Your Name</label><input type="text" id="f-name" placeholder="e.g. Adaeze Okafor" autocomplete="name"/></div>
+              <div class="field-group"><label for="f-phone">Phone / WhatsApp</label><input type="tel" id="f-phone" placeholder="e.g. 0901 234 5678" autocomplete="tel"/></div>
+            </div>
+            <div class="field-row">
+              <div class="field-group"><label for="f-email">Email Address</label><input type="email" id="f-email" placeholder="your@email.com" autocomplete="email"/></div>
+              <div class="field-group"><label for="f-type">Piece Type</label>
+                <select id="f-type"><option value="">— Select —</option><option>Engagement Ring</option><option>Wedding Band</option><option>Necklace / Pendant</option><option>Earrings</option><option>Bracelet</option><option>Full Bridal Suite</option><option>Anniversary Gift</option><option>Other / Not Sure</option></select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group"><label for="f-budget">Approximate Budget</label>
+                <select id="f-budget"><option value="">— Select —</option><option>&#8358;350,000 – &#8358;600,000</option><option>&#8358;600,000 – &#8358;1,000,000</option><option>&#8358;1,000,000 – &#8358;2,000,000</option><option>&#8358;2,000,000+</option><option>Not yet decided</option></select>
+              </div>
+              <div class="field-group"><label for="f-timeline">Desired Timeline</label>
+                <select id="f-timeline"><option value="">— Select —</option><option>ASAP (rush — premium applies)</option><option>6–8 Weeks (standard)</option><option>3 Months+</option><option>Flexible — quality over speed</option></select>
+              </div>
+            </div>
+            <div class="form-full field-group"><label for="f-story">Tell Us Your Story</label><textarea id="f-story" placeholder="Share the inspiration behind this piece — a person, a memory, a dream, a milestone. The more you tell us, the more beautifully we can respond..."></textarea></div>
+            <button class="form-submit" id="formSubmit" type="button">Send My Vision to Sparkles ◆</button>
+            <div class="form-note">We respond within 24 hours, always. Your details are kept in complete confidence.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="nl-sec">
+      <div class="nl-inner">
+        <p class="sec-label">Stay Connected</p>
+        <h2 class="nl-title">First Access to <em>New Collections</em></h2>
+        <p class="nl-p">Join our inner circle. Exclusive previews, bespoke slots, and jewellery care tips — delivered with grace.</p>
+        <div class="nl-form">
+          <input type="email" id="nlEmail" placeholder="Your email address" autocomplete="email"/>
+          <button id="nlBtn" type="button">Subscribe</button>
+        </div>
+        <p class="nl-alt">Or email us at <a href="mailto:divineokpara01@gmail.com">divineokpara01@gmail.com</a></p>
+      </div>
     </div>
 
-    <!-- Newsletter -->
-    <div class="nl-strip">
-      <h2 class="nl-title">First Access to <em>New Collections</em></h2>
-      <p class="nl-p">Join our inner circle for exclusive previews, offers, and care tips.</p>
-      <div class="nl-form"><input type="email" id="nlEmail" placeholder="Your email address"/><button id="nlBtn">Subscribe</button></div>
-      <p class="nl-alt">Or email: <a href="mailto:divineokpara01@gmail.com">divineokpara01@gmail.com</a></p>
-    </div>
-
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
       <div class="foot-grid">
         <div class="foot-brand">
@@ -925,294 +892,113 @@
           <p>Nigeria's premier destination for handcrafted luxury jewellery. Crafted for the woman who knows her worth.</p>
           <div class="soc-row">
             <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://www.facebook.com/sparklesjeweleries" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://facebook.com/sparklesjeweleries" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="https://wa.me/2349019733420" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
           </div>
         </div>
-        <div class="foot-col"><h4>Shop</h4><ul><li><a href="collections.html">Rings</a></li><li><a href="collections.html">Necklaces</a></li><li><a href="collections.html">Earrings</a></li><li><a href="collections.html">Bracelets</a></li><li><a href="collections.html">Anklets</a></li><li><a href="collections.html">Jewellery Sets</a></li></ul></div>
-        <div class="foot-col"><h4>Learn</h4><ul><li><a href="jewllries.html">Jewellery Guide</a></li><li><a href="jewllries.html">Gold Grades</a></li><li><a href="jewllries.html">Diamond 4Cs</a></li><li><a href="jewllries.html">Care Tips</a></li><li><a href="https://wa.me/2349019733420" target="_blank">Custom Orders</a></li></ul></div>
-        <div class="foot-col"><h4>Company</h4><ul><li><a href="index.html">← Home</a></li><li><a href="about.html">Our Story</a></li><li><a href="bespoke.html">Bespoke</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="https://wa.me/2349019733420" target="_blank">WhatsApp Order</a></li></ul></div>
+        <div class="foot-col"><h4>Bespoke</h4><ul><li><a href="#commission-form">Start a Commission</a></li><li><a href="#commission-form">Engagement Rings</a></li><li><a href="#commission-form">Bridal Suites</a></li><li><a href="#commission-form">Anniversary Gifts</a></li><li><a href="https://wa.me/2349019733420">WhatsApp Consult</a></li></ul></div>
+        <div class="foot-col"><h4>Learn</h4><ul><li><a href="jewllries.html">Jewellery Guide</a></li><li><a href="jewllries.html">Our Process</a></li><li><a href="jewllries.html">Gold Grades</a></li><li><a href="jewllries.html">Diamond 4Cs</a></li></ul></div>
+        <div class="foot-col"><h4>Company</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="collections.html">Collections</a></li><li><a href="index.html">&#8592; Home</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       </div>
       <div class="foot-btm">
-        <p>© 2025 Sparkles Jewelleries. All rights reserved.</p>
-        <p style="color:var(--text-dim)">Crafted for Brilliance</p>
-        <div class="pay-row"><div class="pay-chip">Paystack</div><div class="pay-chip">Flutterwave</div><div class="pay-chip">Bank Transfer</div><div class="pay-chip">WhatsApp</div></div>
+        <p>&#169; 2025 Sparkles Jewelleries. All rights reserved.</p>
+        <p style="color:var(--text-dim)">Every Piece. Only Yours.</p>
+        <div class="pay-row"><div class="pay-chip">Paystack</div><div class="pay-chip">Flutterwave</div><div class="pay-chip">Bank Transfer</div><div class="pay-chip">Card</div></div>
       </div>
     </footer>
 
-    <!-- Mobile Bottom Nav -->
-    <div class="mob-bottom-nav">
-      <a class="mob-nav-item" href="collections.html" style="color:var(--gold-lt)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Shop
-      </a>
-      <a class="mob-nav-item" href="jewllries.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        Guide
-      </a>
-      <a class="mob-nav-item primary" href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20order." target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        Order
-      </a>
-      <button class="mob-nav-item" id="mobWishBtnBottom">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        Saved
-      </button>
-      <button class="mob-nav-item" id="mobMenuBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        Menu
-      </button>
-    </div>
-
     <script>
-      const ALL_PRODUCTS = [
-        {id:"r1",cat:"rings",name:"Soleil Diamond Ring",price:285000,rating:5,stars:"★★★★★",reviews:24,badge:"new",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"A breathtaking solitaire diamond ring in 18k gold, capturing sunlight in every facet.",specs:{Material:"18k Yellow Gold",Stone:"0.8ct Diamond",Size:"Available 5–10",Weight:"4.2g"}},
-        {id:"r2",cat:"rings",name:"Céleste Sapphire Ring",price:460000,rating:5,stars:"★★★★★",reviews:7,badge:"new",img:"https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?w=800&q=85",desc:"Deep blue sapphire set in a halo of micro-pavé diamonds.",specs:{Material:"18k White Gold",Stone:"1.2ct Blue Sapphire",Size:"Available 5–10",Weight:"5.1g"}},
-        {id:"r3",cat:"rings",name:"Lumière Signet Ring",price:195000,rating:5,stars:"★★★★★",reviews:31,badge:"best",img:"https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=800&q=85",desc:"A modern take on the classic signet ring — engraved with your initials on premium 18k gold.",specs:{Material:"18k Yellow Gold",Stone:"None",Size:"Available 6–12",Weight:"8.5g"}},
-        {id:"r4",cat:"rings",name:"Minuit Black Diamond Ring",price:540000,rating:5,stars:"★★★★★",reviews:5,badge:"ltd",img:"https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=800&q=85",desc:"Exclusive black diamond set in dark rhodium-plated gold.",specs:{Material:"18k Dark Gold",Stone:"0.5ct Black Diamond",Size:"Available 5–10",Weight:"4.8g"}},
-        {id:"r5",cat:"rings",name:"Aurora Rose Gold Ring",price:175000,rating:5,stars:"★★★★★",reviews:19,badge:"new",img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=85",desc:"Delicate rose gold band with a cascade of pink tourmaline stones.",specs:{Material:"18k Rose Gold",Stone:"Pink Tourmaline",Size:"Available 5–10",Weight:"3.2g"}},
-        {id:"r6",cat:"rings",name:"Étoile Cluster Ring",price:320000,rating:4,stars:"★★★★☆",reviews:12,badge:"",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=85",desc:"A starburst cluster of round diamonds in 18k yellow gold.",specs:{Material:"18k Yellow Gold",Stone:"0.6ct Diamond Cluster",Size:"Available 5–10",Weight:"5.6g"}},
-        {id:"r7",cat:"rings",name:"Perle Eternity Band",price:280000,rating:5,stars:"★★★★★",reviews:22,badge:"best",img:"https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=800&q=85",desc:"Full eternity band set with brilliant-cut diamonds.",specs:{Material:"18k White Gold",Stone:"1.0ct Total Diamond",Size:"Available 5–10",Weight:"4.0g"}},
-        {id:"r8",cat:"rings",name:"Vendôme Emerald Ring",price:620000,rating:5,stars:"★★★★★",reviews:3,badge:"ltd",img:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=85",desc:"Rich Colombian emerald in an Art Deco-inspired setting.",specs:{Material:"18k Yellow Gold",Stone:"1.5ct Emerald",Size:"Available 5–10",Weight:"6.2g"}},
-        {id:"r9",cat:"rings",name:"Solstice Twisted Band",price:148000,rating:5,stars:"★★★★★",reviews:28,badge:"new",img:"https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800&q=85",desc:"Architectural twisted gold band with milgrain edge.",specs:{Material:"18k Yellow Gold",Stone:"None",Size:"Available 5–12",Weight:"5.0g"}},
-        {id:"r10",cat:"rings",name:"Rivière Diamond Pavé Ring",price:395000,rating:5,stars:"★★★★★",reviews:9,badge:"",img:"https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&q=85",desc:"A full river of pavé-set diamonds flows around this stunning band.",specs:{Material:"18k White Gold",Stone:"0.9ct Diamond Pavé",Size:"Available 5–10",Weight:"4.5g"}},
-        {id:"n1",cat:"necklaces",name:"Éclat Gold Pendant",price:195000,rating:5,stars:"★★★★★",reviews:41,badge:"best",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=85",desc:"A stunning teardrop pendant in 18k gold with a suspended brilliant diamond.",specs:{Material:"18k Yellow Gold",Stone:"0.3ct Diamond",Length:"45cm",Weight:"3.8g"}},
-        {id:"n2",cat:"necklaces",name:"Minuit Pearl Choker",price:218000,rating:5,stars:"★★★★★",reviews:13,badge:"",img:"https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=800&q=85",desc:"South Sea freshwater pearls set on a fine 18k gold chain.",specs:{Material:"18k Yellow Gold",Stone:"Freshwater Pearls",Length:"38cm",Weight:"12g"}},
-        {id:"n3",cat:"necklaces",name:"Cascade Diamond Collar",price:580000,rating:5,stars:"★★★★★",reviews:8,badge:"ltd",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=85",desc:"Graduated diamonds descend in a waterfall formation.",specs:{Material:"18k White Gold",Stone:"2.1ct Total Diamond",Length:"42cm",Weight:"14g"}},
-        {id:"n4",cat:"necklaces",name:"Soleil Sun Necklace",price:145000,rating:5,stars:"★★★★★",reviews:27,badge:"new",img:"https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=800&q=85",desc:"Radiant sunburst pendant in textured 18k gold.",specs:{Material:"18k Yellow Gold",Stone:"None",Length:"50cm",Weight:"4.2g"}},
-        {id:"n5",cat:"necklaces",name:"Lumière Layering Set",price:285000,rating:5,stars:"★★★★★",reviews:19,badge:"new",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Three delicate 18k gold chains in staggered lengths.",specs:{Material:"18k Yellow Gold",Stone:"Tiny Diamond Accents",Length:"40/45/50cm",Weight:"5.5g (set)"}},
-        {id:"n6",cat:"necklaces",name:"Rose Quartz Pendant",price:118000,rating:4,stars:"★★★★☆",reviews:33,badge:"",img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=85",desc:"Polished rose quartz cabochon wrapped in delicate 18k gold wire.",specs:{Material:"18k Rose Gold",Stone:"Rose Quartz",Length:"46cm",Weight:"5.1g"}},
-        {id:"n7",cat:"necklaces",name:"Heritage Locket",price:235000,rating:5,stars:"★★★★★",reviews:16,badge:"",img:"https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?w=800&q=85",desc:"Engraved oval locket holding two tiny photos — a timeless keepsake.",specs:{Material:"18k Yellow Gold",Stone:"Diamond clasp",Length:"45cm",Weight:"8.0g"}},
-        {id:"n8",cat:"necklaces",name:"Sapphire Drop Chain",price:340000,rating:5,stars:"★★★★★",reviews:10,badge:"new",img:"https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=800&q=85",desc:"An oval sapphire teardrop suspended from a fine 18k diamond tennis chain.",specs:{Material:"18k White Gold",Stone:"Sapphire & Diamonds",Length:"42cm",Weight:"6.2g"}},
-        {id:"e1",cat:"earrings",name:"Aurore Gold Studs",price:88000,rating:5,stars:"★★★★★",reviews:52,badge:"best",img:"https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800&q=85",desc:"Classic brilliant-cut diamond studs in 18k yellow gold.",specs:{Material:"18k Yellow Gold",Stone:"0.4ct Total Diamond",Closure:"Push Back",Weight:"1.8g pair"}},
-        {id:"e2",cat:"earrings",name:"Lumière Drop Earrings",price:142000,rating:4,stars:"★★★★☆",reviews:18,badge:"",img:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=800&q=85",desc:"Elongated tear-drop diamond earrings on a fine gold articulated stem.",specs:{Material:"18k Yellow Gold",Stone:"0.3ct Diamond",Closure:"Hook",Weight:"3.2g pair"}},
-        {id:"e3",cat:"earrings",name:"Sapphire Halo Studs",price:185000,rating:5,stars:"★★★★★",reviews:14,badge:"new",img:"https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?w=800&q=85",desc:"Oval sapphires encircled by diamond halos in 18k white gold.",specs:{Material:"18k White Gold",Stone:"Sapphire + Diamond Halo",Closure:"Screw Back",Weight:"2.4g pair"}},
-        {id:"e4",cat:"earrings",name:"Cascade Chandelier",price:268000,rating:5,stars:"★★★★★",reviews:9,badge:"ltd",img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=85",desc:"Three-tier cascading diamond chandelier earrings.",specs:{Material:"18k Yellow Gold",Stone:"0.6ct Total Diamond",Closure:"Hook",Weight:"6.8g pair"}},
-        {id:"e5",cat:"earrings",name:"Pearl Baroque Drops",price:125000,rating:5,stars:"★★★★★",reviews:21,badge:"",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Irregular baroque pearls suspended from 18k gold tops.",specs:{Material:"18k Yellow Gold",Stone:"Baroque Freshwater Pearl",Closure:"Hook",Weight:"4.5g pair"}},
-        {id:"e6",cat:"earrings",name:"Éclat Hoops",price:98000,rating:5,stars:"★★★★★",reviews:45,badge:"best",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=85",desc:"Medium-sized pavé diamond hoops in 18k yellow gold.",specs:{Material:"18k Yellow Gold",Stone:"0.5ct Diamond Pavé",Diameter:"25mm",Weight:"5.2g pair"}},
-        {id:"e7",cat:"earrings",name:"Minuit Ear Climbers",price:155000,rating:4,stars:"★★★★☆",reviews:11,badge:"new",img:"https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=800&q=85",desc:"Architectural ear climbers that curve along the lobe.",specs:{Material:"18k White Gold",Stone:"0.3ct Diamond",Closure:"Ear Climber",Weight:"2.8g pair"}},
-        {id:"e8",cat:"earrings",name:"Ruby Tassel Earrings",price:215000,rating:5,stars:"★★★★★",reviews:8,badge:"",img:"https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=800&q=85",desc:"Ruby-topped tassel earrings with fine gold chains cascading below.",specs:{Material:"18k Yellow Gold",Stone:"Ruby Tops",Closure:"Hook",Weight:"7.5g pair"}},
-        {id:"b1",cat:"bracelets",name:"Aura Tennis Bracelet",price:380000,rating:5,stars:"★★★★★",reviews:9,badge:"ltd",img:"https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=800&q=85",desc:"Classic four-prong tennis bracelet set with 3.5ct of brilliant diamonds.",specs:{Material:"18k White Gold",Stone:"3.5ct Total Diamond",Length:"18cm",Weight:"9.5g"}},
-        {id:"b2",cat:"bracelets",name:"Éternité Diamond Bangle",price:620000,rating:5,stars:"★★★★★",reviews:6,badge:"ltd",img:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=85",desc:"Solid 18k gold bangle with a full diamond pavé outer surface.",specs:{Material:"18k Yellow Gold",Stone:"2.0ct Diamond Pavé",Diameter:"6cm",Weight:"18g"}},
-        {id:"b3",cat:"bracelets",name:"Cascade Link Bracelet",price:245000,rating:5,stars:"★★★★★",reviews:14,badge:"new",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Graduated curb-link chain bracelet in 18k yellow gold.",specs:{Material:"18k Yellow Gold",Stone:"None",Length:"19cm",Weight:"12g"}},
-        {id:"b4",cat:"bracelets",name:"Lumière Cuff",price:295000,rating:5,stars:"★★★★★",reviews:11,badge:"new",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=85",desc:"Open-ended 18k gold cuff with hammered interior and smooth exterior.",specs:{Material:"18k Yellow Gold",Stone:"None",Width:"12mm",Weight:"22g"}},
-        {id:"b5",cat:"bracelets",name:"Minuit Charm Bracelet",price:185000,rating:4,stars:"★★★★☆",reviews:22,badge:"best",img:"https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=800&q=85",desc:"Fine cable-link bracelet with five signature Sparkles charms.",specs:{Material:"18k Yellow Gold",Stone:"Mixed Gems",Length:"18cm",Weight:"7.5g"}},
-        {id:"b6",cat:"bracelets",name:"Figaro Chain Bracelet",price:195000,rating:5,stars:"★★★★★",reviews:24,badge:"new",img:"https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=800&q=85",desc:"Classic Italian Figaro chain in 18k yellow gold.",specs:{Material:"18k Yellow Gold",Stone:"None",Length:"18cm",Weight:"7.2g"}},
-        {id:"a1",cat:"anklets",name:"Soleil Gold Anklet",price:95000,rating:5,stars:"★★★★★",reviews:17,badge:"",img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=85",desc:"Delicate 18k gold chain anklet with a tiny sun charm.",specs:{Material:"18k Yellow Gold",Stone:"None",Length:"23cm",Weight:"2.1g"}},
-        {id:"a2",cat:"anklets",name:"Pearl Chain Anklet",price:128000,rating:5,stars:"★★★★★",reviews:9,badge:"new",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Fine 18k gold chain studded with tiny freshwater pearls.",specs:{Material:"18k Yellow Gold",Stone:"Freshwater Pearls",Length:"24cm",Weight:"3.2g"}},
-        {id:"a3",cat:"anklets",name:"Diamond Station Anklet",price:195000,rating:5,stars:"★★★★★",reviews:6,badge:"ltd",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=85",desc:"Five bezel-set diamond stations on a whisper-thin 18k gold chain.",specs:{Material:"18k Yellow Gold",Stone:"0.25ct Total Diamond",Length:"23cm",Weight:"2.8g"}},
-        {id:"a4",cat:"anklets",name:"Infinity Anklet",price:105000,rating:5,stars:"★★★★★",reviews:23,badge:"new",img:"https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=800&q=85",desc:"Infinity symbol charm on a fine 18k gold chain.",specs:{Material:"18k Yellow Gold",Stone:"Tiny Diamond in infinity",Length:"23cm",Weight:"2.5g"}},
-        {id:"a5",cat:"anklets",name:"Heritage Beaded Anklet",price:78000,rating:5,stars:"★★★★★",reviews:31,badge:"best",img:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=85",desc:"Alternating 18k gold and tiger's eye bead anklet.",specs:{Material:"18k Gold Plated",Stone:"Tiger's Eye Beads",Length:"23cm adj.",Weight:"5.5g"}},
-        {id:"a6",cat:"anklets",name:"Satellite Chain Anklet",price:98000,rating:5,stars:"★★★★★",reviews:26,badge:"best",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Dainty satellite chain with evenly spaced gold ball stations.",specs:{Material:"18k Yellow Gold",Stone:"None",Length:"23cm",Weight:"2.8g"}},
-        {id:"s1",cat:"sets",name:"Bridal Lumière Set",price:850000,rating:5,stars:"★★★★★",reviews:4,badge:"ltd",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=85",desc:"Complete 4-piece bridal set: necklace, earrings, bracelet and ring.",specs:{Material:"18k White Gold",Stone:"6.0ct Total Diamond",Pieces:"4",Weight:"28g total"}},
-        {id:"s2",cat:"sets",name:"Everyday Gold Set",price:420000,rating:5,stars:"★★★★★",reviews:14,badge:"best",img:"https://images.unsplash.com/photo-1573408301185-9519f94815d3?w=800&q=85",desc:"A curated trio of stud earrings, pendant necklace and bangle.",specs:{Material:"18k Yellow Gold",Stone:"Small Diamonds",Pieces:"3",Weight:"12g total"}},
-        {id:"s3",cat:"sets",name:"Céleste Night Out Set",price:580000,rating:5,stars:"★★★★★",reviews:7,badge:"new",img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=85",desc:"Sapphire drop earrings paired with matching sapphire pendant.",specs:{Material:"18k White Gold",Stone:"Sapphire + Diamonds",Pieces:"2",Weight:"9g total"}},
-        {id:"s4",cat:"sets",name:"Heritage Classic Set",price:695000,rating:5,stars:"★★★★★",reviews:5,badge:"",img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=85",desc:"Three-piece set of timeless diamond stud earrings, solitaire pendant and tennis bracelet.",specs:{Material:"18k Yellow Gold",Stone:"4.5ct Total Diamond",Pieces:"3",Weight:"16g total"}},
-        {id:"s5",cat:"sets",name:"Rose Garden Set",price:395000,rating:4,stars:"★★★★☆",reviews:9,badge:"new",img:"https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=800&q=85",desc:"Ruby and rose gold earrings, ring, and necklace.",specs:{Material:"18k Rose Gold",Stone:"Rubies + Diamonds",Pieces:"3",Weight:"11g total"}},
-        {id:"s6",cat:"sets",name:"Pearl Elegance Set",price:345000,rating:5,stars:"★★★★★",reviews:12,badge:"best",img:"https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=800&q=85",desc:"South Sea pearl earrings, bracelet, and pendant.",specs:{Material:"18k Yellow Gold",Stone:"South Sea Pearls",Pieces:"3",Weight:"16g total"}}
-      ];
+      /* ── CURSOR ── */
+      const co = document.getElementById('cur-o'), ci = document.getElementById('cur-i');
+      let mx = 0, my = 0, ox = 0, oy = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; ci.style.cssText = `left:${mx}px;top:${my}px`; });
+      (function tick() { ox += (mx - ox) * 0.1; oy += (my - oy) * 0.1; co.style.cssText = `left:${ox - 16}px;top:${oy - 16}px`; requestAnimationFrame(tick); })();
 
-      const PAGE_SIZE = 12;
-      let visibleCount = PAGE_SIZE, activeCat = "all", activeSort = "default", currentProduct = null;
+      /* ── NAVBAR SCROLL ── */
+      window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
 
-      function fmt(n) { return "₦" + n.toLocaleString("en-NG"); }
-      function showToast(msg) { const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2600); }
+      /* ── MOBILE DRAWER ── */
+      const drawer = document.getElementById('mobDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      const burgerBtn = document.getElementById('burgerBtn');
+      function openDrawer() { drawer.classList.add('open'); overlay.classList.add('active'); burgerBtn.classList.add('open'); burgerBtn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function closeDrawer() { drawer.classList.remove('open'); overlay.classList.remove('active'); burgerBtn.classList.remove('open'); burgerBtn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+      burgerBtn.addEventListener('click', openDrawer);
+      document.getElementById('mobX').addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+      drawer.querySelectorAll('a').forEach(l => l.addEventListener('click', closeDrawer));
 
-      function getCart() { try{return JSON.parse(localStorage.getItem("sparkles-cart")||"[]")}catch{return[]} }
-      function saveCart(c) { localStorage.setItem("sparkles-cart",JSON.stringify(c)); }
-      function updateCartBadge() { document.getElementById("cartCount").textContent=getCart().reduce((a,i)=>a+i.qty,0); }
-      function addToCart(id) {
-        const p=ALL_PRODUCTS.find(x=>x.id===id); if(!p)return;
-        const cart=getCart(); const ex=cart.find(i=>i.id===id);
-        if(ex)ex.qty++; else cart.push({id,name:p.name,price:p.price,img:p.img,qty:1});
-        saveCart(cart); updateCartBadge(); renderCart(); showToast("✓ "+p.name+" added to bag");
+      /* ── THEME ── */
+      const html = document.documentElement;
+      html.setAttribute('data-theme', localStorage.getItem('sparkles-theme') || 'dark');
+      function setTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('sparkles-theme', t); }
+      document.getElementById('themeBtn').addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+      document.getElementById('themeBtnMob').addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+      /* ── SCROLL REVEAL ── */
+      const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { threshold: 0.06 });
+      document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+      /* ── GALLERY LIGHTBOX ── */
+      const galItems = Array.from(document.querySelectorAll('.gal-item'));
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const lbCaption = document.getElementById('lbCaption');
+      const lbCounter = document.getElementById('lbCounter');
+      let curIdx = 0;
+
+      function openLB(i) {
+        curIdx = i;
+        const item = galItems[i]; const img = item.querySelector('img');
+        lbImg.src = img.src.replace('w=500', 'w=1200').replace('w=700', 'w=1200');
+        lbImg.alt = img.alt;
+        lbCaption.textContent = item.dataset.caption || '';
+        lbCounter.textContent = (i + 1) + ' / ' + galItems.length;
+        lb.classList.add('active'); document.body.style.overflow = 'hidden';
       }
-      function removeFromCart(id) { saveCart(getCart().filter(i=>i.id!==id)); updateCartBadge(); renderCart(); }
-      function changeQty(id,delta) {
-        const c=getCart(); const item=c.find(x=>x.id===id); if(!item)return;
-        item.qty+=delta; if(item.qty<=0){removeFromCart(id);return;}
-        saveCart(c); updateCartBadge(); renderCart();
-      }
-      function renderCart() {
-        const items=getCart(); const el=document.getElementById("cartItems");
-        const total=items.reduce((a,i)=>a+i.price*i.qty,0);
-        document.getElementById("cartTotalVal").textContent=fmt(total);
-        if(!items.length){el.innerHTML='<div class="cart-empty"><p>Your bag is empty</p></div>';return;}
-        el.innerHTML=items.map(i=>`
-          <div class="cart-item">
-            <img class="cart-item-img" src="${i.img}" alt="${i.name}" loading="lazy"/>
-            <div>
-              <div class="cart-item-name">${i.name}</div>
-              <div class="cart-item-price">${fmt(i.price)}</div>
-              <div class="cart-item-qty">
-                <button class="qty-btn" onclick="changeQty('${i.id}',-1)">−</button>
-                <span class="qty-val">${i.qty}</span>
-                <button class="qty-btn" onclick="changeQty('${i.id}',1)">+</button>
-              </div>
-              <button class="cart-del" onclick="removeFromCart('${i.id}')">Remove</button>
-            </div>
-          </div>`).join("");
-      }
+      function closeLB() { lb.classList.remove('active'); document.body.style.overflow = ''; setTimeout(() => { lbImg.src = ''; }, 300); }
+      function showNext() { openLB((curIdx + 1) % galItems.length); }
+      function showPrev() { openLB((curIdx - 1 + galItems.length) % galItems.length); }
 
-      function getWish() { try{return JSON.parse(localStorage.getItem("sparkles-wish")||"[]")}catch{return[]} }
-      function saveWish(w) { localStorage.setItem("sparkles-wish",JSON.stringify(w)); }
-      function isWished(id) { return getWish().some(x=>x.id===id); }
-      function toggleWish(id) {
-        const p=ALL_PRODUCTS.find(x=>x.id===id); if(!p)return;
-        let w=getWish(); const i=w.findIndex(x=>x.id===id);
-        if(i>-1){w.splice(i,1);showToast("Removed from wishlist");}
-        else{w.push({id,name:p.name,price:p.price,img:p.img});showToast("♥ "+p.name+" saved");}
-        saveWish(w); renderWishlist(); updateWishBtns();
-        if(currentProduct&&currentProduct.id===id) document.getElementById("enqWishBtn").textContent=isWished(id)?"♥ Wishlisted":"♡ Save to Wishlist";
-      }
-      function renderWishlist() {
-        const items=getWish(); const el=document.getElementById("wishItems");
-        if(!items.length){el.innerHTML='<div class="wish-empty"><p>Your wishlist is empty</p></div>';return;}
-        el.innerHTML=items.map(i=>`
-          <div class="wish-item">
-            <img class="wish-item-img" src="${i.img}" alt="${i.name}" loading="lazy"/>
-            <div><div class="wish-item-name">${i.name}</div><div class="wish-item-price">${fmt(i.price)}</div></div>
-            <div class="wish-item-actions">
-              <button class="wish-enquire" onclick="openEnquiry('${i.id}')">Enquire</button>
-              <button class="wish-remove" onclick="toggleWish('${i.id}')">Remove</button>
-            </div>
-          </div>`).join("");
-      }
-      function updateWishBtns() {
-        document.querySelectorAll(".prd-wish").forEach(btn=>{
-          const id=btn.dataset.id; const svg=btn.querySelector("svg");
-          if(isWished(id)){btn.classList.add("wishlisted");svg.setAttribute("fill","#c9a45f");svg.setAttribute("stroke","#c9a45f");}
-          else{btn.classList.remove("wishlisted");svg.setAttribute("fill","none");svg.setAttribute("stroke","currentColor");}
-        });
-      }
-
-      function openEnquiry(id) {
-        const p=ALL_PRODUCTS.find(x=>x.id===id); if(!p)return; currentProduct=p;
-        document.getElementById("enqImg").src=p.img;
-        document.getElementById("enqImg").alt=p.name;
-        document.getElementById("enqCatLabel").textContent=p.cat.charAt(0).toUpperCase()+p.cat.slice(1);
-        document.getElementById("enqNameLabel").textContent=p.name;
-        document.getElementById("enqPriceLabel").textContent=fmt(p.price);
-        document.getElementById("enqCat").textContent=p.cat.charAt(0).toUpperCase()+p.cat.slice(1);
-        document.getElementById("enqName").textContent=p.name;
-        document.getElementById("enqPrice").textContent=fmt(p.price);
-        document.getElementById("enqStars").textContent=p.stars+" ("+p.reviews+" reviews)";
-        document.getElementById("enqDesc").textContent=p.desc;
-        document.getElementById("enqSpecs").innerHTML=Object.entries(p.specs).map(([k,v])=>`<div class="enq-spec"><b>${k}</b>${v}</div>`).join("");
-        document.getElementById("enqWishBtn").textContent=isWished(id)?"♥ Wishlisted":"♡ Save to Wishlist";
-        const msg=encodeURIComponent(`Hello Sparkles! I'm interested in the ${p.name} (${fmt(p.price)}). Can you help me with pricing and availability?`);
-        document.getElementById("enqWaBtn").href=`https://wa.me/2349019733420?text=${msg}`;
-        document.getElementById("enqOverlay").classList.add("open");
-        document.body.style.overflow="hidden";
-      }
-      function closeEnquiry() { document.getElementById("enqOverlay").classList.remove("open"); document.body.style.overflow=""; }
-
-      function buildCard(p) {
-        const badgeHTML=p.badge?`<span class="prd-badge badge-${p.badge}">${p.badge==="new"?"New":p.badge==="best"?"Bestseller":"Limited"}</span>`:"";
-        return `
-          <a class="prd reveal" data-id="${p.id}" data-category="${p.cat}" href="javascript:void(0)" onclick="openEnquiry('${p.id}')">
-            <div class="prd-img-wrap">
-              <img class="prd-img" src="${p.img}" alt="${p.name}" loading="lazy" decoding="async"/>
-              ${badgeHTML}
-              <button class="prd-wish" data-id="${p.id}" onclick="event.preventDefault();event.stopPropagation();toggleWish('${p.id}')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </button>
-              <div class="prd-action">
-                <button class="prd-enquire" onclick="event.preventDefault();event.stopPropagation();openEnquiry('${p.id}')">Enquire</button>
-                <button class="prd-cart" onclick="event.preventDefault();event.stopPropagation();addToCart('${p.id}')">+ Bag</button>
-              </div>
-            </div>
-            <div class="prd-cat">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</div>
-            <div class="prd-name">${p.name}</div>
-            <div class="prd-meta"><span class="prd-price">${fmt(p.price)}</span><span class="prd-stars">${p.stars}(${p.reviews})</span></div>
-          </a>`;
-      }
-
-      function getFiltered() {
-        let items=ALL_PRODUCTS.filter(p=>activeCat==="all"||p.cat===activeCat);
-        if(activeSort==="price-asc")items.sort((a,b)=>a.price-b.price);
-        else if(activeSort==="price-desc")items.sort((a,b)=>b.price-a.price);
-        else if(activeSort==="rating")items.sort((a,b)=>b.rating-a.rating);
-        return items;
-      }
-
-      function render() {
-        const filtered=getFiltered(); const grid=document.getElementById("productGrid");
-        const shown=filtered.slice(0,visibleCount);
-        grid.innerHTML='<div class="empty-state" id="emptyState" style="display:none"><h3>No pieces found</h3><p>Try a different category.</p></div>';
-        if(!filtered.length){document.getElementById("emptyState").style.display="block";document.getElementById("loadMoreWrap").style.display="none";return;}
-        shown.forEach(p=>grid.insertAdjacentHTML("beforeend",buildCard(p)));
-        document.getElementById("resultsCount").textContent=`${filtered.length} Piece${filtered.length!==1?"s":""}`;
-        const lmw=document.getElementById("loadMoreWrap");
-        if(visibleCount>=filtered.length){lmw.style.opacity=".4";lmw.style.pointerEvents="none";document.getElementById("loadMoreBtn").querySelector("span").textContent="All Loaded";}
-        else{lmw.style.opacity="1";lmw.style.pointerEvents="auto";document.getElementById("loadMoreBtn").querySelector("span").textContent="Load More Pieces";}
-        const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target);}});},{threshold:0.05});
-        document.querySelectorAll(".reveal:not(.in)").forEach(r=>ro.observe(r));
-        updateWishBtns();
-      }
-
-      function filterTo(cat) {
-        activeCat=cat; visibleCount=PAGE_SIZE;
-        document.querySelectorAll(".filter-tab").forEach(t=>t.classList.toggle("active",t.dataset.cat===cat));
-        render();
-      }
-
-      function checkHash() {
-        const hash=window.location.hash.replace('#','');
-        const cats=['rings','necklaces','earrings','bracelets','anklets','sets'];
-        if(cats.includes(hash)) filterTo(hash);
-      }
-
-      document.querySelectorAll(".filter-tab").forEach(t=>t.addEventListener("click",function(){filterTo(this.dataset.cat);}));
-      document.getElementById("sortSelect").addEventListener("change",function(){activeSort=this.value;visibleCount=PAGE_SIZE;render();});
-      document.getElementById("loadMoreBtn").addEventListener("click",e=>{e.preventDefault();visibleCount+=PAGE_SIZE;render();});
-
-      render(); updateCartBadge(); renderCart(); renderWishlist(); checkHash();
-
-      document.getElementById("enqClose").addEventListener("click",closeEnquiry);
-      document.getElementById("enqOverlay").addEventListener("click",e=>{if(e.target===document.getElementById("enqOverlay"))closeEnquiry();});
-      document.getElementById("enqBagBtn").addEventListener("click",()=>{if(currentProduct){addToCart(currentProduct.id);closeEnquiry();document.getElementById("cartOverlay").classList.add("open");}});
-      document.getElementById("enqWishBtn").addEventListener("click",()=>{if(currentProduct)toggleWish(currentProduct.id);});
-
-      document.getElementById("cartBtn").addEventListener("click",()=>{renderCart();document.getElementById("cartOverlay").classList.add("open");});
-      document.getElementById("cartClose").addEventListener("click",()=>document.getElementById("cartOverlay").classList.remove("open"));
-      document.getElementById("cartOverlay").addEventListener("click",e=>{if(e.target===document.getElementById("cartOverlay"))document.getElementById("cartOverlay").classList.remove("open");});
-      document.getElementById("cartCheckout").addEventListener("click",()=>{
-        const items=getCart(); if(!items.length){showToast("Your bag is empty");return;}
-        const lines=items.map(i=>`${i.name} x${i.qty} — ${fmt(i.price*i.qty)}`).join("\n");
-        const total=items.reduce((a,i)=>a+i.price*i.qty,0);
-        window.open(`https://wa.me/2349019733420?text=${encodeURIComponent("Hello Sparkles! I'd like to order:\n\n"+lines+"\n\nTotal: "+fmt(total))}`, "_blank");
+      galItems.forEach((item, i) => {
+        item.setAttribute('role', 'button'); item.setAttribute('tabindex', '0');
+        item.addEventListener('click', () => openLB(i));
+        item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLB(i); });
       });
 
-      document.getElementById("wishBtn").addEventListener("click",()=>{renderWishlist();document.getElementById("wishOverlay").classList.add("open");});
-      document.getElementById("wishClose").addEventListener("click",()=>document.getElementById("wishOverlay").classList.remove("open"));
-      document.getElementById("wishOverlay").addEventListener("click",e=>{if(e.target===document.getElementById("wishOverlay"))document.getElementById("wishOverlay").classList.remove("open");});
-      document.getElementById("mobWishBtnBottom")?.addEventListener("click",()=>{renderWishlist();document.getElementById("wishOverlay").classList.add("open");});
+      document.getElementById('lbClose').addEventListener('click', closeLB);
+      document.getElementById('lbNext').addEventListener('click', showNext);
+      document.getElementById('lbPrev').addEventListener('click', showPrev);
+      lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+      document.addEventListener('keydown', e => { if (!lb.classList.contains('active')) return; if (e.key === 'ArrowRight') showNext(); else if (e.key === 'ArrowLeft') showPrev(); else if (e.key === 'Escape') closeLB(); });
 
-      const co=document.getElementById("cur-o"),ci=document.getElementById("cur-i");
-      let mx=0,my=0,ox=0,oy=0;
-      document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;ci.style.cssText=`left:${mx}px;top:${my}px`;});
-      (function tick(){ox+=(mx-ox)*0.1;oy+=(my-oy)*0.1;co.style.cssText=`left:${ox-15}px;top:${oy-15}px`;requestAnimationFrame(tick);})();
+      let tStart = 0;
+      lb.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => { const d = tStart - e.changedTouches[0].clientX; if (Math.abs(d) > 50) { d > 0 ? showNext() : showPrev(); } }, { passive: true });
 
-      document.getElementById("burgerBtn").addEventListener("click",function(){this.classList.toggle("open");document.getElementById("mobDrawer").classList.add("open");});
-      document.getElementById("mobMenuBtn")?.addEventListener("click",()=>document.getElementById("mobDrawer").classList.add("open"));
-      document.getElementById("mobX").addEventListener("click",()=>{document.getElementById("mobDrawer").classList.remove("open");document.getElementById("burgerBtn").classList.remove("open");});
-
-      const html=document.documentElement;
-      html.setAttribute("data-theme",localStorage.getItem("sparkles-theme")||"dark");
-      document.getElementById("themeToggle").addEventListener("click",()=>{
-        const next=html.getAttribute("data-theme")==="dark"?"light":"dark";
-        html.setAttribute("data-theme",next); localStorage.setItem("sparkles-theme",next);
+      /* ── FORM ── */
+      document.getElementById('formSubmit').addEventListener('click', () => {
+        const name = document.getElementById('f-name').value.trim();
+        const phone = document.getElementById('f-phone').value.trim();
+        const email = document.getElementById('f-email').value.trim();
+        const type = document.getElementById('f-type').value;
+        const budget = document.getElementById('f-budget').value;
+        const timeline = document.getElementById('f-timeline').value;
+        const story = document.getElementById('f-story').value.trim();
+        if (!name || !phone) { showToast('Please enter your name and phone number'); return; }
+        const msg = "Hello Sparkles! I'd like to commission a bespoke piece.\n\nName: " + name + "\nPhone: " + phone + "\nEmail: " + (email || 'Not provided') + "\nPiece: " + (type || 'Not specified') + "\nBudget: " + (budget || 'Not specified') + "\nTimeline: " + (timeline || 'Not specified') + "\n\nMy Story:\n" + (story || '(No story provided yet)');
+        window.open('https://wa.me/2349019733420?text=' + encodeURIComponent(msg), '_blank');
       });
 
-      const gro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");gro.unobserve(e.target);}});},{threshold:0.08});
-      document.querySelectorAll(".reveal").forEach(r=>gro.observe(r));
-
-      document.getElementById("nlBtn").addEventListener("click",()=>{
-        const email=document.getElementById("nlEmail").value.trim();
-        if(!email||!email.includes("@")){showToast("Please enter a valid email");return;}
-        window.location.href=`mailto:divineokpara01@gmail.com?subject=Newsletter%20Subscription&body=Please%20add%20me%20to%20the%20Sparkles%20newsletter.%0AEmail%3A%20${encodeURIComponent(email)}`;
+      /* ── NEWSLETTER ── */
+      document.getElementById('nlBtn').addEventListener('click', () => {
+        const email = document.getElementById('nlEmail').value.trim();
+        if (!email || !email.includes('@')) { showToast('Please enter a valid email address'); return; }
+        window.location.href = 'mailto:divineokpara01@gmail.com?subject=Newsletter%20Subscription&body=Please%20subscribe%20me.%0A%0AEmail%3A%20' + encodeURIComponent(email);
       });
+
+      /* ── TOAST ── */
+      function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600); }
     </script>
   </body>
 </html>
