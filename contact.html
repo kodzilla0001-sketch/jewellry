@@ -4,1534 +4,532 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact — Sparkles Jewelleries</title>
-
-    <!-- Google Fonts: Cormorant Garamond (luxury serif) + Jost (clean sans-serif) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
 
     <style>
-      /* ============================================================
-         RESET & BASE
-         Removes default browser spacing and sets box-sizing so 
-         padding doesn't expand element widths unexpectedly.
-      ============================================================ */
-      *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-      /* ============================================================
-         DESIGN TOKENS (CSS Variables)
-         All colors, fonts, and reusable values live here.
-         Change a value here and it updates everywhere on the page.
-      ============================================================ */
       :root {
         --ff-serif: "Cormorant Garamond", Georgia, serif;
         --ff-sans:  "Jost", sans-serif;
         --ease:     cubic-bezier(0.4, 0, 0.2, 1);
-        --nav-h:    72px;
+        --nav-h:    64px;
       }
 
-      /* Dark theme colors */
       [data-theme="dark"] {
-        --bg:         #090806;
-        --surface:    #131009;
-        --surface-2:  #1c1812;
-        --surface-3:  #241e15;
-        --text:       #f0ebe0;
-        --text-sub:   rgba(240,235,224,0.48);
-        --text-dim:   rgba(240,235,224,0.22);
-        --gold:       #c9a45f;
-        --gold-lt:    #e2c88a;
-        --gold-dk:    #8a6b38;
-        --gold-xdk:   #5c4620;
-        --border:     rgba(201,164,95,0.14);
-        --border-hv:  rgba(201,164,95,0.38);
-        --card-bg:    #161209;
-        --shadow:     0 8px 40px rgba(0,0,0,0.6);
-        --nav-bg:     rgba(9,8,6,0.92);
-        --hero-glow:  rgba(201,164,95,0.1);
-        /* Film grain texture — applied as body::before */
-        --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+        --bg: #090806; --surface: #131009; --surface-2: #1c1812;
+        --surface-3: #241e15; --text: #f0ebe0;
+        --text-sub: rgba(240,235,224,0.48); --text-dim: rgba(240,235,224,0.22);
+        --gold: #c9a45f; --gold-lt: #e2c88a; --gold-dk: #8a6b38;
+        --gold-xdk: #5c4620; --border: rgba(201,164,95,0.14);
+        --border-hv: rgba(201,164,95,0.38); --card-bg: #161209;
+        --shadow: 0 8px 40px rgba(0,0,0,0.6); --nav-bg: rgba(9,8,6,0.92);
+        --hero-glow: rgba(201,164,95,0.1);
       }
 
-      /* Light theme colors — same variable names, different values */
       [data-theme="light"] {
-        --bg:         #f7f3ec;
-        --surface:    #ede8de;
-        --surface-2:  #e3ddd1;
-        --surface-3:  #d8d1c3;
-        --text:       #18130a;
-        --text-sub:   rgba(24,19,10,0.52);
-        --text-dim:   rgba(24,19,10,0.28);
-        --gold:       #9a7235;
-        --gold-lt:    #b8904a;
-        --gold-dk:    #6b4d22;
-        --gold-xdk:   #3e2c10;
-        --border:     rgba(154,114,53,0.18);
-        --border-hv:  rgba(154,114,53,0.42);
-        --card-bg:    #ede8de;
-        --shadow:     0 8px 40px rgba(0,0,0,0.1);
-        --nav-bg:     rgba(247,243,236,0.92);
-        --hero-glow:  rgba(154,114,53,0.07);
-        --grain:      none; /* no grain in light mode */
+        --bg: #f7f3ec; --surface: #ede8de; --surface-2: #e3ddd1;
+        --surface-3: #d8d1c3; --text: #18130a;
+        --text-sub: rgba(24,19,10,0.52); --text-dim: rgba(24,19,10,0.28);
+        --gold: #9a7235; --gold-lt: #b8904a; --gold-dk: #6b4d22;
+        --gold-xdk: #3e2c10; --border: rgba(154,114,53,0.18);
+        --border-hv: rgba(154,114,53,0.42); --card-bg: #ede8de;
+        --shadow: 0 8px 40px rgba(0,0,0,0.1); --nav-bg: rgba(247,243,236,0.92);
+        --hero-glow: rgba(154,114,53,0.07);
       }
 
       html { scroll-behavior: smooth; }
-
       body {
-        background:  var(--bg);
-        color:       var(--text);
-        font-family: var(--ff-sans);
-        font-weight: 300;
-        overflow-x:  hidden;
-        cursor:      none; /* replaced by custom cursor below */
-        transition:  background 0.4s, color 0.4s;
+        background: var(--bg); color: var(--text);
+        font-family: var(--ff-sans); font-weight: 300;
+        overflow-x: hidden; transition: background 0.4s, color 0.4s;
       }
 
-      /* Film grain texture overlay — covers the entire page, never blocks clicks */
-      body::before {
-        content:        "";
-        position:       fixed;
-        inset:          0;
-        background:     var(--grain);
-        pointer-events: none;
-        z-index:        9998;
-        opacity:        0.6;
-      }
+      /* ── CURSOR ── */
+      #cur-o, #cur-i { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
+      #cur-o { width: 32px; height: 32px; border: 1px solid rgba(201,164,95,0.45); transition: width .3s, height .3s; }
+      #cur-i { width: 5px; height: 5px; background: var(--gold-lt); transform: translate(-50%,-50%); }
+      body:has(a:hover) #cur-o, body:has(button:hover) #cur-o { width: 48px; height: 48px; border-color: var(--gold); }
+      @media (max-width: 768px) { body { cursor: auto; } #cur-o, #cur-i { display: none; } }
 
+      /* ── TOAST ── */
+      .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface); border: 1px solid var(--gold); color: var(--gold-lt); font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; padding: 12px 28px; opacity: 0; pointer-events: none; z-index: 700; white-space: nowrap; transition: opacity .35s, transform .35s; border-radius: 2px; max-width: calc(100vw - 32px); text-overflow: ellipsis; overflow: hidden; }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-      /* ============================================================
-         CUSTOM CURSOR
-         Two elements: inner dot (#cur-i) tracks the mouse exactly,
-         outer ring (#cur-o) follows with a smooth lag effect.
-         Hidden on mobile since touch screens don't use cursors.
-      ============================================================ */
-      #cur-o, #cur-i {
-        position:       fixed;
-        border-radius:  50%;
-        pointer-events: none; /* never block clicks */
-        z-index:        9999;
-      }
-
-      /* Outer ring */
-      #cur-o {
-        width:  32px;
-        height: 32px;
-        border: 1px solid rgba(201,164,95,0.45);
-        transition: width 0.3s, height 0.3s, border-color 0.3s;
-      }
-
-      /* Inner dot */
-      #cur-i {
-        width:      5px;
-        height:     5px;
-        background: var(--gold-lt);
-        transform:  translate(-50%,-50%);
-      }
-
-      /* Ring expands when hovering links or buttons */
-      body:has(a:hover) #cur-o,
-      body:has(button:hover) #cur-o {
-        width:        48px;
-        height:       48px;
-        border-color: var(--gold);
-      }
-
-      /* Hide custom cursor on mobile */
-      @media (max-width: 768px) {
-        body    { cursor: auto; }
-        #cur-o,
-        #cur-i  { display: none; }
-      }
-
-
-      /* ============================================================
-         TOAST NOTIFICATION
-         Small pop-up message at the bottom of the screen.
-         Shown by adding the .show class via JavaScript.
-      ============================================================ */
-      .toast {
-        position:       fixed;
-        bottom:         80px;
-        left:           50%;
-        transform:      translateX(-50%) translateY(20px); /* starts slightly below */
-        background:     var(--surface);
-        border:         1px solid var(--gold);
-        color:          var(--gold-lt);
-        font-family:    var(--ff-sans);
-        font-size:      0.72rem;
-        letter-spacing: 0.12em;
-        padding:        12px 28px;
-        opacity:        0;
-        pointer-events: none;
-        z-index:        700;
-        white-space:    nowrap;
-        transition:     opacity 0.35s, transform 0.35s;
-      }
-
-      /* Slides up and becomes visible */
-      .toast.show {
-        opacity:   1;
-        transform: translateX(-50%) translateY(0);
-      }
-
-
-      /* ============================================================
-         ANNOUNCEMENT TICKER BAR
-         Horizontally scrolling text strip at the very top.
-         Content is duplicated in HTML for seamless looping.
-      ============================================================ */
-      .announce {
-        background:     var(--bg);
-        border-bottom:  1px solid var(--border);
-        padding:        9px 0;
-        overflow:       hidden;
-        font-size:      0.64rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color:          var(--gold-lt);
-      }
-
-      /* Double-width inner container that scrolls left */
-      .ann-inner {
-        display:   flex;
-        gap:       72px;
-        width:     max-content;
-        animation: ticker 36s linear infinite;
-      }
-
+      /* ── TICKER ── */
+      .announce { background: var(--bg); border-bottom: 1px solid var(--border); padding: 9px 0; overflow: hidden; font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-lt); }
+      .ann-inner { display: flex; gap: 72px; width: max-content; animation: ticker 36s linear infinite; }
       .ann-item { white-space: nowrap; }
+      .ann-item + .ann-item::before { content: "◆"; margin-right: 72px; color: var(--gold-dk); font-size: 0.42rem; vertical-align: middle; }
+      @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-      /* Diamond separator between items */
-      .ann-item + .ann-item::before {
-        content:        "◆";
-        margin-right:   72px;
-        color:          var(--gold-dk);
-        font-size:      0.42rem;
-        vertical-align: middle;
-      }
-
-      /* Scrolls exactly half-way — since content is duplicated, this loops perfectly */
-      @keyframes ticker {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
-      }
-
-
-      /* ============================================================
-         NAVBAR
-         Sticky at top with frosted glass blur.
-         Three columns: [left links] [center logo] [right icons]
-         Logo is absolutely centered so it stays perfectly in the 
-         middle regardless of how many links are on either side.
-      ============================================================ */
+      /* ── NAVBAR ── */
       nav {
-        position:      sticky;
-        top:           0;
-        z-index:       200;
-        height:        var(--nav-h);
-        background:    var(--nav-bg);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-        transition:    background 0.4s;
+        position: sticky; top: 0; z-index: 200; height: var(--nav-h);
+        background: var(--nav-bg); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border); transition: background 0.4s;
       }
-
-      /* Shadow applied once the user scrolls (toggled by JS) */
       nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
 
-      /* Three-column flex container — logo is centered via position: absolute */
       .nav-inner {
-        display:     flex;
-        align-items: center;
-        height:      100%;
-        padding:     0 40px;
-        position:    relative; /* needed for the absolute logo trick */
+        display: flex; align-items: center; height: 100%;
+        padding: 0 40px; max-width: 1440px; margin: 0 auto;
+        position: relative;
       }
+      @media (max-width: 640px) { .nav-inner { padding: 0 16px; } }
 
-      @media (max-width: 640px) { .nav-inner { padding: 0 20px; } }
-
-      /* Left navigation links — flex: 1 makes them fill the left half */
-      .nav-left {
-        display:     flex;
-        align-items: center;
-        gap:         22px;
-        flex:        1;
-      }
-
-      /* Hide left links on tablet and below */
+      /* Left nav links — desktop only */
+      .nav-left { display: flex; align-items: center; gap: 22px; flex: 1; }
       @media (max-width: 900px) { .nav-left { display: none; } }
 
-      /* Dropdown wrapper — positions the panel below the link */
       .nav-drop { position: relative; }
-
-      /* Shared styles for all top-level nav links */
-      .nav-left a,
-      .nav-drop > a {
-        font-size:      0.67rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color:          var(--text-sub);
-        text-decoration: none;
-        white-space:    nowrap;
-        position:       relative;
-        padding-bottom: 2px;
-        transition:     color 0.3s;
-      }
-
-      .nav-left a:hover,
-      .nav-drop > a:hover { color: var(--gold-lt); }
-
-      /* Animated underline that grows from left on hover */
-      .nav-left a::after,
-      .nav-drop > a::after {
-        content:    "";
-        position:   absolute;
-        bottom:     0;
-        left:       0;
-        width:      0;
-        height:     1px;
-        background: var(--gold);
-        transition: width 0.35s var(--ease);
-      }
-
-      .nav-left a:hover::after,
-      .nav-drop > a:hover::after { width: 100%; }
-
-      /* Dropdown panel — hidden by default, revealed on parent hover */
-      .drop-panel {
-        position:  absolute;
-        top:       calc(100% + 14px);
-        left:      0;
-        background: var(--surface);
-        border:    1px solid var(--border);
-        min-width: 200px;
-        padding:   10px 0;
-        opacity:   0;
-        pointer-events: none;
-        transform: translateY(-6px);
-        box-shadow: var(--shadow);
-        transition: opacity 0.25s, transform 0.25s var(--ease);
-      }
-
-      .nav-drop:hover .drop-panel {
-        opacity:        1;
-        pointer-events: all;
-        transform:      translateY(0);
-      }
-
-      .drop-panel a {
-        display:        block;
-        padding:        9px 20px;
-        font-size:      0.67rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color:          var(--text-sub) !important;
-        text-decoration: none;
-        transition:     background 0.2s, color 0.2s !important;
-      }
-
-      /* No underline animation inside dropdown links */
+      .nav-left a, .nav-drop > a { font-size: 0.67rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-sub); text-decoration: none; white-space: nowrap; position: relative; padding-bottom: 2px; transition: color .3s; }
+      .nav-left a:hover, .nav-drop > a:hover { color: var(--gold-lt); }
+      .nav-left a::after, .nav-drop > a::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .35s var(--ease); }
+      .nav-left a:hover::after, .nav-drop > a:hover::after { width: 100%; }
+      .drop-panel { position: absolute; top: calc(100% + 14px); left: 0; background: var(--surface); border: 1px solid var(--border); min-width: 200px; padding: 10px 0; opacity: 0; pointer-events: none; transform: translateY(-6px); box-shadow: var(--shadow); transition: opacity .25s, transform .25s var(--ease); }
+      .nav-drop:hover .drop-panel { opacity: 1; pointer-events: all; transform: translateY(0); }
+      .drop-panel a { display: block; padding: 9px 20px; font-size: 0.67rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-sub) !important; text-decoration: none; transition: background .2s, color .2s !important; }
       .drop-panel a::after { display: none !important; }
-      .drop-panel a:hover  { background: rgba(201,164,95,0.08); color: var(--gold-lt) !important; }
+      .drop-panel a:hover { background: rgba(201,164,95,0.08); color: var(--gold-lt) !important; }
 
-      /* Center Logo — absolutely centered in the nav bar */
-      .nav-logo {
-        position:   absolute;
-        left:       50%;
-        transform:  translateX(-50%); /* perfect center */
-        display:    flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-        gap:        2px;
-        flex-shrink: 0;
-      }
+      /* Center logo — absolutely centred */
+      .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; text-decoration: none; gap: 2px; }
+      .logo-word { font-family: var(--ff-serif); font-weight: 300; font-size: 1.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text); line-height: 1; white-space: nowrap; transition: color .4s; }
+      .logo-tag { font-size: 0.52rem; letter-spacing: 0.55em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+      @media (max-width: 400px) { .logo-word { font-size: 1.2rem; letter-spacing: 0.2em; } }
 
-      .logo-word {
-        font-family:    var(--ff-serif);
-        font-weight:    300;
-        font-size:      1.55rem;
-        letter-spacing: 0.35em;
-        text-transform: uppercase;
-        color:          var(--text);
-        line-height:    1;
-        white-space:    nowrap;
-        transition:     color 0.4s;
-      }
+      /* ── NAV RIGHT — desktop icons + theme; mobile burger ONLY ── */
+      .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex: 1; }
 
-      .logo-tag {
-        font-size:      0.52rem;
-        letter-spacing: 0.55em;
-        text-transform: uppercase;
-        color:          var(--gold);
-        white-space:    nowrap;
-      }
-
-      /* Right side — mirrors nav-left flex: 1 to balance the logo in the center */
-      .nav-right {
-        display:         flex;
-        align-items:     center;
-        justify-content: flex-end;
-        gap:             16px;
-        flex:            1;
-      }
-
-      /* Icon buttons row */
-      .nav-icons { display: flex; gap: 14px; align-items: center; }
-
-      .n-icon {
-        color:      var(--text-sub);
-        cursor:     pointer;
-        transition: color 0.3s;
-        display:    flex;
-        align-items: center;
-        background: none;
-        border:     none;
-      }
-
+      .nav-icons { display: flex; gap: 8px; align-items: center; }
+      .n-icon { color: var(--text-sub); cursor: pointer; transition: color .3s; display: flex; align-items: center; background: none; border: none; padding: 6px; }
       .n-icon:hover { color: var(--gold-lt); }
-      .n-icon svg   { width: 17px; height: 17px; stroke-width: 1.2; }
+      .n-icon svg { width: 17px; height: 17px; stroke-width: 1.2; }
 
-      /* Dark/Light theme toggle pill */
-      .theme-toggle {
-        width:         36px;
-        height:        20px;
-        border-radius: 10px;
-        background:    var(--surface-2);
-        border:        1px solid var(--border);
-        position:      relative;
-        cursor:        pointer;
-        transition:    background 0.3s;
-        flex-shrink:   0;
-      }
-
-      /* The sliding circle inside the toggle */
-      .theme-toggle::after {
-        content:       "";
-        position:      absolute;
-        top:           2px;
-        left:          2px;
-        width:         14px;
-        height:        14px;
-        border-radius: 50%;
-        background:    var(--gold);
-        transition:    transform 0.3s;
-      }
-
-      /* In light mode, slide the circle to the right */
+      .theme-wrap { display: flex; align-items: center; gap: 6px; }
+      .theme-icon { font-size: 0.68rem; color: var(--text-sub); }
+      .theme-toggle { width: 36px; height: 20px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); position: relative; cursor: pointer; transition: background .3s; flex-shrink: 0; }
+      .theme-toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); transition: transform .3s; }
       [data-theme="light"] .theme-toggle::after { transform: translateX(16px); }
 
-      .theme-wrap { display: flex; align-items: center; gap: 7px; }
-      .theme-icon { font-size: 0.7rem; color: var(--text-sub); line-height: 1; }
-
-      /* Hamburger menu button — only visible on mobile */
-      .burger {
-        display:        none;
-        flex-direction: column;
-        gap:            4px;
-        cursor:         pointer;
-        background:     none;
-        border:         none;
-        padding:        6px;
+      /* Hide desktop icons + theme on mobile — live in the drawer */
+      @media (max-width: 900px) {
+        .nav-icons { display: none; }
+        .theme-wrap { display: none; }
       }
 
-      .burger span { display: block; width: 22px; height: 1px; background: var(--gold-lt); transition: 0.3s; }
-
-      /* Animates the burger into an X when open */
-      .burger.open span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+      /* Burger — right side, mobile/tablet only */
+      .burger {
+        display: none; flex-direction: column; gap: 5px;
+        cursor: pointer; background: none; border: none;
+        width: 44px; height: 44px;
+        justify-content: center; align-items: center;
+        -webkit-tap-highlight-color: transparent; flex-shrink: 0;
+      }
+      .burger span { display: block; width: 22px; height: 1.5px; background: var(--gold-lt); transition: 0.3s; border-radius: 2px; }
+      .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .burger.open span:nth-child(2) { opacity: 0; }
-      .burger.open span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
-
-      /* Show burger on tablet and below */
+      .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
       @media (max-width: 900px) { .burger { display: flex; } }
 
-
-      /* ============================================================
-         MOBILE DRAWER MENU
-         Full-screen slide-in menu for small screens.
-         Also has a footer section with contact info at the bottom.
-      ============================================================ */
+      /* ── MOBILE DRAWER — slides from RIGHT ── */
       .mob-drawer {
-        position:   fixed;
-        inset:      0;
-        z-index:    500;
-        background: var(--bg);
-        display:    flex;
-        flex-direction: column;
-        transform:  translateX(100%); /* starts off-screen to the right */
-        transition: transform 0.4s var(--ease);
-        overflow-y: auto;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: min(300px, 85vw); background: var(--surface);
+        z-index: 400; transform: translateX(110%);
+        transition: transform .4s var(--ease);
+        display: flex; flex-direction: column; overflow-y: auto;
+        box-shadow: -4px 0 40px rgba(0,0,0,0.6);
       }
-
-      /* Slides in when .open is added by JS */
       .mob-drawer.open { transform: translateX(0); }
-
-      .mob-drawer-head {
-        display:         flex;
-        align-items:     center;
-        justify-content: space-between;
-        padding:         20px 24px;
-        border-bottom:   1px solid var(--border);
-        flex-shrink:     0;
-      }
-
-      .mob-drawer-logo {
-        font-family:    var(--ff-serif);
-        font-weight:    300;
-        font-size:      1.4rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color:          var(--text);
-        text-decoration: none;
-      }
-
-      /* Close (X) button */
-      .mob-x {
-        background: none;
-        border:     1px solid var(--border);
-        cursor:     pointer;
-        color:      var(--text-sub);
-        width:      36px;
-        height:     36px;
-        display:    flex;
-        align-items: center;
-        justify-content: center;
-        font-size:  1rem;
-        transition: border-color 0.2s, color 0.2s;
-      }
-
+      .mob-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 399; opacity: 0; pointer-events: none; transition: opacity .4s; }
+      .mob-drawer-overlay.active { opacity: 1; pointer-events: all; }
+      .mob-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+      .mob-drawer-logo { font-family: var(--ff-serif); font-weight: 300; font-size: 1.4rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+      .mob-x { background: none; border: 1px solid var(--border); cursor: pointer; color: var(--text-sub); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: border-color .2s, color .2s; border-radius: 2px; }
       .mob-x:hover { border-color: var(--gold); color: var(--gold); }
-
-      /* Mobile nav links list */
-      .mob-nav-links {
-        flex:    1;
-        display: flex;
-        flex-direction: column;
-        padding: 16px 0;
-      }
-
-      .mob-nav-links a {
-        display:         flex;
-        align-items:     center;
-        justify-content: space-between;
-        padding:         16px 24px;
-        font-family:     var(--ff-sans);
-        font-size:       0.78rem;
-        letter-spacing:  0.22em;
-        text-transform:  uppercase;
-        color:           var(--text-sub);
-        text-decoration: none;
-        border-bottom:   1px solid var(--border);
-        transition:      color 0.3s, background 0.3s;
-      }
-
-      .mob-nav-links a:hover  { color: var(--gold-lt); background: rgba(201,164,95,0.04); }
+      .mob-nav-links { flex: 1; display: flex; flex-direction: column; padding: 8px 0; }
+      .mob-nav-links a { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-sub); text-decoration: none; border-bottom: 1px solid var(--border); transition: color .3s, background .3s; min-height: 56px; }
+      .mob-nav-links a:hover { color: var(--gold-lt); background: rgba(201,164,95,0.04); }
       .mob-nav-links a.active { color: var(--gold-lt); }
+      /* Search shortcut in drawer */
+      .mob-search-row { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; }
+      .mob-search-row svg { width: 15px; height: 15px; stroke: var(--text-sub); stroke-width: 1.4; fill: none; flex-shrink: 0; }
+      .mob-search-row span { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-sub); }
+      .mob-search-row:hover span { color: var(--gold-lt); }
+      .mob-search-row:hover svg { stroke: var(--gold-lt); }
+      /* Theme toggle in drawer */
+      .mob-theme-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-top: 1px solid var(--border); margin-top: auto; }
+      .mob-theme-row span { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-sub); }
 
-      /* Chevron arrow icons inside each link */
-      .mob-nav-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; opacity: 0.4; }
-
-      /* Contact info shown at the bottom of the drawer */
-      .mob-drawer-foot {
-        padding:    24px;
-        border-top: 1px solid var(--border);
-        display:    flex;
-        flex-direction: column;
-        gap:        12px;
-        flex-shrink: 0;
-      }
-
-      .mob-contact-row {
-        display:     flex;
-        align-items: center;
-        gap:         10px;
-        font-size:   0.72rem;
-        letter-spacing: 0.12em;
-        color:       var(--text-sub);
-      }
-
-      .mob-contact-row svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.5; flex-shrink: 0; }
-
-
-      /* ============================================================
-         WHATSAPP FLOATING ACTION BUTTON
-         Fixed to bottom-right corner. Bobs up and down gently.
-         Stops bobbing and scales up on hover.
-      ============================================================ */
-      .contact-fab {
-        position:      fixed;
-        bottom:        28px;
-        right:         28px;
-        z-index:       500;
-        width:         52px;
-        height:        52px;
-        border-radius: 50%;
-        background:    var(--surface);
-        border:        1px solid var(--border-hv);
-        display:       flex;
-        align-items:   center;
-        justify-content: center;
-        cursor:        pointer;
-        text-decoration: none;
-        box-shadow:    0 4px 24px rgba(0,0,0,0.5);
-        transition:    border-color 0.3s, transform 0.3s, background 0.3s;
-        animation:     fab-bob 4s ease-in-out infinite;
-      }
-
-      .contact-fab:hover {
-        border-color: var(--gold);
-        background:   rgba(201,164,95,0.1);
-        transform:    scale(1.1);
-        animation:    none; /* stop bobbing on hover */
-      }
-
+      /* ── WHATSAPP FAB ── */
+      .contact-fab { position: fixed; bottom: 28px; right: 28px; z-index: 500; width: 52px; height: 52px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-hv); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 24px rgba(0,0,0,0.5); transition: border-color .3s, background .3s; animation: fab-bob 4s ease-in-out infinite; }
+      .contact-fab:hover { border-color: var(--gold); background: rgba(201,164,95,0.1); animation: none; }
       .contact-fab svg { width: 22px; height: 22px; stroke: var(--gold-lt); fill: none; stroke-width: 1.3; }
+      @keyframes fab-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+      @media (max-width: 640px) { .contact-fab { bottom: 20px; right: 16px; width: 46px; height: 46px; } }
 
-      @keyframes fab-bob {
-        0%, 100% { transform: translateY(0); }
-        50%       { transform: translateY(-5px); }
-      }
-
-      /* Move FAB up on mobile so it clears the bottom navigation bar */
-      @media (max-width: 640px) { .contact-fab { bottom: 80px; right: 20px; } }
-
-
-      /* ============================================================
-         MOBILE BOTTOM NAVIGATION BAR
-         Only visible on small screens (640px and below).
-         Replaces the desktop sidebar navigation with 5 quick-access tabs.
-         Sits fixed at the bottom of the screen.
-      ============================================================ */
-      .mob-bottom-nav {
-        display:    none; /* hidden on desktop */
-        position:   fixed;
-        bottom:     0;
-        left:       0;
-        right:      0;
-        z-index:    300;
-        background: var(--bg);
-        border-top: 1px solid var(--border);
-      }
-
-      /* Show the bottom nav and add padding to footer/newsletter so content isn't hidden behind it */
-      @media (max-width: 640px) {
-        .mob-bottom-nav { display: flex; }
-        footer    { padding-bottom: 80px !important; }
-        .nl-sec   { padding-bottom: 80px !important; }
-      }
-
-      /* Each tab in the bottom navigation bar */
-      .mob-nav-item {
-        flex:            1;
-        display:         flex;
-        flex-direction:  column;
-        align-items:     center;
-        justify-content: center;
-        gap:             4px;
-        padding:         10px 6px;
-        text-decoration: none;
-        color:           var(--text-dim);
-        font-size:       0.52rem;
-        letter-spacing:  0.14em;
-        text-transform:  uppercase;
-        transition:      color 0.2s;
-        cursor:          pointer;
-        background:      none;
-        border:          none;
-      }
-
-      /* Highlighted (active) tab gets gold color */
-      .mob-nav-item:hover,
-      .mob-nav-item.primary { color: var(--gold-lt); }
-
-      .mob-nav-item svg      { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-      .mob-nav-item.primary svg { stroke: var(--gold); }
-
-      /* Divider between each tab */
-      .mob-nav-item + .mob-nav-item { border-left: 1px solid var(--border); }
-
-
-      /* ============================================================
-         SCROLL REVEAL ANIMATION
-         Elements start hidden and slightly below their final position.
-         JS adds .in when they enter the viewport, triggering this transition.
-         Delay classes .d1–.d5 stagger grouped elements.
-      ============================================================ */
-      .reveal    { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+      /* ── REVEAL ── */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
       .reveal.in { opacity: 1; transform: translateY(0); }
+      .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
 
-      .d1 { transition-delay: 0.1s; }
-      .d2 { transition-delay: 0.2s; }
-      .d3 { transition-delay: 0.3s; }
-      .d4 { transition-delay: 0.4s; }
-      .d5 { transition-delay: 0.5s; }
+      /* ── BUTTONS ── */
+      .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; padding: 14px 34px; position: relative; overflow: hidden; transition: color .3s var(--ease); }
+      .btn::before { content: ""; position: absolute; inset: 0; transform: translateX(-101%); transition: transform .35s var(--ease); }
+      .btn:hover::before { transform: translateX(0); }
+      .btn span { position: relative; z-index: 1; }
+      .btn svg { position: relative; z-index: 1; transition: transform .3s; }
+      .btn:hover svg { transform: translateX(3px); }
+      .btn-gold { background: var(--gold); color: var(--bg); }
+      .btn-gold::before { background: var(--gold-dk); }
+      .btn-gold:hover { color: var(--text); }
+      .btn-outline { background: transparent; color: var(--text-sub); border: 1px solid var(--border); }
+      .btn-outline::before { background: rgba(201,164,95,0.07); }
+      .btn-outline:hover { color: var(--gold-lt); border-color: var(--border-hv); }
+      @media (max-width: 480px) { .btn { padding: 14px 22px; font-size: 0.62rem; } }
 
-
-      /* ============================================================
-         HERO SECTION
-         Full-screen opening section with headline and contact shortcuts.
-         Background: animated particle canvas + mesh glow + diagonal lines.
-         Right side has an animated gemstone illustration on desktop.
-      ============================================================ */
-      .contact-hero {
-        position:   relative;
-        min-height: 100svh;
-        display:    flex;
-        align-items: center;
-        overflow:   hidden;
-      }
-
-      /* Canvas element — the particle animation is drawn here via JS */
+      /* ── HERO ── */
+      .contact-hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: var(--bg); }
       .hero-canvas-el { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+      .hero-mesh { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 70% 60% at 65% 40%, rgba(201,164,95,0.12) 0%, transparent 65%), radial-gradient(ellipse 50% 70% at 10% 70%, rgba(100,60,180,0.05) 0%, transparent 55%); }
+      .hero-lines { position: absolute; right: 0; top: 0; bottom: 0; width: 45%; z-index: 1; opacity: 0.03; overflow: hidden; }
+      .hero-lines::before { content: ""; position: absolute; inset: -50%; background-image: repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 40px 40px; }
 
-      /* Soft gold radial glow in the background */
-      .hero-mesh {
-        position:   absolute;
-        inset:      0;
-        z-index:    1;
-        background: radial-gradient(ellipse 70% 60% at 65% 40%, rgba(201,164,95,0.12) 0%, transparent 65%),
-                    radial-gradient(ellipse 50% 70% at 10% 70%, rgba(100,60,180,0.05) 0%, transparent 55%);
-      }
-
-      /* Floating gem illustration — only shown on desktop */
-      .hero-gem-wrap {
-        position:  absolute;
-        right:     6%;
-        top:       50%;
-        transform: translateY(-50%);
-        z-index:   2;
-        animation: gem-float 7s ease-in-out infinite;
-      }
-
+      /* Gem visual — desktop only */
+      .hero-gem-wrap { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); z-index: 2; animation: gem-float 7s ease-in-out infinite; }
       @media (max-width: 900px) { .hero-gem-wrap { display: none; } }
+      @keyframes gem-float { 0%,100%{transform:translateY(-50%) rotate3d(0,1,0,0deg)} 33%{transform:translateY(calc(-50% - 18px)) rotate3d(.2,1,.1,8deg)} 66%{transform:translateY(calc(-50% - 8px)) rotate3d(-.1,1,.2,-5deg)} }
 
-      /* Gentle floating + slight 3D rotation for the gem */
-      @keyframes gem-float {
-        0%, 100% { transform: translateY(-50%) rotate3d(0, 1, 0, 0deg); }
-        33%       { transform: translateY(calc(-50% - 18px)) rotate3d(0.2, 1, 0.1, 8deg); }
-        66%       { transform: translateY(calc(-50% - 8px)) rotate3d(-0.1, 1, 0.2, -5deg); }
-      }
-
-      /* Diagonal gold stripe pattern on the right half of the hero */
-      .hero-lines {
-        position: absolute;
-        right:    0;
-        top:      0;
-        bottom:   0;
-        width:    45%;
-        z-index:  1;
-        opacity:  0.03;
-        overflow: hidden;
-      }
-
-      .hero-lines::before {
-        content:          "";
-        position:         absolute;
-        inset:            -50%;
-        background-image: repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
-        background-size:  40px 40px;
-      }
-
-      /* Two-column layout: text on left, gem illustration fills the right */
       .hero-inner {
-        position:              relative;
-        z-index:               4;
-        max-width:             1400px;
-        margin:                0 auto;
-        padding:               0 56px;
-        width:                 100%;
-        display:               grid;
-        grid-template-columns: 55% 45%;
-        align-items:           center;
-        min-height:            100svh;
+        position: relative; z-index: 4; max-width: 1400px; margin: 0 auto;
+        padding: 0 56px; width: 100%;
+        display: grid; grid-template-columns: 55% 45%; align-items: center; min-height: 100svh;
       }
+      @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; padding: 100px 24px 60px; min-height: 100svh; align-content: center; } }
+      @media (max-width: 480px) { .hero-inner { padding: 90px 16px 50px; } }
 
-      /* Stack to single column on mobile */
-      @media (max-width: 900px) {
-        .hero-inner { grid-template-columns: 1fr; padding: 80px 22px 100px; }
-      }
-
-      /* Small label above the headline */
-      .hero-copy .eyebrow {
-        display:        flex;
-        align-items:    center;
-        gap:            14px;
-        font-size:      0.58rem;
-        letter-spacing: 0.5em;
-        text-transform: uppercase;
-        color:          var(--gold);
-        margin-bottom:  24px;
-        animation:      fade-up 0.9s 0.1s var(--ease) both;
-      }
-
+      .hero-copy .eyebrow { display: flex; align-items: center; gap: 14px; font-size: 0.58rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; animation: fade-up .9s .1s var(--ease) both; }
       .hero-copy .eyebrow::before { content: ""; display: block; width: 28px; height: 1px; background: var(--gold-dk); }
 
-      /* Main headline */
-      .hero-h1 {
-        font-family:   var(--ff-serif);
-        font-size:     clamp(3.2rem, 8vw, 7.5rem);
-        font-weight:   300;
-        line-height:   0.93;
-        color:         var(--text);
-        margin-bottom: 28px;
-        animation:     fade-up 0.9s 0.22s var(--ease) both;
-        letter-spacing: -0.01em;
-      }
-
+      .hero-h1 { font-family: var(--ff-serif); font-size: clamp(2.6rem, 8vw, 7.5rem); font-weight: 300; line-height: 0.93; color: var(--text); margin-bottom: 28px; animation: fade-up .9s .22s var(--ease) both; }
       .hero-h1 em { font-style: italic; color: var(--gold-lt); display: block; }
-
-      /* Outlined (hollow) text for visual contrast in the headline */
       .hero-h1 .hero-outline { -webkit-text-stroke: 1px var(--gold-dk); color: transparent; display: block; }
 
-      /* Short gold dividing line below the headline */
-      .hero-divider {
-        width:         60px;
-        height:        1px;
-        background:    linear-gradient(to right, var(--gold), transparent);
-        margin-bottom: 22px;
-        animation:     fade-up 0.9s 0.32s var(--ease) both;
-      }
+      .hero-divider { width: 60px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin-bottom: 22px; animation: fade-up .9s .32s var(--ease) both; }
 
-      /* Subtitle paragraph */
-      .hero-p {
-        font-size:     0.88rem;
-        line-height:   2.05;
-        color:         var(--text-sub);
-        max-width:     420px;
-        margin-bottom: 38px;
-        animation:     fade-up 0.9s 0.4s var(--ease) both;
-      }
+      .hero-p { font-size: 0.88rem; line-height: 2.05; color: var(--text-sub); max-width: 420px; margin-bottom: 38px; animation: fade-up .9s .4s var(--ease) both; }
+      @media (max-width: 480px) { .hero-p { font-size: 0.82rem; margin-bottom: 28px; max-width: 100%; } }
 
-      /* Quick-contact link cards below the paragraph */
-      .hero-contacts { display: flex; flex-direction: column; gap: 12px; animation: fade-up 0.9s 0.5s var(--ease) both; }
+      /* Hero contact cards */
+      .hero-contacts { display: flex; flex-direction: column; gap: 12px; animation: fade-up .9s .5s var(--ease) both; }
 
-      /* Individual contact card (WhatsApp / Email / Form) */
-      .hc-item {
-        display:     flex;
-        align-items: center;
-        gap:         14px;
-        text-decoration: none;
-        padding:     12px 16px;
-        border:      1px solid var(--border);
-        background:  rgba(201,164,95,0.03);
-        transition:  border-color 0.3s, background 0.3s;
-        position:    relative;
-        overflow:    hidden;
-      }
+      .hc-item { display: flex; align-items: center; gap: 14px; text-decoration: none; padding: 12px 16px; border: 1px solid var(--border); background: rgba(201,164,95,0.03); transition: border-color .3s, background .3s; position: relative; overflow: hidden; }
+      .hc-item::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); transform: scaleY(0); transition: transform .35s var(--ease); transform-origin: bottom; }
+      .hc-item:hover { border-color: var(--border-hv); background: rgba(201,164,95,0.06); }
+      .hc-item:hover::before { transform: scaleY(1); }
 
-      /* Gold left border that scales up on hover */
-      .hc-item::before {
-        content:          "";
-        position:         absolute;
-        left:             0;
-        top:              0;
-        bottom:           0;
-        width:            2px;
-        background:       var(--gold);
-        transform:        scaleY(0);
-        transition:       transform 0.35s var(--ease);
-        transform-origin: bottom;
-      }
-
-      .hc-item:hover                 { border-color: var(--border-hv); background: rgba(201,164,95,0.06); }
-      .hc-item:hover::before         { transform: scaleY(1); }
-
-      /* Circular icon inside each contact card */
-      .hc-icon {
-        width:         38px;
-        height:        38px;
-        border:        1px solid var(--border);
-        border-radius: 50%;
-        display:       flex;
-        align-items:   center;
-        justify-content: center;
-        color:         var(--gold);
-        flex-shrink:   0;
-        transition:    border-color 0.3s, background 0.3s;
-      }
-
+      .hc-icon { width: 38px; height: 38px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: border-color .3s, background .3s; }
       .hc-item:hover .hc-icon { border-color: var(--gold-dk); background: rgba(201,164,95,0.1); }
       .hc-icon svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; }
-
-      /* Label and value text inside each contact card */
-      .hc-text span   { display: block; font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 2px; }
-      .hc-text strong { font-family: var(--ff-serif); font-size: 1rem; font-weight: 300; color: var(--text); transition: color 0.3s; }
+      .hc-text span { display: block; font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 2px; }
+      .hc-text strong { font-family: var(--ff-serif); font-size: 1rem; font-weight: 300; color: var(--text); transition: color .3s; }
       .hc-item:hover .hc-text strong { color: var(--gold-lt); }
+      @media (max-width: 380px) { .hc-text strong { font-size: 0.82rem; word-break: break-all; } }
 
-      /* "Scroll" hint at the bottom of the hero section */
-      .scroll-hint {
-        position:       absolute;
-        bottom:         26px;
-        left:           56px;
-        display:        flex;
-        align-items:    center;
-        gap:            12px;
-        font-size:      0.55rem;
-        letter-spacing: 0.34em;
-        text-transform: uppercase;
-        color:          var(--text-dim);
-        animation:      fade-up 1s 1.2s both;
-        z-index:        5;
-      }
+      /* Scroll hint */
+      .scroll-hint { position: absolute; bottom: 26px; left: 56px; display: flex; align-items: center; gap: 12px; font-size: 0.55rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--text-dim); animation: fade-up 1s 1.2s both; z-index: 5; }
+      @media (max-width: 640px) { .scroll-hint { left: 16px; bottom: 24px; } }
+      .scroll-line { width: 36px; height: 1px; background: linear-gradient(to right, var(--gold-dk), transparent); animation: scroll-pulse 2s ease-in-out infinite; }
+      @keyframes scroll-pulse { 0%,100%{opacity:1;transform:scaleX(1)} 50%{opacity:.4;transform:scaleX(.5)} }
 
-      @media (max-width: 640px) { .scroll-hint { left: 22px; } }
+      @keyframes fade-up { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
 
-      /* Animated line next to "Scroll" text */
-      .scroll-line {
-        width:      36px;
-        height:     1px;
-        background: linear-gradient(to right, var(--gold-dk), transparent);
-        animation:  scroll-pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes scroll-pulse {
-        0%, 100% { opacity: 1; transform: scaleX(1); }
-        50%       { opacity: 0.4; transform: scaleX(0.5); }
-      }
-
-      /* Used on hero elements that animate in on page load */
-      @keyframes fade-up {
-        from { opacity: 0; transform: translateY(26px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-
-
-      /* ============================================================
-         CHANNELS STRIP
-         4-column strip below the hero showing key contact methods.
-         Each cell has a gold underline that sweeps in on hover.
-      ============================================================ */
+      /* ── CHANNELS STRIP ── */
       .channels-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-      /* 4-column grid — the 1px gap shows as a border between cells */
-      .ch-inner {
-        max-width:             1400px;
-        margin:                0 auto;
-        display:               grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap:                   0;
-        background:            var(--border); /* shows through gaps */
-      }
-
+      .ch-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; background: var(--border); }
       @media (max-width: 768px) { .ch-inner { grid-template-columns: 1fr 1fr; } }
-      @media (max-width: 420px) { .ch-inner { grid-template-columns: 1fr; } }
+      @media (max-width: 400px) { .ch-inner { grid-template-columns: 1fr; } }
 
-      /* Each channel item (WhatsApp / Email / Instagram / Location) */
-      .ch-item {
-        background:      var(--surface);
-        padding:         28px 22px;
-        display:         flex;
-        align-items:     center;
-        gap:             16px;
-        text-decoration: none;
-        transition:      background 0.3s;
-        position:        relative;
-        overflow:        hidden;
-      }
-
-      /* Gold underline that sweeps in from the left on hover */
-      .ch-item::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.5s var(--ease); }
+      .ch-item { background: var(--surface); padding: 20px 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; transition: background .3s; position: relative; overflow: hidden; }
+      .ch-item::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width .5s var(--ease); }
       .ch-item:hover::after { width: 100%; }
-      .ch-item:hover        { background: rgba(201,164,95,0.05); }
+      .ch-item:hover { background: rgba(201,164,95,0.05); }
 
-      /* Circular icon */
-      .ch-icon { width: 46px; height: 46px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: border-color 0.3s, background 0.3s; }
+      .ch-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: border-color .3s, background .3s; }
       .ch-item:hover .ch-icon { border-color: var(--gold-dk); background: rgba(201,164,95,0.08); }
-      .ch-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.3; }
-
-      /* Text labels */
-      .ch-label { font-size: 0.54rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 4px; }
-      .ch-val   { font-family: var(--ff-serif); font-size: 1rem; color: var(--text); font-weight: 300; transition: color 0.3s; }
+      .ch-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.3; }
+      .ch-label { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 3px; }
+      .ch-val { font-family: var(--ff-serif); font-size: 0.95rem; color: var(--text); font-weight: 300; transition: color .3s; word-break: break-all; }
       .ch-item:hover .ch-val { color: var(--gold-lt); }
-      .ch-sub   { font-size: 0.64rem; color: var(--text-dim); margin-top: 2px; }
+      .ch-sub { font-size: 0.58rem; color: var(--text-dim); margin-top: 2px; }
 
+      /* ── MAIN CONTACT SECTION ── */
+      .main-contact { max-width: 1400px; margin: 0 auto; padding: 80px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+      @media (max-width: 900px) { .main-contact { grid-template-columns: 1fr; gap: 52px; padding: 60px 24px; } }
+      @media (max-width: 480px) { .main-contact { padding: 48px 16px; gap: 40px; } }
 
-      /* ============================================================
-         MAIN CONTACT SECTION
-         Two-column layout:
-         Left  = contact form
-         Right = contact details, hours, and a list of channels
-      ============================================================ */
-      .main-contact {
-        max-width:             1400px;
-        margin:                0 auto;
-        padding:               88px 56px;
-        display:               grid;
-        grid-template-columns: 1fr 1fr;
-        gap:                   72px;
-        align-items:           start;
-      }
-
-      @media (max-width: 900px) { .main-contact { grid-template-columns: 1fr; gap: 52px; padding: 60px 22px; } }
-
-      /* Section labels and headings */
       .form-label { font-size: 0.58rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-      .form-title { font-family: var(--ff-serif); font-size: clamp(2rem, 3.8vw, 3.4rem); font-weight: 300; color: var(--text); margin-bottom: 16px; line-height: 1.08; }
+      .form-title { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.8vw, 3.4rem); font-weight: 300; color: var(--text); margin-bottom: 16px; line-height: 1.08; }
       .form-title em { font-style: italic; color: var(--gold-lt); }
-      .form-desc { font-size: 0.83rem; line-height: 2; color: var(--text-sub); margin-bottom: 36px; }
+      .form-desc { font-size: 0.83rem; line-height: 2; color: var(--text-sub); margin-bottom: 32px; }
 
-      /* Contact form container */
+      /* Contact Form */
       .cform { display: flex; flex-direction: column; gap: 0; }
-
-      /* Two-field row — gap shows as a visible border line between fields */
       .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--border); }
       @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
 
-      /* Individual field group (label + input) */
-      .fg { background: var(--surface); position: relative; overflow: hidden; transition: background 0.3s; }
+      .fg { background: var(--surface); position: relative; overflow: hidden; transition: background .3s; }
       .fg:focus-within { background: rgba(201,164,95,0.03); }
-
-      /* Gold underline that grows to full width when field is focused */
-      .fg::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.4s var(--ease); }
+      .fg::after { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .4s var(--ease); }
       .fg:focus-within::after { width: 100%; }
-
-      .fg label {
-        display:        block;
-        font-size:      0.52rem;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color:          var(--gold-dk);
-        padding:        14px 18px 4px;
-        cursor:         pointer;
-      }
-
-      /* All input types share the same base styles */
-      .fg input,
-      .fg select,
-      .fg textarea {
-        width:       100%;
-        background:  transparent;
-        border:      none;
-        border-bottom: 1px solid var(--border);
-        color:       var(--text);
-        font-family: var(--ff-sans);
-        font-size:   0.83rem;
-        padding:     6px 18px 14px;
-        outline:     none;
-        -webkit-appearance: none; /* removes default OS styling on selects/inputs */
-        transition:  border-color 0.3s;
-      }
-
+      .fg label { display: block; font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); padding: 14px 18px 4px; cursor: pointer; }
+      .fg input, .fg select, .fg textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text); font-family: var(--ff-sans); font-size: 0.83rem; padding: 6px 18px 14px; outline: none; -webkit-appearance: none; appearance: none; transition: border-color .3s; }
       .fg textarea { resize: vertical; min-height: 120px; }
-
-      /* When focused, hide the bottom border (the ::after line takes over) */
-      .fg input:focus,
-      .fg select:focus,
-      .fg textarea:focus { border-color: transparent; }
-
-      .fg input::placeholder,
-      .fg textarea::placeholder { color: var(--text-dim); }
-
-      /* Dropdown options match our dark theme */
+      .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: transparent; }
+      .fg input::placeholder, .fg textarea::placeholder { color: var(--text-dim); }
       .fg select option { background: var(--surface); color: var(--text); }
-
-      /* Full-width field (textarea) */
       .fg-full { background: var(--surface); }
 
-      /* Submit button — full width, gold with slide-in darker gold on hover */
-      .form-submit {
-        background:     var(--gold);
-        color:          #000;
-        font-family:    var(--ff-sans);
-        font-size:      0.66rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        padding:        18px 36px;
-        cursor:         pointer;
-        border:         none;
-        width:          100%;
-        transition:     background 0.3s, color 0.3s;
-        position:       relative;
-        overflow:       hidden;
-      }
-
-      /* Hover sweep overlay */
-      .form-submit::before { content: ""; position: absolute; inset: 0; background: var(--gold-dk); transform: translateX(-101%); transition: transform 0.35s var(--ease); }
+      .form-submit { background: var(--gold); color: #000; font-family: var(--ff-sans); font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 18px 36px; cursor: pointer; border: none; width: 100%; transition: background .3s, color .3s; position: relative; overflow: hidden; }
+      .form-submit::before { content: ""; position: absolute; inset: 0; background: var(--gold-dk); transform: translateX(-101%); transition: transform .35s var(--ease); }
       .form-submit:hover::before { transform: translateX(0); }
       .form-submit span { position: relative; z-index: 1; }
       .form-submit:hover { color: var(--text); }
+      .form-note { font-size: 0.62rem; color: var(--text-dim); padding: 12px 18px; text-align: center; background: var(--surface); border-top: 1px solid var(--border); line-height: 1.7; }
 
-      .form-note { font-size: 0.62rem; color: var(--text-dim); padding: 12px 18px; text-align: center; background: var(--surface); border-top: 1px solid var(--border); }
-
-      /* Right column: contact info section */
+      /* Right info column */
       .info-label { font-size: 0.58rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
       .info-title { font-family: var(--ff-serif); font-size: clamp(1.8rem, 2.8vw, 2.9rem); font-weight: 300; color: var(--text); margin-bottom: 18px; line-height: 1.1; }
       .info-title em { font-style: italic; color: var(--gold-lt); }
       .info-body p { font-size: 0.83rem; line-height: 2; color: var(--text-sub); margin-bottom: 14px; }
 
-      /* List of contact channels (WhatsApp, Phone, Email, Instagram, Facebook) */
       .info-channels { display: flex; flex-direction: column; gap: 0; background: var(--border); margin-top: 32px; }
-
-      /* Each channel row — icon on left, text on right */
-      .ic-row { background: var(--surface); display: grid; grid-template-columns: 56px 1fr; align-items: center; text-decoration: none; transition: background 0.3s; border-bottom: 1px solid var(--border); }
+      .ic-row { background: var(--surface); display: grid; grid-template-columns: 56px 1fr; align-items: center; text-decoration: none; transition: background .3s; border-bottom: 1px solid var(--border); }
       .ic-row:last-child { border-bottom: none; }
       .ic-row:hover { background: rgba(201,164,95,0.05); }
-
       .ic-icon { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; color: var(--gold); }
       .ic-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.3; }
-
-      .ic-body { padding: 14px 18px; }
+      .ic-body { padding: 14px 18px; overflow: hidden; }
       .ic-name { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 2px; }
-      .ic-val  { font-family: var(--ff-serif); font-size: 1rem; color: var(--text); font-weight: 300; transition: color 0.3s; }
+      .ic-val { font-family: var(--ff-serif); font-size: 0.95rem; color: var(--text); font-weight: 300; transition: color .3s; word-break: break-all; }
       .ic-row:hover .ic-val { color: var(--gold-lt); }
-      .ic-note { font-size: 0.62rem; color: var(--text-dim); margin-top: 1px; }
+      .ic-note { font-size: 0.6rem; color: var(--text-dim); margin-top: 1px; }
 
-      /* Studio hours table */
       .hours-block { margin-top: 32px; background: var(--surface); border: 1px solid var(--border); padding: 24px 22px; }
-      .hb-title    { font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-      .hb-row      { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; }
+      .hb-title { font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+      .hb-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; gap: 8px; }
       .hb-row:last-child { border-bottom: none; }
-      .hb-day  { color: var(--text-sub); }
-      .hb-time { color: var(--text); font-family: var(--ff-serif); }
+      .hb-day { color: var(--text-sub); }
+      .hb-time { color: var(--text); font-family: var(--ff-serif); text-align: right; }
       .hb-time.closed { color: var(--text-dim); }
 
-
-      /* ============================================================
-         MAP SECTION
-         Animated visual map (not a real map — pure CSS/HTML art)
-         with a pulsing pin at the center and district labels.
-      ============================================================ */
-      .map-sec   { background: var(--surface); border-top: 1px solid var(--border); }
+      /* ── MAP SECTION ── */
+      .map-sec { background: var(--surface); border-top: 1px solid var(--border); }
       .map-inner { max-width: 1400px; margin: 0 auto; padding: 80px 56px; }
-      @media (max-width: 640px) { .map-inner { padding: 56px 20px; } }
+      @media (max-width: 640px) { .map-inner { padding: 56px 16px; } }
 
-      /* Shared section heading styles used across multiple sections */
-      .sec-hd    { text-align: center; margin-bottom: 52px; }
+      .sec-hd { text-align: center; margin-bottom: 52px; }
       .sec-label { font-size: 0.62rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-      .sec-title { font-family: var(--ff-serif); font-size: clamp(1.9rem, 4vw, 3.4rem); font-weight: 300; color: var(--text); }
+      .sec-title { font-family: var(--ff-serif); font-size: clamp(1.8rem, 4vw, 3.4rem); font-weight: 300; color: var(--text); }
       .sec-title em { font-style: italic; color: var(--gold-lt); }
 
-      /* Map visual on left, address info on right */
       .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--border); margin-top: 52px; }
       @media (max-width: 768px) { .map-grid { grid-template-columns: 1fr; } }
 
-      /* The visual map container — uses CSS perspective for a tilt effect */
-      .map-vis { position: relative; min-height: 400px; overflow: hidden; background: var(--card-bg); perspective: 600px; }
-
-      /* The tilted inner map that flattens slightly on hover */
-      .map-3d { position: absolute; inset: 0; transform: rotateX(22deg) scale(1.1); transform-origin: center 60%; transition: transform 0.6s var(--ease); }
+      .map-vis { position: relative; min-height: 360px; overflow: hidden; background: var(--card-bg); }
+      @media (max-width: 480px) { .map-vis { min-height: 260px; } }
+      .map-3d { position: absolute; inset: 0; transform: rotateX(22deg) scale(1.1); transform-origin: center 60%; transition: transform .6s var(--ease); }
       .map-vis:hover .map-3d { transform: rotateX(14deg) scale(1.05); }
-
-      /* Moving grid lines — drifts diagonally for a subtle animation */
-      .map-grid-lines {
-        position:         absolute;
-        inset:            0;
-        background-image: linear-gradient(rgba(201,164,95,0.07) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(201,164,95,0.07) 1px, transparent 1px);
-        background-size:  48px 48px;
-        animation:        grid-drift 24s linear infinite;
-      }
-
-      @keyframes grid-drift { from { background-position: 0 0; } to { background-position: 48px 48px; } }
-
-      /* Glowing circle at the center of the map */
-      .map-glow {
-        position:      absolute;
-        left:          50%;
-        top:           50%;
-        transform:     translate(-50%, -50%);
-        width:         200px;
-        height:        200px;
-        background:    radial-gradient(circle, rgba(201,164,95,0.18) 0%, transparent 70%);
-        border-radius: 50%;
-        animation:     map-glow-pulse 3s ease-in-out infinite;
-      }
-
-      @keyframes map-glow-pulse {
-        0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
-        50%       { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
-      }
-
-      /* Expanding rings that pulse outward from the pin */
-      .pulse-ring {
-        position:      absolute;
-        left:          50%;
-        top:           50%;
-        transform:     translate(-50%, -50%);
-        border-radius: 50%;
-        border:        1px solid var(--gold);
-        opacity:       0;
-        animation:     pulse-out 3s ease-out infinite;
-      }
-
-      /* Each ring is slightly larger and starts with a delay */
-      .pulse-ring:nth-child(3) { width:  50px; height:  50px; animation-delay: 0s; }
-      .pulse-ring:nth-child(4) { width:  90px; height:  90px; animation-delay: 0.8s; }
-      .pulse-ring:nth-child(5) { width: 130px; height: 130px; animation-delay: 1.6s; }
-      .pulse-ring:nth-child(6) { width: 170px; height: 170px; animation-delay: 2.4s; }
-
-      @keyframes pulse-out {
-        0%   { opacity: 0.8; transform: translate(-50%, -50%) scale(0.5); }
-        100% { opacity: 0;   transform: translate(-50%, -50%) scale(1.5); }
-      }
-
-      /* District name labels on the map */
-      .district { position: absolute; font-family: var(--ff-sans); font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); padding: 4px 9px; border: 1px solid rgba(201,164,95,0.1); background: rgba(16,14,24,0.7); }
-      .d-vi     { top: 18%; left: 10%; }
-      .d-lekki  { top: 40%; right: 14%; color: var(--gold); border-color: rgba(201,164,95,0.22); } /* highlighted because that's where we are */
-      .d-ikoyi  { bottom: 26%; right: 8%; }
-      .d-ajah   { bottom: 16%; left: 8%; }
-
-      /* Pin in the center of the map */
-      .map-pin-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 3; }
-      .pin-dot  { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 4px rgba(201,164,95,0.2), 0 0 24px rgba(201,164,95,0.5); animation: pin-beat 2s ease-in-out infinite; }
+      .map-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,164,95,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(201,164,95,0.07) 1px, transparent 1px); background-size: 48px 48px; animation: grid-drift 24s linear infinite; }
+      @keyframes grid-drift { from{background-position:0 0} to{background-position:48px 48px} }
+      .map-glow { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,164,95,0.18) 0%, transparent 70%); border-radius: 50%; animation: map-glow-pulse 3s ease-in-out infinite; }
+      @keyframes map-glow-pulse { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7} 50%{transform:translate(-50%,-50%) scale(1.3);opacity:1} }
+      .pulse-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border-radius: 50%; border: 1px solid var(--gold); opacity: 0; animation: pulse-out 3s ease-out infinite; }
+      .pulse-ring:nth-child(3){width:50px;height:50px;animation-delay:0s}
+      .pulse-ring:nth-child(4){width:90px;height:90px;animation-delay:.8s}
+      .pulse-ring:nth-child(5){width:130px;height:130px;animation-delay:1.6s}
+      .pulse-ring:nth-child(6){width:170px;height:170px;animation-delay:2.4s}
+      @keyframes pulse-out { 0%{opacity:.8;transform:translate(-50%,-50%) scale(.5)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)} }
+      .district { position: absolute; font-family: var(--ff-sans); font-size: 0.52rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 4px 8px; border: 1px solid rgba(201,164,95,0.1); background: rgba(16,14,24,0.7); }
+      .d-vi{top:18%;left:10%} .d-lekki{top:40%;right:14%;color:var(--gold);border-color:rgba(201,164,95,.22)} .d-ikoyi{bottom:26%;right:8%} .d-ajah{bottom:16%;left:8%}
+      .map-pin-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; z-index: 3; }
+      .pin-dot { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 4px rgba(201,164,95,0.2),0 0 24px rgba(201,164,95,0.5); animation: pin-beat 2s ease-in-out infinite; }
       .pin-stem { width: 2px; height: 28px; background: linear-gradient(to bottom, var(--gold), transparent); }
-      .pin-base { width: 12px; height: 3px; background: rgba(0,0,0,0.35); border-radius: 50%; margin-top: 1px; animation: pin-beat 2s ease-in-out infinite; }
+      .pin-base { width: 12px; height: 3px; background: rgba(0,0,0,.35); border-radius: 50%; margin-top: 1px; }
+      @keyframes pin-beat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
 
-      @keyframes pin-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-      /* Right side of the map section — address and visit booking */
-      .map-info    { background: var(--surface); padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; }
-      @media (max-width: 640px) { .map-info { padding: 30px 22px; } }
-      .mi-label    { font-size: 0.58rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-      .mi-title    { font-family: var(--ff-serif); font-size: clamp(1.5rem, 2.5vw, 2.3rem); font-weight: 300; color: var(--text); margin-bottom: 16px; line-height: 1.15; }
+      .map-info { background: var(--surface); padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; }
+      @media (max-width: 640px) { .map-info { padding: 28px 18px; } }
+      .mi-label { font-size: 0.58rem; letter-spacing: 0.44em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .mi-title { font-family: var(--ff-serif); font-size: clamp(1.4rem, 2.5vw, 2.3rem); font-weight: 300; color: var(--text); margin-bottom: 16px; line-height: 1.15; }
       .mi-title em { font-style: italic; color: var(--gold-lt); }
-      .mi-desc     { font-size: 0.8rem; line-height: 1.9; color: var(--text-sub); margin-bottom: 24px; }
-
-      /* Address line items */
+      .mi-desc { font-size: 0.8rem; line-height: 1.9; color: var(--text-sub); margin-bottom: 24px; }
       .mi-addr { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
-      .mi-row  { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--text-sub); }
-      .mi-row svg { width: 13px; height: 13px; stroke: var(--gold-dk); fill: none; stroke-width: 1.5; flex-shrink: 0; }
-
-      /* 2×2 grid of landmark info below the address */
+      .mi-row { display: flex; align-items: flex-start; gap: 10px; font-size: 0.78rem; color: var(--text-sub); }
+      .mi-row svg { width: 13px; height: 13px; stroke: var(--gold-dk); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 2px; }
       .mi-landmarks { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-      .mi-lm        { background: var(--surface-2); padding: 10px 12px; font-size: 0.64rem; color: var(--text-dim); }
+      .mi-lm { background: var(--surface-2); padding: 10px 12px; font-size: 0.64rem; color: var(--text-dim); }
       .mi-lm strong { display: block; color: var(--text-sub); font-weight: 400; font-size: 0.7rem; margin-bottom: 1px; }
 
-
-      /* ============================================================
-         FAQ SECTION
-         Accordion-style questions. Clicking opens/closes an answer.
-         2-column grid on desktop, single column on mobile.
-      ============================================================ */
+      /* ── FAQ ── */
       .faq-sec { max-width: 1400px; margin: 0 auto; padding: 96px 56px; }
-      @media (max-width: 640px) { .faq-sec { padding: 60px 20px; } }
-
-      /* 2-column grid of FAQ cards */
+      @media (max-width: 640px) { .faq-sec { padding: 60px 16px; } }
       .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); margin-top: 52px; }
       @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
 
-      /* Individual FAQ card */
-      .faq-item { background: var(--surface); padding: 28px 24px; cursor: pointer; transition: background 0.3s; position: relative; overflow: hidden; }
-
-      /* Background fill that expands from top on hover/open */
-      .faq-item::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 0; background: rgba(201,164,95,0.06); transition: height 0.4s var(--ease); }
+      .faq-item { background: var(--surface); padding: 28px 24px; cursor: pointer; transition: background .3s; position: relative; overflow: hidden; }
+      .faq-item::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 0; background: rgba(201,164,95,0.06); transition: height .4s var(--ease); }
       .faq-item:hover::before, .faq-item.open::before { height: 100%; }
-
-      /* Gold bottom border when the answer is open */
       .faq-item.open { border-bottom: 2px solid var(--gold); }
-
-      /* Question row — text on left, + button on right */
-      .faq-q        { display: flex; justify-content: space-between; align-items: center; gap: 16px; position: relative; }
-      .faq-q-text   { font-family: var(--ff-serif); font-size: 1.08rem; color: var(--text); font-weight: 300; line-height: 1.3; transition: color 0.3s; }
+      .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 16px; position: relative; }
+      .faq-q-text { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--text); font-weight: 300; line-height: 1.3; transition: color .3s; }
       .faq-item:hover .faq-q-text, .faq-item.open .faq-q-text { color: var(--gold-lt); }
-
-      /* The + button that rotates to × when open */
-      .faq-toggle { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s; color: var(--gold-dk); }
+      .faq-toggle { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .4s var(--ease), border-color .3s, background .3s; color: var(--gold-dk); }
       .faq-item.open .faq-toggle { transform: rotate(45deg); border-color: var(--gold); background: var(--gold); color: #000; }
       .faq-toggle svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-      /* Answer text — hidden by default, expands to max-height when open */
-      .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease), padding 0.3s; font-size: 0.79rem; line-height: 1.9; color: var(--text-sub); position: relative; }
+      .faq-a { max-height: 0; overflow: hidden; transition: max-height .5s var(--ease), padding .3s; font-size: 0.79rem; line-height: 1.9; color: var(--text-sub); position: relative; }
       .faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
 
-
-      /* ============================================================
-         SOCIAL SECTION
-         Four platform cards (Instagram, Facebook, WhatsApp, Email).
-         Gold top border sweeps in on hover.
-      ============================================================ */
-      .social-sec   { background: var(--surface); border-top: 1px solid var(--border); padding: 80px 56px; }
-      @media (max-width: 640px) { .social-sec { padding: 60px 20px; } }
+      /* ── SOCIAL ── */
+      .social-sec { background: var(--surface); border-top: 1px solid var(--border); padding: 80px 56px; }
+      @media (max-width: 640px) { .social-sec { padding: 60px 16px; } }
       .social-inner { max-width: 1400px; margin: 0 auto; }
-
-      /* 4-column grid collapses to 2 on mobile */
-      .soc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); margin-top: 52px; }
+      .soc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: var(--border); margin-top: 52px; }
       @media (max-width: 768px) { .soc-grid { grid-template-columns: 1fr 1fr; } }
-      @media (max-width: 400px) { .soc-grid { grid-template-columns: 1fr; } }
 
-      /* Individual platform card */
-      .soc-card { background: var(--surface); padding: 36px 24px; text-align: center; text-decoration: none; display: block; transition: background 0.3s; position: relative; overflow: hidden; }
-
-      /* Gold top border that expands from center on hover */
-      .soc-card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--gold); transition: width 0.4s var(--ease); }
+      .soc-card { background: var(--surface); padding: 32px 20px; text-align: center; text-decoration: none; display: block; transition: background .3s; position: relative; overflow: hidden; }
+      .soc-card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--gold); transition: width .4s var(--ease); }
       .soc-card:hover::before { width: 100%; }
       .soc-card:hover { background: rgba(201,164,95,0.04); }
-
-      /* Platform icon circle */
-      .sc-icon { width: 52px; height: 52px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: var(--gold); transition: border-color 0.3s, background 0.3s, transform 0.3s; }
+      .sc-icon { width: 52px; height: 52px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--gold); transition: border-color .3s, background .3s, transform .3s; }
       .soc-card:hover .sc-icon { border-color: var(--gold); background: rgba(201,164,95,0.1); transform: scale(1.08) rotate(6deg); }
       .sc-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.3; }
-
-      /* Card text */
       .sc-platform { font-size: 0.54rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dk); margin-bottom: 5px; }
-      .sc-handle   { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--text); margin-bottom: 5px; transition: color 0.3s; }
+      .sc-handle { font-family: var(--ff-serif); font-size: 1rem; color: var(--text); margin-bottom: 5px; transition: color .3s; word-break: break-all; }
       .soc-card:hover .sc-handle { color: var(--gold-lt); }
-      .sc-cta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); transition: color 0.3s; }
+      .sc-cta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); transition: color .3s; }
       .soc-card:hover .sc-cta { color: var(--gold-dk); }
 
-
-      /* ============================================================
-         NEWSLETTER SECTION
-         Simple centered email capture with a soft glow behind it.
-      ============================================================ */
-      .nl-sec {
-        text-align: center;
-        padding:    96px 40px;
-        background: var(--bg);
-        border-top: 1px solid var(--border);
-        position:   relative;
-        overflow:   hidden;
-      }
-
-      /* Soft radial glow in the background */
+      /* ── NEWSLETTER ── */
+      .nl-sec { text-align: center; padding: 96px 40px; background: var(--bg); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
       .nl-sec::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 50%, var(--hero-glow), transparent 70%); pointer-events: none; }
-
-      .nl-inner  { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
-      .nl-title  { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 2.7rem); font-weight: 300; color: var(--text); margin-bottom: 12px; }
+      @media (max-width: 640px) { .nl-sec { padding: 60px 16px; } }
+      .nl-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+      .nl-title { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 2.7rem); font-weight: 300; color: var(--text); margin-bottom: 12px; }
       .nl-title em { font-style: italic; color: var(--gold-lt); }
-      .nl-p      { font-size: 0.8rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 28px; }
-
-      /* Email input + subscribe button side by side */
-      .nl-form   { display: flex; max-width: 420px; margin: 0 auto 14px; }
-      .nl-form input { flex: 1; background: transparent; border: 1px solid var(--border); border-right: none; padding: 13px 16px; color: var(--text); font-family: var(--ff-sans); font-size: 0.78rem; outline: none; transition: border-color 0.3s; min-width: 0; }
+      .nl-p { font-size: 0.8rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 28px; }
+      .nl-form { display: flex; max-width: 420px; margin: 0 auto 14px; }
+      .nl-form input { flex: 1; background: transparent; border: 1px solid var(--border); border-right: none; padding: 13px 16px; color: var(--text); font-family: var(--ff-sans); font-size: 0.78rem; outline: none; transition: border-color .3s; min-width: 0; }
       .nl-form input::placeholder { color: var(--text-dim); }
-      .nl-form input:focus        { border-color: var(--border-hv); }
-      .nl-form button { background: var(--gold); border: 1px solid var(--gold); color: var(--bg); font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 13px 20px; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+      .nl-form input:focus { border-color: var(--border-hv); }
+      .nl-form button { background: var(--gold); border: 1px solid var(--gold); color: var(--bg); font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 13px 18px; cursor: pointer; transition: background .3s; white-space: nowrap; }
       .nl-form button:hover { background: var(--gold-dk); }
-
-      .nl-alt   { font-size: 0.7rem; color: var(--text-sub); }
+      .nl-alt { font-size: 0.7rem; color: var(--text-sub); }
       .nl-alt a { color: var(--gold-lt); text-decoration: none; }
+      @media (max-width: 480px) { .nl-form { flex-direction: column; } .nl-form input { border-right: 1px solid var(--border); border-bottom: none; } .nl-form button { padding: 14px; } }
 
-
-      /* ============================================================
-         FOOTER
-         4-column grid: brand info | shop links | explore links | contact links
-         Below: copyright + tagline + payment method badges
-      ============================================================ */
-      footer { border-top: 1px solid var(--border); padding: 76px 56px 36px; background: var(--bg); transition: background 0.4s; }
-      @media (max-width: 640px) { footer { padding: 60px 20px 32px; } }
-
-      /* 4-column grid collapses on smaller screens */
+      /* ── FOOTER ── */
+      footer { border-top: 1px solid var(--border); padding: 76px 56px 36px; background: var(--bg); }
+      @media (max-width: 640px) { footer { padding: 56px 16px 32px; } }
       .foot-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
       @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
       @media (max-width: 500px) { .foot-grid { grid-template-columns: 1fr; } }
-
-      /* Brand column */
       .foot-brand .fb-name { font-family: var(--ff-serif); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.22em; color: var(--text); margin-bottom: 14px; }
-      .foot-brand p        { font-size: 0.78rem; line-height: 1.95; color: var(--text-sub); max-width: 280px; margin-bottom: 26px; }
-
-      /* Social icon row */
-      .soc-row { display: flex; gap: 12px; }
-      .soc-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-sub); transition: border-color 0.3s, color 0.3s, background 0.3s; }
+      .foot-brand p { font-size: 0.78rem; line-height: 1.95; color: var(--text-sub); max-width: 280px; margin-bottom: 26px; }
+      .soc-row { display: flex; gap: 12px; flex-wrap: wrap; }
+      .soc-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-sub); transition: border-color .3s, color .3s, background .3s; }
       .soc-btn:hover { border-color: var(--border-hv); color: var(--gold-lt); background: rgba(201,164,95,0.07); }
       .soc-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-
-      /* Link columns */
       .foot-col h4 { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
       .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-      .foot-col ul li a { font-size: 0.78rem; color: var(--text-sub); text-decoration: none; transition: color 0.3s; }
+      .foot-col ul li a { font-size: 0.78rem; color: var(--text-sub); text-decoration: none; transition: color .3s; }
       .foot-col ul li a:hover { color: var(--text); }
-
-      /* Bottom bar */
       .foot-btm { max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
       .foot-btm p { font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.08em; }
-
-      /* Payment method badges */
-      .pay-row  { display: flex; gap: 8px; flex-wrap: wrap; }
+      .pay-row { display: flex; gap: 8px; flex-wrap: wrap; }
       .pay-chip { border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; font-size: 0.58rem; letter-spacing: 0.08em; color: var(--text-dim); }
 
-
-      /* ============================================================
-         REUSABLE BUTTON STYLES
-         .btn-gold    = filled gold, sweep to darker gold on hover
-         .btn-outline = transparent with border, subtle fill on hover
-      ============================================================ */
-      .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; padding: 14px 34px; position: relative; overflow: hidden; transition: color 0.3s var(--ease); }
-      .btn::before { content: ""; position: absolute; inset: 0; transform: translateX(-101%); transition: transform 0.35s var(--ease); }
-      .btn:hover::before { transform: translateX(0); }
-      .btn span { position: relative; z-index: 1; }
-      .btn svg  { position: relative; z-index: 1; transition: transform 0.3s; }
-      .btn:hover svg { transform: translateX(3px); }
-
-      .btn-gold          { background: var(--gold); color: var(--bg); }
-      .btn-gold::before  { background: var(--gold-dk); }
-      .btn-gold:hover    { color: var(--text); }
-
-      .btn-outline         { background: transparent; color: var(--text-sub); border: 1px solid var(--border); }
-      .btn-outline::before { background: rgba(201,164,95,0.07); }
-      .btn-outline:hover   { color: var(--gold-lt); border-color: var(--border-hv); }
-
-
-      /* ============================================================
-         GEMSTONE ILLUSTRATION ANIMATIONS
-         Three rings spin at different speeds. Three floating info 
-         cards bob at offset timing for a lively effect.
-      ============================================================ */
-      @keyframes spin-a { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
-      @keyframes spin-b { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
-      @keyframes spin-c { from { transform: rotate(360deg); } to { transform: rotate(0deg);    } }
-
-      @keyframes float-a { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-10px); } }
-      @keyframes float-b { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-8px); }  }
-      @keyframes float-c { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-12px); } }
+      @keyframes spin-a { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      @keyframes spin-b { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      @keyframes spin-c { from{transform:rotate(360deg)} to{transform:rotate(0deg)} }
+      @keyframes float-a { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes float-b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+      @keyframes float-c { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
     </style>
   </head>
 
   <body>
-
-    <!-- Custom cursor elements (positioned by JavaScript) -->
     <div id="cur-o"></div>
     <div id="cur-i"></div>
-
-    <!-- Toast notification (shown/hidden by JS using .show class) -->
     <div class="toast" id="toast"></div>
 
-
-    <!-- ============================================================
-         WHATSAPP FLOATING BUTTON
-         Fixed bottom-right. Opens a WhatsApp chat on click.
-         Bobs up and down gently to attract attention.
-    ============================================================ -->
-    <a class="contact-fab"
-       href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20love%20to%20get%20in%20touch."
-       target="_blank"
-       aria-label="Chat with us on WhatsApp">
-      <svg viewBox="0 0 24 24">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-      </svg>
+    <!-- WHATSAPP FAB -->
+    <a class="contact-fab" href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20love%20to%20get%20in%20touch." target="_blank" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
     </a>
 
+    <!-- DRAWER OVERLAY -->
+    <div class="mob-drawer-overlay" id="drawerOverlay"></div>
 
-    <!-- ============================================================
-         MOBILE BOTTOM NAVIGATION BAR
-         Only shown on screens 640px and below.
-         Gives quick access to Shop, Bespoke, Contact, About, and Menu.
-    ============================================================ -->
-    <div class="mob-bottom-nav" role="navigation" aria-label="Mobile navigation">
-      <a class="mob-nav-item" href="collections.html">
-        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Shop
-      </a>
-      <a class="mob-nav-item" href="bespoke.html">
-        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        Bespoke
-      </a>
-      <!-- Primary tab — highlighted in gold -->
-      <a class="mob-nav-item primary"
-         href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20get%20in%20touch."
-         target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        Contact
-      </a>
-      <a class="mob-nav-item" href="about.html">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        About
-      </a>
-      <button class="mob-nav-item" id="mobMenuBtn" aria-label="Open menu">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        Menu
-      </button>
-    </div>
-
-
-    <!-- ============================================================
-         MOBILE DRAWER MENU
-         Full-screen slide-in menu opened by the burger or "Menu" tab.
-         Has a contact info footer at the bottom.
-    ============================================================ -->
-    <div class="mob-drawer" id="mobDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <!-- MOBILE DRAWER -->
+    <div class="mob-drawer" id="mobDrawer">
       <div class="mob-drawer-head">
         <a class="mob-drawer-logo" href="index.html">Sparkles</a>
-        <button class="mob-x" id="mobX" aria-label="Close menu">✕</button>
+        <button class="mob-x" id="mobX">&#10005;</button>
       </div>
-
       <nav class="mob-nav-links">
-        <a href="index.html">
-          Home
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <a href="collections.html">
-          Collections
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <a href="jewllries.html">
-          Jewellery Guide
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <a href="bespoke.html">
-          Bespoke
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <a href="about.html">
-          About Us
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <!-- Active page gets gold color -->
-        <a href="contact.html" class="active">
-          Contact
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="jewllries.html">Jewellery Guide</a>
+        <a href="bespoke.html">Bespoke</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html" class="active">Contact</a>
       </nav>
-
-      <!-- Contact details at the bottom of the drawer -->
-      <div class="mob-drawer-foot">
-        <div class="mob-contact-row">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
-          <span>09019733420</span>
-        </div>
-        <div class="mob-contact-row">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>divineokpara01@gmail.com</span>
+      <!-- Search shortcut in drawer -->
+      <div class="mob-search-row" onclick="location.href='collections.html'">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Search</span>
+      </div>
+      <!-- Theme toggle in drawer -->
+      <div class="mob-theme-row">
+        <span>Theme</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:0.7rem;color:var(--text-dim)">&#9789;</span>
+          <button class="theme-toggle" id="themeBtnMob"></button>
+          <span style="font-size:0.7rem;color:var(--text-dim)">&#9728;</span>
         </div>
       </div>
     </div>
 
-
-    <!-- ============================================================
-         ANNOUNCEMENT TICKER BAR
-         Scrolling text at the very top.
-         Content duplicated for seamless loop.
-    ============================================================ -->
+    <!-- TICKER -->
     <div class="announce" aria-hidden="true">
       <div class="ann-inner">
-        <!-- First copy -->
         <span class="ann-item">We respond to every message — always</span>
         <span class="ann-item">WhatsApp: 09019733420</span>
-        <span class="ann-item">Free delivery on orders over ₦50,000</span>
+        <span class="ann-item">Free delivery on orders over &#8358;50,000</span>
         <span class="ann-item">Bespoke consultations by appointment</span>
         <span class="ann-item">Lagos-based · Nationwide delivery</span>
         <span class="ann-item">divineokpara01@gmail.com</span>
-        <!-- Duplicate copy for seamless scroll loop -->
         <span class="ann-item">We respond to every message — always</span>
         <span class="ann-item">WhatsApp: 09019733420</span>
-        <span class="ann-item">Free delivery on orders over ₦50,000</span>
+        <span class="ann-item">Free delivery on orders over &#8358;50,000</span>
         <span class="ann-item">Bespoke consultations by appointment</span>
         <span class="ann-item">Lagos-based · Nationwide delivery</span>
         <span class="ann-item">divineokpara01@gmail.com</span>
       </div>
     </div>
 
-
-    <!-- ============================================================
-         NAVBAR
-         Three sections: [left links] [center logo] [right icons+burger]
-         Logo is absolutely centered so it stays perfectly in the middle.
-    ============================================================ -->
-    <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <!-- NAVBAR -->
+    <nav id="navbar">
       <div class="nav-inner">
-
-        <!-- Left: navigation links (hidden on mobile/tablet) -->
+        <!-- LEFT: desktop links only -->
         <div class="nav-left">
           <a href="index.html">Home</a>
-
-          <!-- Collections dropdown -->
           <div class="nav-drop">
             <a href="collections.html">Collections</a>
             <div class="drop-panel">
@@ -1541,8 +539,6 @@
               <a href="collections.html">Gift Sets</a>
             </div>
           </div>
-
-          <!-- Jewellery dropdown -->
           <div class="nav-drop">
             <a href="collections.html">Jewellery</a>
             <div class="drop-panel">
@@ -1553,119 +549,73 @@
               <a href="collections.html">Anklets</a>
             </div>
           </div>
-
           <a href="jewllries.html">Guide</a>
           <a href="bespoke.html">Bespoke</a>
           <a href="about.html">About</a>
-          <!-- Active page — highlighted gold -->
           <a href="contact.html" style="color:var(--gold-lt)">Contact</a>
         </div>
 
-        <!-- Center: logo (absolutely centered in CSS) -->
-        <a href="index.html" class="nav-logo" aria-label="Sparkles Jewellery — Home">
+        <!-- CENTER: logo -->
+        <a href="index.html" class="nav-logo">
           <span class="logo-word">Sparkles</span>
           <span class="logo-tag">Jewellery</span>
         </a>
 
-        <!-- Right: search, theme toggle, and burger menu -->
+        <!-- RIGHT: desktop = icons + theme; mobile = burger ONLY -->
         <div class="nav-right">
           <div class="nav-icons">
-            <!-- Search button — goes to collections page -->
             <button class="n-icon" onclick="location.href='collections.html'" aria-label="Search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="11" cy="11" r="7"/>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
-
-            <!-- Dark/Light theme toggle -->
             <div class="theme-wrap">
-              <span class="theme-icon" aria-hidden="true">☽</span>
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour theme"></button>
-              <span class="theme-icon" aria-hidden="true">☀</span>
+              <span class="theme-icon">&#9789;</span>
+              <button class="theme-toggle" id="themeToggle"></button>
+              <span class="theme-icon">&#9728;</span>
             </div>
           </div>
-
-          <!-- Burger button — only visible on mobile (shown via CSS) -->
-          <button class="burger" id="burgerBtn" aria-label="Open navigation menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+          <!-- BURGER ONLY on mobile -->
+          <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
           </button>
         </div>
-
       </div>
     </nav>
 
-
-    <!-- ============================================================
-         HERO SECTION
-         Full-height opening with headline, contact shortcuts,
-         and an animated gemstone illustration on the right.
-    ============================================================ -->
+    <!-- HERO -->
     <section class="contact-hero">
-
-      <!-- Particle animation canvas (drawn by JavaScript) -->
       <canvas class="hero-canvas-el" id="heroCanvas" aria-hidden="true"></canvas>
-
-      <!-- Background decorative layers -->
-      <div class="hero-mesh"  aria-hidden="true"></div>
+      <div class="hero-mesh" aria-hidden="true"></div>
       <div class="hero-lines" aria-hidden="true"></div>
 
-      <!-- Animated gemstone illustration — desktop only -->
+      <!-- Gem illustration — desktop only -->
       <div class="hero-gem-wrap" aria-hidden="true">
         <div style="position:relative;width:360px;height:360px;">
-
-          <!-- Three orbiting elliptical rings at different speeds -->
           <svg style="position:absolute;inset:0;width:100%;height:100%;animation:spin-a 18s linear infinite;" viewBox="0 0 360 360">
             <ellipse cx="180" cy="180" rx="165" ry="60" fill="none" stroke="rgba(201,164,95,.18)" stroke-width="1"/>
             <circle cx="345" cy="180" r="5" fill="var(--gold)" opacity=".9"/>
           </svg>
-
           <svg style="position:absolute;inset:0;width:100%;height:100%;animation:spin-b 12s linear infinite;" viewBox="0 0 360 360">
             <ellipse cx="180" cy="180" rx="120" ry="44" fill="none" stroke="rgba(201,164,95,.28)" stroke-width="1.2" stroke-dasharray="4 6"/>
             <circle cx="300" cy="180" r="4" fill="var(--gold-lt)" opacity=".8"/>
           </svg>
-
           <svg style="position:absolute;inset:0;width:100%;height:100%;animation:spin-c 8s linear infinite reverse;" viewBox="0 0 360 360">
             <ellipse cx="180" cy="180" rx="75" ry="28" fill="none" stroke="rgba(201,164,95,.22)" stroke-width="1"/>
             <circle cx="255" cy="180" r="3" fill="var(--gold)" opacity=".7"/>
           </svg>
-
-          <!-- Gold gemstone SVG at the center -->
-          <svg style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 0 28px rgba(201,164,95,0.35));"
-               width="120" height="120" viewBox="0 0 120 120">
+          <svg style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 0 28px rgba(201,164,95,0.35));" width="120" height="120" viewBox="0 0 120 120">
             <defs>
-              <linearGradient id="gemGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#f0d080"/>
-                <stop offset="35%"  stop-color="#c9a45f"/>
-                <stop offset="70%"  stop-color="#8a6b38"/>
-                <stop offset="100%" stop-color="#e2c88a"/>
-              </linearGradient>
-              <linearGradient id="gemFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#d4b060" stop-opacity=".9"/>
-                <stop offset="100%" stop-color="#7a5828" stop-opacity=".7"/>
-              </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
+              <linearGradient id="gemGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f0d080"/><stop offset="35%" stop-color="#c9a45f"/><stop offset="70%" stop-color="#8a6b38"/><stop offset="100%" stop-color="#e2c88a"/></linearGradient>
+              <linearGradient id="gemFace" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b060" stop-opacity=".9"/><stop offset="100%" stop-color="#7a5828" stop-opacity=".7"/></linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             </defs>
-            <!-- Top facets -->
-            <polygon points="60,8 82,40 60,32 38,40"    fill="url(#gemGold)"/>
-            <polygon points="82,40 108,40 60,32"         fill="rgba(201,164,95,.5)"/>
-            <polygon points="12,40 38,40 60,32"          fill="rgba(240,208,128,.6)"/>
-            <polygon points="12,40 60,32 108,40 60,52"   fill="url(#gemFace)"/>
-            <!-- Bottom pavilion -->
-            <polygon points="12,40 60,52 60,112"         fill="rgba(90,50,20,.6)"/>
-            <polygon points="108,40 60,52 60,112"        fill="rgba(201,164,95,.4)"/>
-            <!-- Highlight sparkles -->
-            <circle cx="60" cy="20" r="2"   fill="white" opacity=".9" filter="url(#glow)"/>
-            <circle cx="90" cy="36" r="1.5" fill="white" opacity=".7"/>
-            <circle cx="34" cy="34" r="1"   fill="#e2c88a" opacity=".8"/>
+            <polygon points="60,8 82,40 60,32 38,40" fill="url(#gemGold)"/>
+            <polygon points="82,40 108,40 60,32" fill="rgba(201,164,95,.5)"/>
+            <polygon points="12,40 38,40 60,32" fill="rgba(240,208,128,.6)"/>
+            <polygon points="12,40 60,32 108,40 60,52" fill="url(#gemFace)"/>
+            <polygon points="12,40 60,52 60,112" fill="rgba(90,50,20,.6)"/>
+            <polygon points="108,40 60,52 60,112" fill="rgba(201,164,95,.4)"/>
+            <circle cx="60" cy="20" r="2" fill="white" opacity=".9" filter="url(#glow)"/>
           </svg>
-
-          <!-- Floating info cards around the gem -->
           <div style="position:absolute;top:5%;right:-10%;background:rgba(9,8,6,0.9);border:1px solid rgba(201,164,95,0.25);backdrop-filter:blur(12px);padding:10px 16px;animation:float-a 7s ease-in-out infinite;">
             <span style="display:block;font-size:0.5rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Response</span>
             <span style="font-family:var(--ff-serif);font-size:0.9rem;color:var(--text);">Within 24hrs</span>
@@ -1678,166 +628,72 @@
             <span style="display:block;font-size:0.5rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Visits</span>
             <span style="font-family:var(--ff-serif);font-size:0.9rem;color:var(--text);">By Appointment</span>
           </div>
-
         </div>
       </div>
 
-      <!-- Main text content — left column -->
+      <!-- Hero text -->
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow">Let's Connect</div>
-
-          <h1 class="hero-h1">
-            Every Story<br/>
-            <span class="hero-outline">Starts</span>
-            <em>with Hello.</em>
-          </h1>
-
+          <h1 class="hero-h1">Every Story<br/><span class="hero-outline">Starts</span><em>with Hello.</em></h1>
           <div class="hero-divider" aria-hidden="true"></div>
-
-          <p class="hero-p">
-            Whether you have a dream ring in mind, a question about our pieces,
-            or simply want to say hello — we want to hear from you. Every
-            conversation matters at Sparkles.
-          </p>
-
-          <!-- Quick-access contact shortcut cards -->
+          <p class="hero-p">Whether you have a dream ring in mind, a question about our pieces, or simply want to say hello — we want to hear from you. Every conversation matters at Sparkles.</p>
           <div class="hero-contacts">
-
             <a href="https://wa.me/2349019733420" target="_blank" class="hc-item">
-              <div class="hc-icon">
-                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              </div>
-              <div class="hc-text">
-                <span>WhatsApp — Fastest Reply</span>
-                <strong>09019733420</strong>
-              </div>
+              <div class="hc-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+              <div class="hc-text"><span>WhatsApp — Fastest Reply</span><strong>09019733420</strong></div>
             </a>
-
             <a href="mailto:divineokpara01@gmail.com" class="hc-item">
-              <div class="hc-icon">
-                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-              </div>
-              <div class="hc-text">
-                <span>Email Address</span>
-                <strong>divineokpara01@gmail.com</strong>
-              </div>
+              <div class="hc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+              <div class="hc-text"><span>Email Address</span><strong>divineokpara01@gmail.com</strong></div>
             </a>
-
             <a href="#contact-form" class="hc-item">
-              <div class="hc-icon">
-                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <div class="hc-text">
-                <span>Send a Message</span>
-                <strong>Fill our contact form →</strong>
-              </div>
+              <div class="hc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="hc-text"><span>Send a Message</span><strong>Fill our contact form &#8594;</strong></div>
             </a>
-
           </div>
         </div>
       </div>
 
-      <!-- Scroll indicator at the bottom of the hero -->
-      <div class="scroll-hint" aria-hidden="true">
-        <div class="scroll-line"></div>
-        <span>Scroll</span>
-      </div>
-
+      <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div><span>Scroll</span></div>
     </section>
 
-
-    <!-- ============================================================
-         CHANNELS STRIP
-         4 key contact methods shown as a horizontal strip.
-    ============================================================ -->
+    <!-- CHANNELS STRIP -->
     <div class="channels-strip">
       <div class="ch-inner">
-
         <a href="https://wa.me/2349019733420" target="_blank" class="ch-item reveal">
-          <div class="ch-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </div>
-          <div>
-            <div class="ch-label">WhatsApp</div>
-            <div class="ch-val">09019733420</div>
-            <div class="ch-sub">Fastest response</div>
-          </div>
+          <div class="ch-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div><div class="ch-label">WhatsApp</div><div class="ch-val">09019733420</div><div class="ch-sub">Fastest response</div></div>
         </a>
-
         <a href="mailto:divineokpara01@gmail.com" class="ch-item reveal d1">
-          <div class="ch-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-          </div>
-          <div>
-            <div class="ch-label">Email</div>
-            <div class="ch-val">divineokpara01</div>
-            <div class="ch-sub">@gmail.com</div>
-          </div>
+          <div class="ch-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+          <div><div class="ch-label">Email</div><div class="ch-val">divineokpara01</div><div class="ch-sub">@gmail.com</div></div>
         </a>
-
         <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="ch-item reveal d2">
-          <div class="ch-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </div>
-          <div>
-            <div class="ch-label">Instagram</div>
-            <div class="ch-val">@sparklesjewelleries</div>
-            <div class="ch-sub">DM us anytime</div>
-          </div>
+          <div class="ch-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div><div class="ch-label">Instagram</div><div class="ch-val">@sparklesjewelleries</div><div class="ch-sub">DM us anytime</div></div>
         </a>
-
-        <!-- Location — not a link, just informational -->
         <div class="ch-item reveal d3" style="cursor:default;">
-          <div class="ch-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="ch-label">Location</div>
-            <div class="ch-val">Lagos, Nigeria</div>
-            <div class="ch-sub">Lekki Phase 1</div>
-          </div>
+          <div class="ch-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="ch-label">Location</div><div class="ch-val">Lagos, Nigeria</div><div class="ch-sub">Lekki Phase 1</div></div>
         </div>
-
       </div>
     </div>
 
-
-    <!-- ============================================================
-         MAIN CONTACT SECTION
-         Left: contact form that sends to WhatsApp
-         Right: contact channel list + studio hours
-    ============================================================ -->
+    <!-- MAIN CONTACT SECTION -->
     <div class="main-contact" id="contact-form">
-
-      <!-- Left: Contact Form -->
       <div class="reveal">
         <p class="form-label">Send Us a Message</p>
         <h2 class="form-title">What's on<br/><em>Your Mind?</em></h2>
         <p class="form-desc">Whether it's a commission, a question, a gift inquiry, or just a hello — fill in the form and we'll respond within 24 hours.</p>
-
         <div class="cform">
-
-          <!-- Row 1: Name + Phone -->
           <div class="field-row">
-            <div class="fg">
-              <label for="c-name">Your Name</label>
-              <input type="text" id="c-name" placeholder="e.g. Adaeze Okafor" autocomplete="name"/>
-            </div>
-            <div class="fg">
-              <label for="c-phone">Phone / WhatsApp</label>
-              <input type="tel" id="c-phone" placeholder="e.g. 0901 234 5678" autocomplete="tel"/>
-            </div>
+            <div class="fg"><label for="c-name">Your Name</label><input type="text" id="c-name" placeholder="e.g. Adaeze Okafor" autocomplete="name"/></div>
+            <div class="fg"><label for="c-phone">Phone / WhatsApp</label><input type="tel" id="c-phone" placeholder="e.g. 0901 234 5678" autocomplete="tel"/></div>
           </div>
-
-          <!-- Row 2: Email + Subject -->
           <div class="field-row">
-            <div class="fg">
-              <label for="c-email">Email Address</label>
-              <input type="email" id="c-email" placeholder="your@email.com" autocomplete="email"/>
-            </div>
-            <div class="fg">
-              <label for="c-subject">Subject</label>
+            <div class="fg"><label for="c-email">Email Address</label><input type="email" id="c-email" placeholder="your@email.com" autocomplete="email"/></div>
+            <div class="fg"><label for="c-subject">Subject</label>
               <select id="c-subject">
                 <option value="">— Select —</option>
                 <option>Bespoke Commission Enquiry</option>
@@ -1851,83 +707,38 @@
               </select>
             </div>
           </div>
-
-          <!-- Full-width message textarea -->
-          <div class="fg fg-full">
-            <label for="c-msg">Your Message</label>
-            <textarea id="c-msg" placeholder="Tell us everything — we love to hear the full story..."></textarea>
-          </div>
-
-          <!-- Submit button — builds a WhatsApp message on click (see JS) -->
-          <button class="form-submit" id="cFormSubmit" type="button">
-            <span>Send Message to Sparkles ◆</span>
-          </button>
-
+          <div class="fg fg-full"><label for="c-msg">Your Message</label><textarea id="c-msg" placeholder="Tell us everything — we love to hear the full story..."></textarea></div>
+          <button class="form-submit" id="cFormSubmit" type="button"><span>Send Message to Sparkles ◆</span></button>
           <div class="form-note">We respond within 24 hours. Your details are kept in complete confidence.</div>
-
         </div>
       </div>
 
-      <!-- Right: Contact Info + Hours -->
       <div class="reveal d2">
         <p class="info-label">Contact Details</p>
         <h2 class="info-title">We're<br/><em>Always Here</em></h2>
-
-        <div class="info-body">
-          <p>At Sparkles, no message goes unanswered. Whether you message us at 7am or 11pm — we see it, and we respond. Luxury service isn't just about the jewellery.</p>
-        </div>
-
-        <!-- Clickable channel list -->
+        <div class="info-body"><p>At Sparkles, no message goes unanswered. Whether you message us at 7am or 11pm — we see it, and we respond. Luxury service isn't just about the jewellery.</p></div>
         <div class="info-channels">
-
           <a href="https://wa.me/2349019733420" target="_blank" class="ic-row">
             <div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-            <div class="ic-body">
-              <div class="ic-name">WhatsApp</div>
-              <div class="ic-val">09019733420</div>
-              <div class="ic-note">Fastest channel — replies often within minutes</div>
-            </div>
+            <div class="ic-body"><div class="ic-name">WhatsApp</div><div class="ic-val">09019733420</div><div class="ic-note">Fastest channel — replies often within minutes</div></div>
           </a>
-
           <a href="tel:+2349019733420" class="ic-row">
             <div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div class="ic-body">
-              <div class="ic-name">Phone Call</div>
-              <div class="ic-val">+234 901 973 3420</div>
-              <div class="ic-note">Mon–Sat, 9am–6pm WAT</div>
-            </div>
+            <div class="ic-body"><div class="ic-name">Phone Call</div><div class="ic-val">+234 901 973 3420</div><div class="ic-note">Mon–Sat, 9am–6pm WAT</div></div>
           </a>
-
           <a href="mailto:divineokpara01@gmail.com" class="ic-row">
             <div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
-            <div class="ic-body">
-              <div class="ic-name">Email</div>
-              <div class="ic-val">divineokpara01@gmail.com</div>
-              <div class="ic-note">Response within 24 hours</div>
-            </div>
+            <div class="ic-body"><div class="ic-name">Email</div><div class="ic-val">divineokpara01@gmail.com</div><div class="ic-note">Response within 24 hours</div></div>
           </a>
-
           <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="ic-row">
             <div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
-            <div class="ic-body">
-              <div class="ic-name">Instagram</div>
-              <div class="ic-val">@sparklesjewelleries</div>
-              <div class="ic-note">DMs open — follow for new arrivals</div>
-            </div>
+            <div class="ic-body"><div class="ic-name">Instagram</div><div class="ic-val">@sparklesjewelleries</div><div class="ic-note">DMs open — follow for new arrivals</div></div>
           </a>
-
           <a href="https://facebook.com/sparklesjeweleries" target="_blank" class="ic-row">
             <div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
-            <div class="ic-body">
-              <div class="ic-name">Facebook</div>
-              <div class="ic-val">Sparkles Jewelleries</div>
-              <div class="ic-note">Shop updates &amp; announcements</div>
-            </div>
+            <div class="ic-body"><div class="ic-name">Facebook</div><div class="ic-val">Sparkles Jewelleries</div><div class="ic-note">Shop updates &amp; announcements</div></div>
           </a>
-
         </div>
-
-        <!-- Studio opening hours -->
         <div class="hours-block">
           <div class="hb-title">Studio Hours</div>
           <div class="hb-row"><span class="hb-day">Monday – Friday</span><span class="hb-time">9:00 AM – 6:00 PM</span></div>
@@ -1935,230 +746,110 @@
           <div class="hb-row"><span class="hb-day">Sunday</span><span class="hb-time closed">Closed (WhatsApp open)</span></div>
           <div class="hb-row"><span class="hb-day">Public Holidays</span><span class="hb-time closed">WhatsApp only</span></div>
         </div>
-
       </div>
     </div>
 
-
-    <!-- ============================================================
-         MAP SECTION
-         Animated visual map with pulsing pin and district labels.
-         Not a real map — CSS and HTML art.
-    ============================================================ -->
+    <!-- MAP SECTION -->
     <section class="map-sec">
       <div class="map-inner">
-
-        <div class="sec-hd reveal">
-          <p class="sec-label">Our Location</p>
-          <h2 class="sec-title">Visit Us in <em>Lagos</em></h2>
-        </div>
-
-        <!-- Two-column: map visual on left, address info on right -->
+        <div class="sec-hd reveal"><p class="sec-label">Our Location</p><h2 class="sec-title">Visit Us in <em>Lagos</em></h2></div>
         <div class="map-grid">
-
-          <!-- Left: the visual map -->
           <div class="map-vis reveal">
             <div class="map-3d">
-              <!-- Animated grid lines that drift diagonally -->
               <div class="map-grid-lines"></div>
-              <!-- Glowing circle at the center -->
               <div class="map-glow"></div>
-              <!-- Expanding pulse rings from the pin -->
-              <div class="pulse-ring"></div>
-              <div class="pulse-ring"></div>
-              <div class="pulse-ring"></div>
-              <div class="pulse-ring"></div>
-              <!-- District name labels -->
+              <div class="pulse-ring"></div><div class="pulse-ring"></div>
+              <div class="pulse-ring"></div><div class="pulse-ring"></div>
               <div class="district d-vi">Victoria Island</div>
-              <div class="district d-lekki">◆ Lekki Phase 1</div>
+              <div class="district d-lekki">&#9670; Lekki Phase 1</div>
               <div class="district d-ikoyi">Ikoyi</div>
               <div class="district d-ajah">Ajah</div>
-              <!-- The location pin in the center -->
-              <div class="map-pin-center">
-                <div class="pin-dot"></div>
-                <div class="pin-stem"></div>
-                <div class="pin-base"></div>
-              </div>
+              <div class="map-pin-center"><div class="pin-dot"></div><div class="pin-stem"></div><div class="pin-base"></div></div>
             </div>
           </div>
-
-          <!-- Right: address and visit booking info -->
           <div class="map-info reveal d2">
             <div class="mi-label">Find Us</div>
             <h3 class="mi-title">Sparkles Atelier,<br/><em>Lekki Phase 1</em></h3>
-            <p class="mi-desc">
-              Our atelier is by appointment. Book a consultation via WhatsApp
-              and we'll welcome you for a private viewing of our collections and
-              a one-on-one bespoke session.
-            </p>
-
+            <p class="mi-desc">Our atelier is by appointment. Book a consultation via WhatsApp and we'll welcome you for a private viewing of our collections and a one-on-one bespoke session.</p>
             <div class="mi-addr">
-              <div class="mi-row">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Lekki Phase 1, Lagos, Nigeria
-              </div>
-              <div class="mi-row">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                By appointment only — Mon to Sat
-              </div>
-              <div class="mi-row">
-                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                WhatsApp to schedule: 09019733420
-              </div>
+              <div class="mi-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Lekki Phase 1, Lagos, Nigeria</div>
+              <div class="mi-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>By appointment only — Mon to Sat</div>
+              <div class="mi-row"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp to schedule: 09019733420</div>
             </div>
-
-            <!-- Landmark info grid -->
             <div class="mi-landmarks">
               <div class="mi-lm"><strong>Near</strong>Lekki Conservation Centre</div>
               <div class="mi-lm"><strong>Access</strong>Lekki–Epe Expressway</div>
               <div class="mi-lm"><strong>Landmark</strong>Close to Shoprite Lekki</div>
               <div class="mi-lm"><strong>Parking</strong>Available on premises</div>
             </div>
-
             <div style="margin-top:24px;">
-              <a href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20book%20a%20visit%20to%20your%20atelier."
-                 target="_blank" class="btn btn-gold">
+              <a href="https://wa.me/2349019733420?text=Hello%20Sparkles!%20I%27d%20like%20to%20book%20a%20visit." target="_blank" class="btn btn-gold">
                 <span>Book a Visit</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                  <polyline points="12 5 19 12 12 19"/>
-                </svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-
-    <!-- ============================================================
-         FAQ SECTION
-         Accordion-style Q&A. Clicking a card opens/closes the answer.
-         Only one answer can be open at a time (handled in JS).
-    ============================================================ -->
+    <!-- FAQ -->
     <section class="faq-sec">
-
-      <div class="sec-hd reveal">
-        <p class="sec-label">Common Questions</p>
-        <h2 class="sec-title reveal d1">You Asked, <em>We Answer</em></h2>
-      </div>
-
-      <!-- 2-column FAQ grid -->
+      <div class="sec-hd reveal"><p class="sec-label">Common Questions</p><h2 class="sec-title reveal d1">You Asked, <em>We Answer</em></h2></div>
       <div class="faq-grid">
-
-        <!-- Each .faq-item has an onclick that calls toggleFaq(this) -->
         <div class="faq-item reveal" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">How long does a bespoke commission take?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
+          <div class="faq-q"><span class="faq-q-text">How long does a bespoke commission take?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
           <div class="faq-a">Standard bespoke pieces take 6–8 weeks from approved design to delivery. Complex pieces or those requiring rare gemstones may take 10–14 weeks. Rush orders can sometimes be accommodated — contact us to discuss.</div>
         </div>
-
         <div class="faq-item reveal d1" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">Do you ship nationwide across Nigeria?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
-          <div class="faq-a">Yes! We deliver to all major cities — Lagos, Abuja, Port Harcourt, Ibadan, Kano, Enugu and more. Orders above ₦50,000 receive free delivery. We use insured courier services for all jewellery.</div>
+          <div class="faq-q"><span class="faq-q-text">Do you ship nationwide across Nigeria?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="faq-a">Yes! We deliver to all major cities — Lagos, Abuja, Port Harcourt, Ibadan, Kano, Enugu and more. Orders above &#8358;50,000 receive free delivery. We use insured courier services for all jewellery.</div>
         </div>
-
         <div class="faq-item reveal d2" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">Can I see pieces in person before buying?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
+          <div class="faq-q"><span class="faq-q-text">Can I see pieces in person before buying?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
           <div class="faq-a">Absolutely. Our Lagos atelier is open by appointment, Monday through Saturday. Book a private viewing via WhatsApp and we'll arrange a personal consultation. We also offer video calls for remote clients.</div>
         </div>
-
         <div class="faq-item reveal d1" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">What payment methods do you accept?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
+          <div class="faq-q"><span class="faq-q-text">What payment methods do you accept?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
           <div class="faq-a">We accept direct bank transfer, Paystack, Flutterwave, debit/credit cards, and cash for in-person visits. For bespoke commissions, we require a 50% deposit at design approval, with the balance before delivery.</div>
         </div>
-
         <div class="faq-item reveal d2" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">Do you offer ring resizing and repairs?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
+          <div class="faq-q"><span class="faq-q-text">Do you offer ring resizing and repairs?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
           <div class="faq-a">Yes — and for all Sparkles pieces, resizing is complimentary for the lifetime of the piece. We also offer full cleaning, polishing, prong re-tipping, and stone replacement services.</div>
         </div>
-
         <div class="faq-item reveal d3" onclick="toggleFaq(this)">
-          <div class="faq-q">
-            <span class="faq-q-text">Can I use my own stone in a bespoke piece?</span>
-            <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-          </div>
+          <div class="faq-q"><span class="faq-q-text">Can I use my own stone in a bespoke piece?</span><div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
           <div class="faq-a">Absolutely — and we love this. Family heirlooms, inherited gems, sentimental stones — our goldsmiths treat them with the greatest care. Contact us to begin this special conversation.</div>
         </div>
-
       </div>
     </section>
 
-
-    <!-- ============================================================
-         SOCIAL SECTION
-         Four platform cards with hover animations.
-    ============================================================ -->
+    <!-- SOCIAL -->
     <section class="social-sec">
       <div class="social-inner">
-
-        <div class="sec-hd reveal">
-          <p class="sec-label">Follow the Journey</p>
-          <h2 class="sec-title">Find Us <em>Everywhere</em></h2>
-        </div>
-
+        <div class="sec-hd reveal"><p class="sec-label">Follow the Journey</p><h2 class="sec-title">Find Us <em>Everywhere</em></h2></div>
         <div class="soc-grid">
-
           <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="soc-card reveal">
-            <div class="sc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="var(--gold)" stroke="none"/></svg>
-            </div>
-            <div class="sc-platform">Instagram</div>
-            <div class="sc-handle">@sparklesjewelleries</div>
-            <div class="sc-cta">Follow for daily beauty</div>
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="var(--gold)" stroke="none"/></svg></div>
+            <div class="sc-platform">Instagram</div><div class="sc-handle">@sparklesjewelleries</div><div class="sc-cta">Follow for daily beauty</div>
           </a>
-
           <a href="https://facebook.com/sparklesjeweleries" target="_blank" class="soc-card reveal d1">
-            <div class="sc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </div>
-            <div class="sc-platform">Facebook</div>
-            <div class="sc-handle">Sparkles Jewelleries</div>
-            <div class="sc-cta">Like our page</div>
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+            <div class="sc-platform">Facebook</div><div class="sc-handle">Sparkles Jewelleries</div><div class="sc-cta">Like our page</div>
           </a>
-
           <a href="https://wa.me/2349019733420" target="_blank" class="soc-card reveal d2">
-            <div class="sc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            </div>
-            <div class="sc-platform">WhatsApp</div>
-            <div class="sc-handle">09019733420</div>
-            <div class="sc-cta">Chat with us now</div>
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div class="sc-platform">WhatsApp</div><div class="sc-handle">09019733420</div><div class="sc-cta">Chat with us now</div>
           </a>
-
           <a href="mailto:divineokpara01@gmail.com" class="soc-card reveal d3">
-            <div class="sc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            </div>
-            <div class="sc-platform">Email</div>
-            <div class="sc-handle">divineokpara01</div>
-            <div class="sc-cta">Drop us a line</div>
+            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+            <div class="sc-platform">Email</div><div class="sc-handle">divineokpara01</div><div class="sc-cta">Drop us a line</div>
           </a>
-
         </div>
       </div>
     </section>
 
-
-    <!-- ============================================================
-         NEWSLETTER SECTION
-         Email capture. On submit, opens a mailto link.
-    ============================================================ -->
+    <!-- NEWSLETTER -->
     <div class="nl-sec">
       <div class="nl-inner">
         <p class="sec-label">Stay Connected</p>
@@ -2172,306 +863,102 @@
       </div>
     </div>
 
-
-    <!-- ============================================================
-         FOOTER
-         4-column links grid + copyright / payment badges.
-    ============================================================ -->
+    <!-- FOOTER -->
     <footer>
       <div class="foot-grid">
-
-        <!-- Column 1: Brand + social icons -->
         <div class="foot-brand">
           <div class="fb-name">Sparkles</div>
           <p>Nigeria's premier destination for handcrafted luxury jewellery. Crafted for the woman who knows her worth.</p>
           <div class="soc-row">
-            <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="soc-btn" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://facebook.com/sparklesjeweleries" target="_blank" class="soc-btn" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </a>
-            <a href="https://wa.me/2349019733420" target="_blank" class="soc-btn" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            </a>
+            <a href="https://instagram.com/sparklesjewelleries" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://facebook.com/sparklesjeweleries" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://wa.me/2349019733420" target="_blank" class="soc-btn"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
           </div>
         </div>
-
-        <!-- Column 2: Shop links -->
-        <div class="foot-col">
-          <h4>Shop</h4>
-          <ul>
-            <li><a href="collections.html">Rings</a></li>
-            <li><a href="collections.html">Necklaces</a></li>
-            <li><a href="collections.html">Earrings</a></li>
-            <li><a href="collections.html">Bracelets</a></li>
-            <li><a href="collections.html">Anklets</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 3: Explore links -->
-        <div class="foot-col">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">Our Story</a></li>
-            <li><a href="jewllries.html">Jewellery Guide</a></li>
-            <li><a href="bespoke.html">Bespoke Orders</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 4: Contact links -->
-        <div class="foot-col">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="https://wa.me/2349019733420">WhatsApp</a></li>
-            <li><a href="tel:+2349019733420">+234 901 973 3420</a></li>
-            <li><a href="mailto:divineokpara01@gmail.com">Email Us</a></li>
-            <li><a href="https://instagram.com/sparklesjewelleries">Instagram</a></li>
-          </ul>
-        </div>
-
+        <div class="foot-col"><h4>Shop</h4><ul><li><a href="collections.html">Rings</a></li><li><a href="collections.html">Necklaces</a></li><li><a href="collections.html">Earrings</a></li><li><a href="collections.html">Bracelets</a></li><li><a href="collections.html">Anklets</a></li></ul></div>
+        <div class="foot-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">Our Story</a></li><li><a href="jewllries.html">Jewellery Guide</a></li><li><a href="bespoke.html">Bespoke Orders</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+        <div class="foot-col"><h4>Contact</h4><ul><li><a href="https://wa.me/2349019733420">WhatsApp</a></li><li><a href="tel:+2349019733420">+234 901 973 3420</a></li><li><a href="mailto:divineokpara01@gmail.com">Email Us</a></li><li><a href="https://instagram.com/sparklesjewelleries">Instagram</a></li></ul></div>
       </div>
-
-      <!-- Bottom bar: copyright + tagline + payment badges -->
       <div class="foot-btm">
-        <p>© 2025 Sparkles Jewelleries. All rights reserved.</p>
+        <p>&#169; 2025 Sparkles Jewelleries. All rights reserved.</p>
         <p style="color:var(--text-dim)">Crafted for Brilliance</p>
-        <div class="pay-row">
-          <div class="pay-chip">Paystack</div>
-          <div class="pay-chip">Flutterwave</div>
-          <div class="pay-chip">Bank Transfer</div>
-          <div class="pay-chip">Card</div>
-        </div>
+        <div class="pay-row"><div class="pay-chip">Paystack</div><div class="pay-chip">Flutterwave</div><div class="pay-chip">Bank Transfer</div><div class="pay-chip">Card</div></div>
       </div>
     </footer>
 
-
-    <!-- ============================================================
-         JAVASCRIPT
-         All interactive behaviour — at the bottom so HTML loads first.
-    ============================================================ -->
     <script>
-      // ── CUSTOM CURSOR ──────────────────────────────────────────
-      // Inner dot follows the mouse instantly.
-      // Outer ring smoothly interpolates toward the mouse (lerp).
+      /* ── CURSOR ── */
+      const co = document.getElementById('cur-o'), ci = document.getElementById('cur-i');
+      let mx = 0, my = 0, ox = 0, oy = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; ci.style.cssText = `left:${mx}px;top:${my}px`; });
+      (function tick() { ox += (mx - ox) * 0.1; oy += (my - oy) * 0.1; co.style.cssText = `left:${ox - 16}px;top:${oy - 16}px`; requestAnimationFrame(tick); })();
 
-      const curOuter = document.getElementById('cur-o');
-      const curInner = document.getElementById('cur-i');
-      let mouseX = 0, mouseY = 0;
-      let outerX = 0, outerY = 0;
-
-      document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        curInner.style.cssText = `left:${mouseX}px;top:${mouseY}px`;
-      });
-
-      // Move outer ring 10% closer to mouse each animation frame
-      (function animateCursor() {
-        outerX += (mouseX - outerX) * 0.1;
-        outerY += (mouseY - outerY) * 0.1;
-        curOuter.style.cssText = `left:${outerX - 16}px;top:${outerY - 16}px`;
-        requestAnimationFrame(animateCursor);
-      })();
-
-
-      // ── PARTICLE CANVAS ────────────────────────────────────────
-      // Draws rising gold particles over the hero section background.
-      // Particles fade in, drift upward with a gentle sine wave, then reset.
-
+      /* ── PARTICLE CANVAS ── */
       const canvas = document.getElementById('heroCanvas');
-      const ctx    = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d');
       let W, H, particles = [];
-
-      // Resize canvas to match the hero section dimensions
-      function resizeCanvas() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = document.querySelector('.contact-hero').offsetHeight;
-      }
-
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      // Particle class — each particle rises from the bottom and fades in/out
+      function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = document.querySelector('.contact-hero').offsetHeight; }
+      resizeCanvas(); window.addEventListener('resize', resizeCanvas);
       class Particle {
         constructor() { this.reset(); }
-
-        reset() {
-          this.x           = Math.random() * W;
-          this.y           = H + 10; // start just off the bottom edge
-          this.size        = Math.random() * 1.8 + 0.4;
-          this.speed       = Math.random() * 0.55 + 0.15;
-          this.opacity     = 0;
-          this.targetOpacity = Math.random() * 0.3 + 0.05;
-          this.life        = 0;
-          this.maxLife     = Math.random() * 280 + 180;
-          this.drift       = Math.random() * 0.4 - 0.2; // left/right wobble amount
-        }
-
-        update() {
-          this.y    -= this.speed; // rise upward
-          this.x    += Math.sin(this.life * 0.018) * this.drift; // gentle side-to-side drift
-          this.life++;
-
-          // Fade in during first 70 frames, fade out during last 70 frames
-          if (this.life < 70)
-            this.opacity = this.targetOpacity * (this.life / 70);
-          else if (this.life > this.maxLife - 70)
-            this.opacity = this.targetOpacity * ((this.maxLife - this.life) / 70);
-
-          // Reset when particle reaches the top or completes its lifespan
-          if (this.life >= this.maxLife || this.y < -10) this.reset();
-        }
-
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201,164,95,${this.opacity})`;
-          ctx.fill();
-        }
+        reset() { this.x = Math.random() * W; this.y = H + 10; this.size = Math.random() * 1.8 + 0.4; this.speed = Math.random() * 0.55 + 0.15; this.opacity = 0; this.targetOpacity = Math.random() * 0.3 + 0.05; this.life = 0; this.maxLife = Math.random() * 280 + 180; this.drift = Math.random() * 0.4 - 0.2; }
+        update() { this.y -= this.speed; this.x += Math.sin(this.life * 0.018) * this.drift; this.life++; if (this.life < 70) this.opacity = this.targetOpacity * (this.life / 70); else if (this.life > this.maxLife - 70) this.opacity = this.targetOpacity * ((this.maxLife - this.life) / 70); if (this.life >= this.maxLife || this.y < -10) this.reset(); }
+        draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `rgba(201,164,95,${this.opacity})`; ctx.fill(); }
       }
-
-      // Spawn 70 particles, randomly distribute their starting positions
-      for (let i = 0; i < 70; i++) {
-        particles.push(new Particle());
-        particles[i].y    = Math.random() * H; // scatter them across the hero on load
-        particles[i].life = Math.random() * 200;
-      }
-
-      function animateParticles() {
-        ctx.clearRect(0, 0, W, H);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animateParticles);
-      }
-
+      for (let i = 0; i < 70; i++) { particles.push(new Particle()); particles[i].y = Math.random() * H; particles[i].life = Math.random() * 200; }
+      function animateParticles() { ctx.clearRect(0, 0, W, H); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
       animateParticles();
 
+      /* ── NAVBAR SCROLL ── */
+      window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60); });
 
-      // ── NAVBAR SCROLL SHADOW ───────────────────────────────────
-      // Adds a shadow to the navbar once the user scrolls down 60px.
-
-      window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-      });
-
-
-      // ── MOBILE DRAWER ──────────────────────────────────────────
-      // Opened by either the desktop burger button or the "Menu" tab
-      // in the bottom nav bar. Closed by the X button or clicking outside.
-
-      const drawer    = document.getElementById('mobDrawer');
+      /* ── MOBILE DRAWER ── */
+      const drawer = document.getElementById('mobDrawer');
+      const overlay = document.getElementById('drawerOverlay');
       const burgerBtn = document.getElementById('burgerBtn');
-
-      const openDrawer  = () => { drawer.classList.add('open'); burgerBtn?.setAttribute('aria-expanded', 'true'); };
-      const closeDrawer = () => { drawer.classList.remove('open'); burgerBtn?.setAttribute('aria-expanded', 'false'); burgerBtn?.classList.remove('open'); };
-
-      burgerBtn?.addEventListener('click', () => { openDrawer(); burgerBtn.classList.toggle('open'); });
-      document.getElementById('mobMenuBtn')?.addEventListener('click', openDrawer);
+      function openDrawer() { drawer.classList.add('open'); overlay.classList.add('active'); burgerBtn.classList.add('open'); burgerBtn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function closeDrawer() { drawer.classList.remove('open'); overlay.classList.remove('active'); burgerBtn.classList.remove('open'); burgerBtn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+      burgerBtn.addEventListener('click', openDrawer);
       document.getElementById('mobX').addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+      drawer.querySelectorAll('a').forEach(l => l.addEventListener('click', closeDrawer));
 
-      // Close if user clicks the dark backdrop (not the drawer itself)
-      drawer.addEventListener('click', e => { if (e.target === drawer) closeDrawer(); });
+      /* ── THEME ── */
+      const html = document.documentElement;
+      html.setAttribute('data-theme', localStorage.getItem('sparkles-theme') || 'dark');
+      function setTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('sparkles-theme', t); }
+      document.getElementById('themeToggle').addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+      document.getElementById('themeBtnMob').addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
-      // Close when any nav link inside the drawer is clicked
-      drawer.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeDrawer);
-      });
+      /* ── SCROLL REVEAL ── */
+      const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+      /* ── FAQ ── */
+      function toggleFaq(item) { const open = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open')); if (!open) item.classList.add('open'); }
 
-      // ── THEME TOGGLE ───────────────────────────────────────────
-      // Switches between dark and light mode.
-      // Preference is saved to localStorage and applied on next page load.
-
-      const htmlEl = document.documentElement;
-      htmlEl.setAttribute('data-theme', localStorage.getItem('sparkles-theme') || 'dark');
-
-      document.getElementById('themeToggle').addEventListener('click', () => {
-        const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        htmlEl.setAttribute('data-theme', next);
-        localStorage.setItem('sparkles-theme', next);
-      });
-
-
-      // ── SCROLL REVEAL ──────────────────────────────────────────
-      // Watches .reveal elements. When they enter the viewport,
-      // adds .in which triggers the CSS fade-up transition.
-
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            revealObserver.unobserve(entry.target); // stop watching once revealed
-          }
-        });
-      }, { threshold: 0.08 });
-
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-
-      // ── FAQ ACCORDION ──────────────────────────────────────────
-      // Only one FAQ item can be open at a time.
-      // Clicking an open item closes it; clicking a closed item opens it
-      // and closes any currently open item.
-
-      function toggleFaq(item) {
-        const isCurrentlyOpen = item.classList.contains('open');
-        // Close all open items
-        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-        // If the clicked item wasn't open, open it now
-        if (!isCurrentlyOpen) item.classList.add('open');
-      }
-
-
-      // ── CONTACT FORM → WHATSAPP ────────────────────────────────
-      // Collects form values, validates name and message,
-      // then opens WhatsApp with a pre-filled message.
-
+      /* ── CONTACT FORM ── */
       document.getElementById('cFormSubmit').addEventListener('click', () => {
-        const name    = document.getElementById('c-name').value.trim();
-        const phone   = document.getElementById('c-phone').value.trim();
-        const email   = document.getElementById('c-email').value.trim();
+        const name = document.getElementById('c-name').value.trim();
+        const phone = document.getElementById('c-phone').value.trim();
+        const email = document.getElementById('c-email').value.trim();
         const subject = document.getElementById('c-subject').value;
-        const msg     = document.getElementById('c-msg').value.trim();
-
-        // Basic validation — name and message are required
-        if (!name || !msg) {
-          showToast('Please fill in your name and message');
-          return;
-        }
-
-        // Build the pre-filled WhatsApp message
-        const waMessage = `Hello Sparkles!\n\nName: ${name}\nPhone: ${phone || 'Not provided'}\nEmail: ${email || 'Not provided'}\nSubject: ${subject || 'General Enquiry'}\n\nMessage:\n${msg}`;
-
-        window.open(`https://wa.me/2349019733420?text=${encodeURIComponent(waMessage)}`, '_blank');
-        showToast('✓ Opening WhatsApp with your message');
+        const msg = document.getElementById('c-msg').value.trim();
+        if (!name || !msg) { showToast('Please fill in your name and message'); return; }
+        const wa = 'Hello Sparkles!\n\nName: ' + name + '\nPhone: ' + (phone || 'Not provided') + '\nEmail: ' + (email || 'Not provided') + '\nSubject: ' + (subject || 'General Enquiry') + '\n\nMessage:\n' + msg;
+        window.open('https://wa.me/2349019733420?text=' + encodeURIComponent(wa), '_blank');
+        showToast('Opening WhatsApp with your message');
       });
 
-
-      // ── NEWSLETTER ─────────────────────────────────────────────
-      // Validates email, then opens a pre-filled mailto link.
-
+      /* ── NEWSLETTER ── */
       document.getElementById('nlBtn').addEventListener('click', () => {
         const email = document.getElementById('nlEmail').value.trim();
-        if (!email || !email.includes('@')) {
-          showToast('Please enter a valid email address');
-          return;
-        }
-        window.location.href = `mailto:divineokpara01@gmail.com?subject=Newsletter%20Subscription&body=Please%20add%20me%20to%20the%20Sparkles%20newsletter.%0AEmail%3A%20${encodeURIComponent(email)}`;
+        if (!email || !email.includes('@')) { showToast('Please enter a valid email address'); return; }
+        window.location.href = 'mailto:divineokpara01@gmail.com?subject=Newsletter%20Subscription&body=Please%20add%20me%20to%20the%20Sparkles%20newsletter.%0AEmail%3A%20' + encodeURIComponent(email);
       });
 
-
-      // ── SHOW TOAST HELPER ──────────────────────────────────────
-      // Displays a small notification message for 2.6 seconds.
-
-      function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2600);
-      }
+      /* ── TOAST ── */
+      function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600); }
     </script>
-
   </body>
 </html>
